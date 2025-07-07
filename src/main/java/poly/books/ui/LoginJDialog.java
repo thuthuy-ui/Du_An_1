@@ -34,7 +34,7 @@ public class LoginJDialog extends javax.swing.JDialog {
         txtUsername = new javax.swing.JTextField();
         txtPassword = new javax.swing.JPasswordField();
         icon = new javax.swing.JLabel();
-        btnLogin = new javax.swing.JButton();
+        btnDangnhap = new javax.swing.JButton();
         btnKetThuc = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
 
@@ -83,11 +83,11 @@ public class LoginJDialog extends javax.swing.JDialog {
         icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/stack-of-books-250x250.png"))); // NOI18N
         icon.setPreferredSize(new java.awt.Dimension(200, 200));
 
-        btnLogin.setBackground(new java.awt.Color(51, 255, 51));
-        btnLogin.setText("Đăng nhập");
-        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+        btnDangnhap.setBackground(new java.awt.Color(51, 255, 51));
+        btnDangnhap.setText("Đăng nhập");
+        btnDangnhap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoginActionPerformed(evt);
+                btnDangnhapActionPerformed(evt);
             }
         });
 
@@ -110,7 +110,7 @@ public class LoginJDialog extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnLogin)
+                        .addComponent(btnDangnhap)
                         .addGap(18, 18, 18)
                         .addComponent(btnKetThuc))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -129,23 +129,24 @@ public class LoginJDialog extends javax.swing.JDialog {
                         .addGap(44, 44, 44)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(22, 22, 22)
-                        .addComponent(jLabel4))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(icon, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(12, 12, 12)
+                        .addComponent(jLabel4)
+                        .addGap(12, 12, 12))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(icon, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnKetThuc)
-                    .addComponent(btnLogin))
+                    .addComponent(btnDangnhap))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+    private void btnDangnhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangnhapActionPerformed
     
-    }//GEN-LAST:event_btnLoginActionPerformed
+    }//GEN-LAST:event_btnDangnhapActionPerformed
 
     private void btnKetThucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKetThucActionPerformed
     
@@ -194,8 +195,8 @@ public class LoginJDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDangnhap;
     private javax.swing.JButton btnKetThuc;
-    private javax.swing.JButton btnLogin;
     private javax.swing.JLabel icon;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

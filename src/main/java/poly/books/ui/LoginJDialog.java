@@ -82,7 +82,7 @@ public class LoginJDialog extends javax.swing.JDialog {
 
         icon.setBackground(new java.awt.Color(255, 0, 204));
         icon.setForeground(new java.awt.Color(153, 102, 255));
-        icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/stack-of-books-250x250.png"))); // NOI18N
+        icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/stack-of-books-250x250.png"))); // NOI18N
         icon.setPreferredSize(new java.awt.Dimension(200, 200));
 
         btnDangnhap.setBackground(new java.awt.Color(51, 255, 51));

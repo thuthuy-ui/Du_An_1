@@ -5,7 +5,11 @@
 package poly.books.entity;
 
 import java.util.Date;
-
+import lombok.*;
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+@Builder
 /**
  *
  * @author HuyNguyen

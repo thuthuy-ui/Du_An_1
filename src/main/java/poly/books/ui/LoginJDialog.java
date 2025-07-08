@@ -149,7 +149,10 @@ public class LoginJDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_btnDangnhapActionPerformed
 
     private void btnKetThucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKetThucActionPerformed
-    
+      int XacNhan = JOptionPane.showConfirmDialog(this,"Bạn có muốn kết thúc không ?", "Xác nhận" ,JOptionPane.YES_NO_OPTION);
+         if(XacNhan == JOptionPane.YES_OPTION) {
+             System.exit(0);
+         }
     }//GEN-LAST:event_btnKetThucActionPerformed
 
     /**

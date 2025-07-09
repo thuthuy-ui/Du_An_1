@@ -280,156 +280,158 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
 
         jPanel2.setLayout(new java.awt.CardLayout());
 
+        jLabel13.setBackground(new java.awt.Color(255, 255, 255));
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel13.setText("Bán Hàng");
 
         javax.swing.GroupLayout BanHangLayout = new javax.swing.GroupLayout(BanHang);
         BanHang.setLayout(BanHangLayout);
         BanHangLayout.setHorizontalGroup(
             BanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(BanHangLayout.createSequentialGroup()
-                .addGap(301, 301, 301)
-                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(366, Short.MAX_VALUE))
+            .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 927, Short.MAX_VALUE)
         );
         BanHangLayout.setVerticalGroup(
             BanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(BanHangLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
                 .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(544, Short.MAX_VALUE))
+                .addGap(0, 555, Short.MAX_VALUE))
         );
 
         jPanel2.add(BanHang, "card2");
 
+        Quanlysach.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel14.setBackground(new java.awt.Color(255, 255, 255));
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel14.setText("Quản lý Sách");
 
         javax.swing.GroupLayout QuanlysachLayout = new javax.swing.GroupLayout(Quanlysach);
         Quanlysach.setLayout(QuanlysachLayout);
         QuanlysachLayout.setHorizontalGroup(
             QuanlysachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(QuanlysachLayout.createSequentialGroup()
-                .addGap(374, 374, 374)
-                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(409, Short.MAX_VALUE))
+            .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 927, Short.MAX_VALUE)
         );
         QuanlysachLayout.setVerticalGroup(
             QuanlysachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(QuanlysachLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(561, Short.MAX_VALUE))
+                .addContainerGap(549, Short.MAX_VALUE))
         );
 
         jPanel2.add(Quanlysach, "card3");
 
+        TaiKhoan.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel15.setBackground(new java.awt.Color(255, 255, 255));
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel15.setText("Quản Lý Tài Khoản");
 
         javax.swing.GroupLayout TaiKhoanLayout = new javax.swing.GroupLayout(TaiKhoan);
         TaiKhoan.setLayout(TaiKhoanLayout);
         TaiKhoanLayout.setHorizontalGroup(
             TaiKhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(TaiKhoanLayout.createSequentialGroup()
-                .addGap(301, 301, 301)
-                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(329, Short.MAX_VALUE))
+            .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 927, Short.MAX_VALUE)
         );
         TaiKhoanLayout.setVerticalGroup(
             TaiKhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TaiKhoanLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(544, Short.MAX_VALUE))
+                .addContainerGap(532, Short.MAX_VALUE))
         );
 
         jPanel2.add(TaiKhoan, "card4");
 
+        Quanlyhoadon.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel16.setBackground(new java.awt.Color(255, 255, 255));
         jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel16.setText("Quản lý Hóa Đơn");
 
         javax.swing.GroupLayout QuanlyhoadonLayout = new javax.swing.GroupLayout(Quanlyhoadon);
         Quanlyhoadon.setLayout(QuanlyhoadonLayout);
         QuanlyhoadonLayout.setHorizontalGroup(
             QuanlyhoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(QuanlyhoadonLayout.createSequentialGroup()
-                .addGap(301, 301, 301)
-                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(328, Short.MAX_VALUE))
+            .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 927, Short.MAX_VALUE)
         );
         QuanlyhoadonLayout.setVerticalGroup(
             QuanlyhoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(QuanlyhoadonLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(544, Short.MAX_VALUE))
+                .addContainerGap(532, Short.MAX_VALUE))
         );
 
         jPanel2.add(Quanlyhoadon, "card5");
 
+        GiamGia.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel17.setBackground(new java.awt.Color(255, 255, 255));
         jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel17.setText("Giảm giá");
 
         javax.swing.GroupLayout GiamGiaLayout = new javax.swing.GroupLayout(GiamGia);
         GiamGia.setLayout(GiamGiaLayout);
         GiamGiaLayout.setHorizontalGroup(
             GiamGiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(GiamGiaLayout.createSequentialGroup()
-                .addGap(301, 301, 301)
-                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(366, Short.MAX_VALUE))
+            .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 927, Short.MAX_VALUE)
         );
         GiamGiaLayout.setVerticalGroup(
             GiamGiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(GiamGiaLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(17, 17, 17)
                 .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(544, Short.MAX_VALUE))
+                .addContainerGap(538, Short.MAX_VALUE))
         );
 
         jPanel2.add(GiamGia, "card6");
 
+        jLabel18.setBackground(new java.awt.Color(255, 255, 255));
         jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel18.setText("Thống kê");
 
         javax.swing.GroupLayout ThongkeLayout = new javax.swing.GroupLayout(Thongke);
         Thongke.setLayout(ThongkeLayout);
         ThongkeLayout.setHorizontalGroup(
             ThongkeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ThongkeLayout.createSequentialGroup()
-                .addGap(301, 301, 301)
-                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(366, Short.MAX_VALUE))
+            .addComponent(jLabel18, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 927, Short.MAX_VALUE)
         );
         ThongkeLayout.setVerticalGroup(
             ThongkeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ThongkeLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(544, Short.MAX_VALUE))
+                .addContainerGap(532, Short.MAX_VALUE))
         );
 
         jPanel2.add(Thongke, "card7");
 
+        KhachHang.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Khách hàng");
 
         javax.swing.GroupLayout KhachHangLayout = new javax.swing.GroupLayout(KhachHang);
         KhachHang.setLayout(KhachHangLayout);
         KhachHangLayout.setHorizontalGroup(
             KhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(KhachHangLayout.createSequentialGroup()
-                .addGap(310, 310, 310)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(384, Short.MAX_VALUE))
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 927, Short.MAX_VALUE)
         );
         KhachHangLayout.setVerticalGroup(
             KhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(KhachHangLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(547, Short.MAX_VALUE))
+                .addContainerGap(535, Short.MAX_VALUE))
         );
 
         jPanel2.add(KhachHang, "card8");
@@ -453,9 +455,9 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
                 .addGap(21, 21, 21)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 602, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(mainLayout.createSequentialGroup()
-                .addComponent(menu, javax.swing.GroupLayout.DEFAULT_SIZE, 654, Short.MAX_VALUE)
+                .addComponent(menu, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE)
                 .addContainerGap())
         );
 

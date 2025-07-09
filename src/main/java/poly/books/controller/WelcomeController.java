@@ -4,21 +4,10 @@
  */
 package poly.books.controller;
 
-import poly.books.util.XDialog;
-
 /**
  *
  * @author HuyNguyen
  */
-public interface LoginController {
-     void open();
-
-    void login();
-
-    default void exit() {
-        if (XDialog.confirm("Bạn muốn kết thúc?")) {
-            System.exit(0);
-
-        }
-    }
+public interface WelcomeController {
+        void waiting(); 
 }

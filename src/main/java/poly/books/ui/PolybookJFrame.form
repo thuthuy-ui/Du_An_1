@@ -71,10 +71,13 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <Component id="menu" min="-2" pref="0" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jPanel2" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
+<<<<<<< HEAD
+=======
+                          <EmptySpace max="-2" attributes="0"/>
+>>>>>>> e792bfe6b2c3fee8d21ab87af2077416cb41c7b7
                           <Component id="jLabel12" min="-2" pref="43" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
@@ -85,13 +88,17 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                   <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jPanel2" max="32767" attributes="0"/>
               </Group>
+<<<<<<< HEAD
               <Group type="102" alignment="0" attributes="0">
                   <Component id="menu" pref="580" max="32767" attributes="0"/>
+=======
+              <Group type="102" attributes="0">
+                  <Component id="menu" max="32767" attributes="0"/>
+>>>>>>> e792bfe6b2c3fee8d21ab87af2077416cb41c7b7
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -351,7 +358,7 @@
         <Component class="javax.swing.JLabel" name="jLabel12">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/menu.png"/>
+              <Image iconType="3" name="/images/icons8-warehouse-25.png"/>
             </Property>
           </Properties>
           <Events>
@@ -391,18 +398,45 @@
           </Layout>
           <SubComponents>
             <Container class="javax.swing.JPanel" name="BanHang">
+<<<<<<< HEAD
+=======
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+                  <CardConstraints cardName="card2"/>
+                </Constraint>
+              </Constraints>
+>>>>>>> e792bfe6b2c3fee8d21ab87af2077416cb41c7b7
 
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
+<<<<<<< HEAD
                       <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
+=======
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jLabel13" pref="840" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+>>>>>>> e792bfe6b2c3fee8d21ab87af2077416cb41c7b7
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
+<<<<<<< HEAD
                           <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace pref="447" max="32767" attributes="0"/>
+=======
+                          <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                          <Component id="jLabel13" min="-2" pref="35" max="-2" attributes="0"/>
+                          <EmptySpace pref="494" max="32767" attributes="0"/>
+>>>>>>> e792bfe6b2c3fee8d21ab87af2077416cb41c7b7
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -413,6 +447,11 @@
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="0" type="rgb"/>
                     </Property>
+<<<<<<< HEAD
+=======
+                    <Property name="horizontalAlignment" type="int" value="0"/>
+                    <Property name="text" type="java.lang.String" value="B&#xe1;n H&#xe0;ng"/>
+>>>>>>> e792bfe6b2c3fee8d21ab87af2077416cb41c7b7
                   </Properties>
 
                   <Layout>
@@ -446,18 +485,45 @@
               </SubComponents>
             </Container>
             <Container class="javax.swing.JPanel" name="Quanlysach">
+<<<<<<< HEAD
+=======
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+                  <CardConstraints cardName="card3"/>
+                </Constraint>
+              </Constraints>
+>>>>>>> e792bfe6b2c3fee8d21ab87af2077416cb41c7b7
 
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
+<<<<<<< HEAD
                       <Component id="jPanel3" alignment="0" max="32767" attributes="0"/>
+=======
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jLabel14" pref="840" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+>>>>>>> e792bfe6b2c3fee8d21ab87af2077416cb41c7b7
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
+<<<<<<< HEAD
                           <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
                           <EmptySpace pref="447" max="32767" attributes="0"/>
+=======
+                          <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                          <Component id="jLabel14" min="-2" pref="35" max="-2" attributes="0"/>
+                          <EmptySpace pref="484" max="32767" attributes="0"/>
+>>>>>>> e792bfe6b2c3fee8d21ab87af2077416cb41c7b7
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -468,6 +534,11 @@
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="0" type="rgb"/>
                     </Property>
+<<<<<<< HEAD
+=======
+                    <Property name="horizontalAlignment" type="int" value="0"/>
+                    <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; S&#xe1;ch"/>
+>>>>>>> e792bfe6b2c3fee8d21ab87af2077416cb41c7b7
                   </Properties>
 
                   <Layout>
@@ -501,18 +572,41 @@
               </SubComponents>
             </Container>
             <Container class="javax.swing.JPanel" name="TaiKhoan">
+<<<<<<< HEAD
+=======
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+                  <CardConstraints cardName="card4"/>
+                </Constraint>
+              </Constraints>
+>>>>>>> e792bfe6b2c3fee8d21ab87af2077416cb41c7b7
 
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
+<<<<<<< HEAD
                       <Component id="jPanel4" alignment="0" max="32767" attributes="0"/>
+=======
+                      <Component id="jLabel15" alignment="1" pref="852" max="32767" attributes="0"/>
+>>>>>>> e792bfe6b2c3fee8d21ab87af2077416cb41c7b7
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
+<<<<<<< HEAD
                           <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
                           <EmptySpace pref="447" max="32767" attributes="0"/>
+=======
+                          <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                          <Component id="jLabel15" min="-2" pref="35" max="-2" attributes="0"/>
+                          <EmptySpace pref="494" max="32767" attributes="0"/>
+>>>>>>> e792bfe6b2c3fee8d21ab87af2077416cb41c7b7
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -523,6 +617,11 @@
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="0" type="rgb"/>
                     </Property>
+<<<<<<< HEAD
+=======
+                    <Property name="horizontalAlignment" type="int" value="0"/>
+                    <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n L&#xfd; T&#xe0;i Kho&#x1ea3;n"/>
+>>>>>>> e792bfe6b2c3fee8d21ab87af2077416cb41c7b7
                   </Properties>
 
                   <Layout>
@@ -556,6 +655,19 @@
               </SubComponents>
             </Container>
             <Container class="javax.swing.JPanel" name="Quanlyhoadon">
+<<<<<<< HEAD
+=======
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+                  <CardConstraints cardName="card5"/>
+                </Constraint>
+              </Constraints>
+>>>>>>> e792bfe6b2c3fee8d21ab87af2077416cb41c7b7
 
               <Layout>
                 <DimensionLayout dim="0">
@@ -563,20 +675,32 @@
                       <Component id="jPanel5" alignment="1" max="32767" attributes="0"/>
                       <Component id="jPanel10" alignment="0" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
+<<<<<<< HEAD
                           <Component id="jPanel9" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+=======
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jLabel16" min="-2" pref="840" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+>>>>>>> e792bfe6b2c3fee8d21ab87af2077416cb41c7b7
                       </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
+<<<<<<< HEAD
                           <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jPanel10" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jPanel9" min="-2" pref="300" max="-2" attributes="0"/>
                           <EmptySpace pref="244" max="32767" attributes="0"/>
+=======
+                          <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                          <Component id="jLabel16" min="-2" pref="35" max="-2" attributes="0"/>
+                          <EmptySpace pref="494" max="32767" attributes="0"/>
+>>>>>>> e792bfe6b2c3fee8d21ab87af2077416cb41c7b7
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -587,6 +711,11 @@
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="0" type="rgb"/>
                     </Property>
+<<<<<<< HEAD
+=======
+                    <Property name="horizontalAlignment" type="int" value="0"/>
+                    <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; H&#xf3;a &#x110;&#x1a1;n"/>
+>>>>>>> e792bfe6b2c3fee8d21ab87af2077416cb41c7b7
                   </Properties>
 
                   <Layout>
@@ -898,18 +1027,42 @@
               </SubComponents>
             </Container>
             <Container class="javax.swing.JPanel" name="GiamGia">
+<<<<<<< HEAD
+=======
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+                  <CardConstraints cardName="card6"/>
+                </Constraint>
+              </Constraints>
+>>>>>>> e792bfe6b2c3fee8d21ab87af2077416cb41c7b7
 
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
+<<<<<<< HEAD
                       <Component id="jPanel6" alignment="0" max="32767" attributes="0"/>
+=======
+                      <Component id="jLabel17" alignment="1" pref="852" max="32767" attributes="0"/>
+>>>>>>> e792bfe6b2c3fee8d21ab87af2077416cb41c7b7
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
+<<<<<<< HEAD
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="jPanel6" min="-2" max="-2" attributes="0"/>
                           <EmptySpace pref="447" max="32767" attributes="0"/>
+=======
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                          <Component id="jLabel17" min="-2" pref="35" max="-2" attributes="0"/>
+                          <EmptySpace pref="494" max="32767" attributes="0"/>
+>>>>>>> e792bfe6b2c3fee8d21ab87af2077416cb41c7b7
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -920,6 +1073,11 @@
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="0" type="rgb"/>
                     </Property>
+<<<<<<< HEAD
+=======
+                    <Property name="horizontalAlignment" type="int" value="0"/>
+                    <Property name="text" type="java.lang.String" value="Gi&#x1ea3;m gi&#xe1;"/>
+>>>>>>> e792bfe6b2c3fee8d21ab87af2077416cb41c7b7
                   </Properties>
 
                   <Layout>
@@ -953,18 +1111,42 @@
               </SubComponents>
             </Container>
             <Container class="javax.swing.JPanel" name="Thongke">
+<<<<<<< HEAD
+=======
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+                  <CardConstraints cardName="card7"/>
+                </Constraint>
+              </Constraints>
+>>>>>>> e792bfe6b2c3fee8d21ab87af2077416cb41c7b7
 
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
+<<<<<<< HEAD
                       <Component id="jPanel7" alignment="0" max="32767" attributes="0"/>
+=======
+                      <Component id="jLabel18" alignment="1" pref="852" max="32767" attributes="0"/>
+>>>>>>> e792bfe6b2c3fee8d21ab87af2077416cb41c7b7
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
+<<<<<<< HEAD
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="jPanel7" min="-2" max="-2" attributes="0"/>
                           <EmptySpace pref="447" max="32767" attributes="0"/>
+=======
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                          <Component id="jLabel18" min="-2" pref="35" max="-2" attributes="0"/>
+                          <EmptySpace pref="494" max="32767" attributes="0"/>
+>>>>>>> e792bfe6b2c3fee8d21ab87af2077416cb41c7b7
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -975,6 +1157,11 @@
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="0" type="rgb"/>
                     </Property>
+<<<<<<< HEAD
+=======
+                    <Property name="horizontalAlignment" type="int" value="0"/>
+                    <Property name="text" type="java.lang.String" value="Th&#x1ed1;ng k&#xea;"/>
+>>>>>>> e792bfe6b2c3fee8d21ab87af2077416cb41c7b7
                   </Properties>
 
                   <Layout>
@@ -1008,18 +1195,41 @@
               </SubComponents>
             </Container>
             <Container class="javax.swing.JPanel" name="KhachHang">
+<<<<<<< HEAD
+=======
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+                  <CardConstraints cardName="card8"/>
+                </Constraint>
+              </Constraints>
+>>>>>>> e792bfe6b2c3fee8d21ab87af2077416cb41c7b7
 
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
+<<<<<<< HEAD
                       <Component id="jPanel8" alignment="1" max="32767" attributes="0"/>
+=======
+                      <Component id="jLabel1" alignment="1" pref="852" max="32767" attributes="0"/>
+>>>>>>> e792bfe6b2c3fee8d21ab87af2077416cb41c7b7
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
+<<<<<<< HEAD
                           <Component id="jPanel8" min="-2" max="-2" attributes="0"/>
                           <EmptySpace pref="447" max="32767" attributes="0"/>
+=======
+                          <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                          <Component id="jLabel1" min="-2" pref="38" max="-2" attributes="0"/>
+                          <EmptySpace pref="497" max="32767" attributes="0"/>
+>>>>>>> e792bfe6b2c3fee8d21ab87af2077416cb41c7b7
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1030,6 +1240,11 @@
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="0" type="rgb"/>
                     </Property>
+<<<<<<< HEAD
+=======
+                    <Property name="horizontalAlignment" type="int" value="0"/>
+                    <Property name="text" type="java.lang.String" value="Kh&#xe1;ch h&#xe0;ng"/>
+>>>>>>> e792bfe6b2c3fee8d21ab87af2077416cb41c7b7
                   </Properties>
 
                   <Layout>

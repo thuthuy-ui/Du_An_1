@@ -5,15 +5,23 @@
 package poly.books.ui;
 
 import java.awt.Color;
+<<<<<<< HEAD
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+=======
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import poly.books.controller.PolybookController;
+import poly.books.util.XAuth;
+import poly.books.util.XIcon;
+>>>>>>> e792bfe6b2c3fee8d21ab87af2077416cb41c7b7
 
 /**
  *
  * @author HuyNguyen
  */
-public class PolybookJFrame extends javax.swing.JFrame {
+public class PolybookJFrame extends javax.swing.JFrame implements poly.books.controller.PolybookController {
 
     /**
      * Creates new form PolybookJFrame 215 503
@@ -23,7 +31,7 @@ public class PolybookJFrame extends javax.swing.JFrame {
 
     public PolybookJFrame() {
         initComponents();
-   
+        this.init();
         menu.setSize(199, 573);
     }
 
@@ -318,7 +326,7 @@ public class PolybookJFrame extends javax.swing.JFrame {
                 .addComponent(lbDangXuat, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/menu.png"))); // NOI18N
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-warehouse-25.png"))); // NOI18N
         jLabel12.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel12MouseClicked(evt);
@@ -326,6 +334,8 @@ public class PolybookJFrame extends javax.swing.JFrame {
         });
 
         jPanel1.setBackground(new java.awt.Color(0, 255, 255));
+
+        BanHang.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -349,16 +359,31 @@ public class PolybookJFrame extends javax.swing.JFrame {
         BanHang.setLayout(BanHangLayout);
         BanHangLayout.setHorizontalGroup(
             BanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< HEAD
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+=======
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BanHangLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 840, Short.MAX_VALUE)
+                .addContainerGap())
+>>>>>>> e792bfe6b2c3fee8d21ab87af2077416cb41c7b7
         );
         BanHangLayout.setVerticalGroup(
             BanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(BanHangLayout.createSequentialGroup()
+<<<<<<< HEAD
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(447, Short.MAX_VALUE))
+=======
+                .addGap(23, 23, 23)
+                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(494, Short.MAX_VALUE))
+>>>>>>> e792bfe6b2c3fee8d21ab87af2077416cb41c7b7
         );
 
         jPanel3.setBackground(new java.awt.Color(0, 255, 255));
+
+        Quanlysach.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -382,16 +407,31 @@ public class PolybookJFrame extends javax.swing.JFrame {
         Quanlysach.setLayout(QuanlysachLayout);
         QuanlysachLayout.setHorizontalGroup(
             QuanlysachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< HEAD
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+=======
+            .addGroup(QuanlysachLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 840, Short.MAX_VALUE)
+                .addContainerGap())
+>>>>>>> e792bfe6b2c3fee8d21ab87af2077416cb41c7b7
         );
         QuanlysachLayout.setVerticalGroup(
             QuanlysachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(QuanlysachLayout.createSequentialGroup()
+<<<<<<< HEAD
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(447, Short.MAX_VALUE))
+=======
+                .addGap(33, 33, 33)
+                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(484, Short.MAX_VALUE))
+>>>>>>> e792bfe6b2c3fee8d21ab87af2077416cb41c7b7
         );
 
         jPanel4.setBackground(new java.awt.Color(0, 255, 255));
+
+        TaiKhoan.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -415,18 +455,33 @@ public class PolybookJFrame extends javax.swing.JFrame {
         TaiKhoan.setLayout(TaiKhoanLayout);
         TaiKhoanLayout.setHorizontalGroup(
             TaiKhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< HEAD
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+=======
+            .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 852, Short.MAX_VALUE)
+>>>>>>> e792bfe6b2c3fee8d21ab87af2077416cb41c7b7
         );
         TaiKhoanLayout.setVerticalGroup(
             TaiKhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TaiKhoanLayout.createSequentialGroup()
+<<<<<<< HEAD
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(447, Short.MAX_VALUE))
+=======
+                .addGap(23, 23, 23)
+                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(494, Short.MAX_VALUE))
+>>>>>>> e792bfe6b2c3fee8d21ab87af2077416cb41c7b7
         );
 
         jPanel5.setBackground(new java.awt.Color(0, 255, 255));
 
+<<<<<<< HEAD
         jLabel16.setBackground(new java.awt.Color(0, 255, 255));
+=======
+        Quanlyhoadon.setBackground(new java.awt.Color(255, 255, 255));
+
+>>>>>>> e792bfe6b2c3fee8d21ab87af2077416cb41c7b7
         jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel16.setText("Quản lý Hóa Đơn");
@@ -621,21 +676,35 @@ public class PolybookJFrame extends javax.swing.JFrame {
             .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(QuanlyhoadonLayout.createSequentialGroup()
+<<<<<<< HEAD
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+=======
+                .addContainerGap()
+                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 840, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+>>>>>>> e792bfe6b2c3fee8d21ab87af2077416cb41c7b7
         );
         QuanlyhoadonLayout.setVerticalGroup(
             QuanlyhoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(QuanlyhoadonLayout.createSequentialGroup()
+<<<<<<< HEAD
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(244, Short.MAX_VALUE))
+=======
+                .addGap(23, 23, 23)
+                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(494, Short.MAX_VALUE))
+>>>>>>> e792bfe6b2c3fee8d21ab87af2077416cb41c7b7
         );
 
         jPanel6.setBackground(new java.awt.Color(0, 255, 255));
+
+        GiamGia.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -659,6 +728,7 @@ public class PolybookJFrame extends javax.swing.JFrame {
         GiamGia.setLayout(GiamGiaLayout);
         GiamGiaLayout.setHorizontalGroup(
             GiamGiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< HEAD
             .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         GiamGiaLayout.setVerticalGroup(
@@ -666,9 +736,21 @@ public class PolybookJFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, GiamGiaLayout.createSequentialGroup()
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(447, Short.MAX_VALUE))
+=======
+            .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 852, Short.MAX_VALUE)
+        );
+        GiamGiaLayout.setVerticalGroup(
+            GiamGiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(GiamGiaLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(494, Short.MAX_VALUE))
+>>>>>>> e792bfe6b2c3fee8d21ab87af2077416cb41c7b7
         );
 
         jPanel7.setBackground(new java.awt.Color(0, 255, 255));
+
+        Thongke.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -692,6 +774,7 @@ public class PolybookJFrame extends javax.swing.JFrame {
         Thongke.setLayout(ThongkeLayout);
         ThongkeLayout.setHorizontalGroup(
             ThongkeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< HEAD
             .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         ThongkeLayout.setVerticalGroup(
@@ -699,9 +782,21 @@ public class PolybookJFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ThongkeLayout.createSequentialGroup()
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(447, Short.MAX_VALUE))
+=======
+            .addComponent(jLabel18, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 852, Short.MAX_VALUE)
+        );
+        ThongkeLayout.setVerticalGroup(
+            ThongkeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ThongkeLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(494, Short.MAX_VALUE))
+>>>>>>> e792bfe6b2c3fee8d21ab87af2077416cb41c7b7
         );
 
         jPanel8.setBackground(new java.awt.Color(0, 255, 255));
+
+        KhachHang.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -725,13 +820,23 @@ public class PolybookJFrame extends javax.swing.JFrame {
         KhachHang.setLayout(KhachHangLayout);
         KhachHangLayout.setHorizontalGroup(
             KhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< HEAD
             .addComponent(jPanel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+=======
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 852, Short.MAX_VALUE)
+>>>>>>> e792bfe6b2c3fee8d21ab87af2077416cb41c7b7
         );
         KhachHangLayout.setVerticalGroup(
             KhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(KhachHangLayout.createSequentialGroup()
+<<<<<<< HEAD
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(447, Short.MAX_VALUE))
+=======
+                .addGap(17, 17, 17)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(497, Short.MAX_VALUE))
+>>>>>>> e792bfe6b2c3fee8d21ab87af2077416cb41c7b7
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -766,22 +871,28 @@ public class PolybookJFrame extends javax.swing.JFrame {
             mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainLayout.createSequentialGroup()
                 .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
                 .addGroup(mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(mainLayout.createSequentialGroup()
+<<<<<<< HEAD
+=======
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+>>>>>>> e792bfe6b2c3fee8d21ab87af2077416cb41c7b7
                         .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
         );
         mainLayout.setVerticalGroup(
             mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(mainLayout.createSequentialGroup()
+<<<<<<< HEAD
                 .addComponent(menu, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
+=======
+                .addComponent(menu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+>>>>>>> e792bfe6b2c3fee8d21ab87af2077416cb41c7b7
                 .addContainerGap())
         );
 
@@ -799,6 +910,7 @@ public class PolybookJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+<<<<<<< HEAD
     private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
         openMenu();
     }//GEN-LAST:event_jLabel12MouseClicked
@@ -807,6 +919,8 @@ public class PolybookJFrame extends javax.swing.JFrame {
         closeMenu();
     }//GEN-LAST:event_lbDangXuatTaiKhoanMouseClicked
 
+=======
+>>>>>>> e792bfe6b2c3fee8d21ab87af2077416cb41c7b7
     private void lbBanHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbBanHangMouseClicked
         BanHang.setVisible(true);
         Quanlysach.setVisible(false);
@@ -829,17 +943,17 @@ public class PolybookJFrame extends javax.swing.JFrame {
      }//GEN-LAST:event_lbQLSachMouseClicked
 
     private void lbTaiKhoanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbTaiKhoanMouseClicked
-       BanHang.setVisible(false);
+        BanHang.setVisible(false);
         Quanlysach.setVisible(false);
         Quanlyhoadon.setVisible(false);
         TaiKhoan.setVisible(true);
         KhachHang.setVisible(false);
         Thongke.setVisible(false);
-        GiamGia.setVisible(false); 
+        GiamGia.setVisible(false);
     }//GEN-LAST:event_lbTaiKhoanMouseClicked
 
     private void lbQuanLyKHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbQuanLyKHMouseClicked
-     BanHang.setVisible(false);
+        BanHang.setVisible(false);
         Quanlysach.setVisible(false);
         Quanlyhoadon.setVisible(false);
         TaiKhoan.setVisible(false);
@@ -848,7 +962,7 @@ public class PolybookJFrame extends javax.swing.JFrame {
         GiamGia.setVisible(false);     }//GEN-LAST:event_lbQuanLyKHMouseClicked
 
     private void lbQuanLyHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbQuanLyHDMouseClicked
-       BanHang.setVisible(false);
+        BanHang.setVisible(false);
         Quanlysach.setVisible(false);
         Quanlyhoadon.setVisible(true);
         TaiKhoan.setVisible(false);
@@ -866,7 +980,7 @@ public class PolybookJFrame extends javax.swing.JFrame {
         GiamGia.setVisible(false);     }//GEN-LAST:event_lbThongKeMouseClicked
 
     private void lbgiamgiaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbgiamgiaMouseClicked
-       BanHang.setVisible(false);
+        BanHang.setVisible(false);
         Quanlysach.setVisible(false);
         Quanlyhoadon.setVisible(false);
         TaiKhoan.setVisible(false);
@@ -878,6 +992,7 @@ public class PolybookJFrame extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_lbDangXuatMouseClicked
 
+<<<<<<< HEAD
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
       
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -892,6 +1007,15 @@ public class PolybookJFrame extends javax.swing.JFrame {
         tblHoaDon.setRowSorter(sorter);
         sorter.setRowFilter(javax.swing.RowFilter.regexFilter("!." + timkiem,0));
     }//GEN-LAST:event_rdoTimKiemActionPerformed
+=======
+    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
+        closeMenu();
+    }//GEN-LAST:event_jLabel7MouseClicked
+
+    private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
+        openMenu();
+    }//GEN-LAST:event_jLabel12MouseClicked
+>>>>>>> e792bfe6b2c3fee8d21ab87af2077416cb41c7b7
 
     /**
      * @param args the command line arguments
@@ -995,5 +1119,41 @@ public class PolybookJFrame extends javax.swing.JFrame {
     private javax.swing.JTextField txtTimKiem;
     private javax.swing.JTextField txtTongTien;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void init() {
+        this.setIconImage(XIcon.getIcon("/images/logo.png").getImage());
+        this.setLocationRelativeTo(null);
+
+        this.showWelcomeJDialog(this);
+        this.showLoginJDialog(this);
+//        XIcon.setIcon(lblPhoto, "photos/" + XAuth.user.getPhoto());
+//        lblFullname.setText(XAuth.user.getFullname());
+
+//        if (!XAuth.user.isManager()) {
+//            pnlManager.setVisible(false);
+//            getContentPane().revalidate(); 
+//            getContentPane().repaint();
+//        }
+    }
+
+    @Override
+    public void exit() {
+    }
+
+    @Override
+    public void showJDialog(JDialog dialog) {
+        PolybookController.super.showJDialog(dialog); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    }
+
+    @Override
+    public void showWelcomeJDialog(JFrame frame) {
+        PolybookController.super.showWelcomeJDialog(frame); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    }
+
+    @Override
+    public void showLoginJDialog(JFrame frame) {
+        PolybookController.super.showLoginJDialog(frame); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    }
 
 }

@@ -8,6 +8,6 @@ package poly.books.controller;
  *
  * @author ADMIN
  */
-public interface SachController {
+public interface SachController extends CrudController{
     
 }

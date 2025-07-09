@@ -4,14 +4,16 @@
  */
 package poly.books.ui;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-
+import poly.books.util.XAuth;
+import poly.books.util.XDialog;
 
 /**
  *
  * @author HuyNguyen
  */
-public class LoginJDialog extends javax.swing.JDialog {
+public class LoginJDialog extends javax.swing.JDialog implements poly.books.controller.LoginController {
 
     /**
      * Creates new form LoginJDialog
@@ -30,12 +32,13 @@ public class LoginJDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel2 = new javax.swing.JPanel();
+        icon = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtUsername = new javax.swing.JTextField();
         txtPassword = new javax.swing.JPasswordField();
-        icon = new javax.swing.JLabel();
         btnDangnhap = new javax.swing.JButton();
         btnKetThuc = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
@@ -44,6 +47,15 @@ public class LoginJDialog extends javax.swing.JDialog {
         setTitle("Đăng nhập");
         setBackground(new java.awt.Color(204, 255, 204));
 
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        icon.setBackground(new java.awt.Color(255, 255, 255));
+        icon.setForeground(new java.awt.Color(153, 102, 255));
+        icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/stack-of-books-250x250.png"))); // NOI18N
+        icon.setOpaque(true);
+        icon.setPreferredSize(new java.awt.Dimension(200, 200));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "ĐĂNG NHẬP", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 24))); // NOI18N
         jPanel1.setForeground(new java.awt.Color(153, 255, 153));
 
@@ -80,11 +92,6 @@ public class LoginJDialog extends javax.swing.JDialog {
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
-        icon.setBackground(new java.awt.Color(255, 0, 204));
-        icon.setForeground(new java.awt.Color(153, 102, 255));
-        icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/stack-of-books-250x250.png"))); // NOI18N
-        icon.setPreferredSize(new java.awt.Dimension(200, 200));
-
         btnDangnhap.setBackground(new java.awt.Color(51, 255, 51));
         btnDangnhap.setText("Đăng nhập");
         btnDangnhap.addActionListener(new java.awt.event.ActionListener() {
@@ -104,57 +111,65 @@ public class LoginJDialog extends javax.swing.JDialog {
         jLabel4.setForeground(new java.awt.Color(51, 51, 255));
         jLabel4.setText("Quên mật khẩu?");
 
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(icon, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnDangnhap)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnKetThuc))
+                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(33, 33, 33))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(13, 13, 13)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnKetThuc)
+                            .addComponent(btnDangnhap)))
+                    .addComponent(icon, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(29, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnDangnhap)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnKetThuc))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(icon, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(20, 20, 20))
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(22, 22, 22)
-                        .addComponent(jLabel4)
-                        .addGap(12, 12, 12))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(icon, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnKetThuc)
-                    .addComponent(btnDangnhap))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDangnhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangnhapActionPerformed
-    
+        this.login();
     }//GEN-LAST:event_btnDangnhapActionPerformed
 
     private void btnKetThucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKetThucActionPerformed
-      int XacNhan = JOptionPane.showConfirmDialog(this,"Bạn có muốn kết thúc không ?", "Xác nhận" ,JOptionPane.YES_NO_OPTION);
-         if(XacNhan == JOptionPane.YES_OPTION) {
-             System.exit(0);
-         }
+        int XacNhan = JOptionPane.showConfirmDialog(this, "Bạn có muốn kết thúc không ?", "Xác nhận", JOptionPane.YES_NO_OPTION);
+        if (XacNhan == JOptionPane.YES_OPTION) {
+            System.exit(0);
+        }
     }//GEN-LAST:event_btnKetThucActionPerformed
 
     /**
@@ -207,9 +222,36 @@ public class LoginJDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 
-    
+    @Override
+    public void open() {
+        this.setLocationRelativeTo(null);
+    }
+
+    @Override
+    public void login() {
+//        String username = txtUsername.getText();
+//        String password = new String(txtPassword.getPassword());
+//        User user = dao.findById(username);
+//        if (user == null) {
+//            XDialog.alert("Sai tên đăng nhập!");
+//        } else if (!password.equals(user.getPassword())) {
+//            XDialog.alert("Sai mật khẩu đăng nhập!");
+//        } else if (!user.isEnabled()) {
+//            XDialog.alert("Tài khoản của bạn đang tạm dừng!");
+//        } else {
+//            XAuth.user = user; 
+//            this.dispose();
+//        }
+    }
+
+    @Override
+    public void exit() {
+        System.exit(0);
+    }
+
 }

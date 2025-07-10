@@ -4,10 +4,30 @@
  */
 package poly.books.dao;
 
+import java.util.List;
+import poly.books.entity.NhaXuatBan;
+import poly.books.util.XQuery;
+
 /**
  *
  * @author LAPTOP
  */
 public class NhaXuatBanDAO {
-    
+
+    String getAllSQL = """
+                       SELECT TOP (1000) [MaNXB]
+                             ,[TenNXB]
+                         FROM [QLNhaSachPro].[dbo].[NhaXuatBan]
+                       """;
+    String findBySQL = """
+                       SELECT * FROM [QLNhaSachPro].[dbo].[NhaXuatBan] where MaNXB = ?
+                       """;
+
+    public List<NhaXuatBan> getAll() {
+        return XQuery.getBeanList(NhaXuatBan.class, getAllSQL);
+    }
+
+    public NhaXuatBan findByID(String MaNXB) {
+        return XQuery.getSingleBean(NhaXuatBan.class, findBySQL, MaNXB);
+    }
 }

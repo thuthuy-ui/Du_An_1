@@ -8,6 +8,6 @@ package poly.books.dao;
  *
  * @author LAPTOP
  */
-public class ChiiTietHoaDonDAO {
+public class ChiTietHoaDonDAO {
     
 }

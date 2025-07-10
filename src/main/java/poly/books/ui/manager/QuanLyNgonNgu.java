@@ -2,18 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
-package poly.books.ui;
+package poly.books.ui.manager;
 
 /**
  *
  * @author HuyNguyen
  */
-public class QuanLyTheLoai extends javax.swing.JDialog {
+public class QuanLyNgonNgu extends javax.swing.JDialog {
 
     /**
-     * Creates new form QuanLyTheLoai
+     * Creates new form QuanLyNgoNgu
      */
-    public QuanLyTheLoai(java.awt.Frame parent, boolean modal) {
+    public QuanLyNgonNgu(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -29,14 +29,14 @@ public class QuanLyTheLoai extends javax.swing.JDialog {
 
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbTheLoai = new javax.swing.JTable();
+        tbNgonNgu = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         btnTimKiem = new javax.swing.JButton();
         txtTimKiem = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtTenLinhVuc = new javax.swing.JTextField();
+        txtNgonNgu = new javax.swing.JTextField();
         btnThem = new javax.swing.JButton();
         btnSua = new javax.swing.JButton();
         btnXoa = new javax.swing.JButton();
@@ -46,7 +46,7 @@ public class QuanLyTheLoai extends javax.swing.JDialog {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thông tin", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 18))); // NOI18N
 
-        tbTheLoai.setModel(new javax.swing.table.DefaultTableModel(
+        tbNgonNgu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -54,10 +54,10 @@ public class QuanLyTheLoai extends javax.swing.JDialog {
                 {null, null}
             },
             new String [] {
-                "Mã thể loại", "Tên thể loại"
+                "Mã ngôn ngữ", "Tên ngôn ngữ"
             }
         ));
-        jScrollPane1.setViewportView(tbTheLoai);
+        jScrollPane1.setViewportView(tbNgonNgu);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -101,11 +101,11 @@ public class QuanLyTheLoai extends javax.swing.JDialog {
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thể loại", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 18))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ngôn ngữ", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 18))); // NOI18N
 
-        jLabel1.setText("Mã thể loại");
+        jLabel1.setText("Mã ngôn ngữ:");
 
-        jLabel2.setText("Tên thể loại");
+        jLabel2.setText("Tên ngôn ngữ: ");
 
         btnThem.setText("Thêm");
 
@@ -138,7 +138,7 @@ public class QuanLyTheLoai extends javax.swing.JDialog {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(18, 18, 18)
-                                .addComponent(txtTenLinhVuc, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(txtNgonNgu, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -161,7 +161,7 @@ public class QuanLyTheLoai extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtTenLinhVuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNgonNgu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(59, 59, 59)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -228,20 +228,21 @@ public class QuanLyTheLoai extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(QuanLyTheLoai.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(QuanLyNgonNgu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(QuanLyTheLoai.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(QuanLyNgonNgu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(QuanLyTheLoai.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(QuanLyNgonNgu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(QuanLyTheLoai.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(QuanLyNgonNgu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                QuanLyTheLoai dialog = new QuanLyTheLoai(new javax.swing.JFrame(), true);
+                QuanLyNgonNgu dialog = new QuanLyNgonNgu(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -265,8 +266,8 @@ public class QuanLyTheLoai extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tbTheLoai;
-    private javax.swing.JTextField txtTenLinhVuc;
+    private javax.swing.JTable tbNgonNgu;
+    private javax.swing.JTextField txtNgonNgu;
     private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
 }

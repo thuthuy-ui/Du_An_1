@@ -605,6 +605,9 @@
               <ComponentRef name="buttonGroup1"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNXBActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnTacgia">
           <Properties>
@@ -613,6 +616,9 @@
               <ComponentRef name="buttonGroup1"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTacgiaActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnTheLoai">
           <Properties>
@@ -621,6 +627,9 @@
               <ComponentRef name="buttonGroup1"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTheLoaiActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnLinhVuc">
           <Properties>
@@ -640,6 +649,9 @@
               <ComponentRef name="buttonGroup1"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNgonNguActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

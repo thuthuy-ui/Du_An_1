@@ -95,43 +95,6 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
         jPanel2 = new javax.swing.JPanel();
         BanHang = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
-        Quanlysach = new javax.swing.JPanel();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
-        jLabel18 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
-        jButton5 = new javax.swing.JButton();
-        btnTimKiem = new javax.swing.JTextField();
-        jComboBox4 = new javax.swing.JComboBox<>();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jLabel25 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
-        jComboBox5 = new javax.swing.JComboBox<>();
         TaiKhoan = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
         Quanlyhoadon = new javax.swing.JPanel();
@@ -338,280 +301,6 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
 
         jPanel2.add(BanHang, "card2");
 
-        Quanlysach.setBackground(new java.awt.Color(255, 255, 255));
-
-        jLabel19.setBackground(new java.awt.Color(0, 204, 204));
-        jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel19.setText("Quản lý Sách");
-        jLabel19.setOpaque(true);
-
-        jLabel1.setText("Mã Sách");
-
-        jLabel2.setText("Tên sách");
-
-        jLabel3.setText("Tác giả");
-
-        jLabel4.setText("Lĩnh vực");
-
-        jLabel5.setText("Thể loại");
-
-        jLabel6.setText("Nhà xuất bản");
-
-        jLabel11.setText("Ngôn ngữ");
-
-        jLabel14.setText("Tập");
-
-        jLabel15.setText("Lần tái bản");
-
-        jLabel16.setText("Giá bán");
-
-        jLabel17.setText("INBS");
-
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
-            }
-        });
-
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
-            }
-        });
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jTextField7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField7ActionPerformed(evt);
-            }
-        });
-
-        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_supplier_25px.png"))); // NOI18N
-        jLabel18.setText("ảnh");
-        jLabel18.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
-
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_add_25px_5.png"))); // NOI18N
-        jButton1.setText("Thêm");
-
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_edit_25px.png"))); // NOI18N
-        jButton2.setText("Sửa");
-
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_delete_25px_1.png"))); // NOI18N
-        jButton3.setText("Xóa");
-
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_reset_25px_1.png"))); // NOI18N
-        jButton4.setText("Làm mới");
-
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm Kiếm", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(102, 102, 102))); // NOI18N
-
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_search_25px.png"))); // NOI18N
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(7, 7, 7)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5)
-                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(16, Short.MAX_VALUE))
-        );
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "MaSach", "TenSach", "MaTacGia", "MaLinhVuc", "MaLoaiSach", "MaNXB", "NamXuatBan", "GiaBan", "LanTaiBan", "ISBN", "Tap", "MaNgonNgu", "HinhAnh"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        jLabel25.setText("Năm sản xuất");
-
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        javax.swing.GroupLayout QuanlysachLayout = new javax.swing.GroupLayout(Quanlysach);
-        Quanlysach.setLayout(QuanlysachLayout);
-        QuanlysachLayout.setHorizontalGroup(
-            QuanlysachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel19, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(QuanlysachLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(QuanlysachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(QuanlysachLayout.createSequentialGroup()
-                        .addGroup(QuanlysachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(QuanlysachLayout.createSequentialGroup()
-                                .addGroup(QuanlysachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(QuanlysachLayout.createSequentialGroup()
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jTextField1))
-                                    .addGroup(QuanlysachLayout.createSequentialGroup()
-                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(QuanlysachLayout.createSequentialGroup()
-                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jTextField3))
-                                    .addGroup(QuanlysachLayout.createSequentialGroup()
-                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(QuanlysachLayout.createSequentialGroup()
-                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(QuanlysachLayout.createSequentialGroup()
-                                        .addComponent(jLabel6)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                .addGap(49, 49, 49)
-                                .addGroup(QuanlysachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(QuanlysachLayout.createSequentialGroup()
-                                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(QuanlysachLayout.createSequentialGroup()
-                                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jTextField8))
-                                    .addGroup(QuanlysachLayout.createSequentialGroup()
-                                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jComboBox5, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(QuanlysachLayout.createSequentialGroup()
-                                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(QuanlysachLayout.createSequentialGroup()
-                                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(QuanlysachLayout.createSequentialGroup()
-                                        .addComponent(jLabel25)
-                                        .addGap(10, 10, 10)
-                                        .addComponent(jTextField9)))
-                                .addGroup(QuanlysachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(QuanlysachLayout.createSequentialGroup()
-                                        .addGap(40, 40, 40)
-                                        .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addGroup(QuanlysachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)))
-                                    .addGroup(QuanlysachLayout.createSequentialGroup()
-                                        .addGap(222, 222, 222)
-                                        .addComponent(jButton4)))))
-                        .addGap(0, 21, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        QuanlysachLayout.setVerticalGroup(
-            QuanlysachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(QuanlysachLayout.createSequentialGroup()
-                .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(QuanlysachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(QuanlysachLayout.createSequentialGroup()
-                        .addGroup(QuanlysachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(QuanlysachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(QuanlysachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(QuanlysachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(QuanlysachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(QuanlysachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(QuanlysachLayout.createSequentialGroup()
-                        .addGroup(QuanlysachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel11)
-                            .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(QuanlysachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel14)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(QuanlysachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel15)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(QuanlysachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel16)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(QuanlysachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel17)
-                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(QuanlysachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel25)))
-                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(QuanlysachLayout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4)))
-                .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 28, Short.MAX_VALUE))
-        );
-
-        jPanel2.add(Quanlysach, "card3");
-
         TaiKhoan.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel20.setBackground(new java.awt.Color(0, 204, 204));
@@ -779,7 +468,6 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
 
     private void lbBanHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbBanHangMouseClicked
         BanHang.setVisible(true);
-        Quanlysach.setVisible(false);
         Quanlyhoadon.setVisible(false);
         TaiKhoan.setVisible(false);
         KhachHang.setVisible(false);
@@ -789,18 +477,11 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
     }//GEN-LAST:event_lbBanHangMouseClicked
 
     private void lbQLSachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbQLSachMouseClicked
-        BanHang.setVisible(false);
-        Quanlysach.setVisible(true);
-        Quanlyhoadon.setVisible(false);
-        TaiKhoan.setVisible(false);
-        KhachHang.setVisible(false);
-        Thongke.setVisible(false);
-        GiamGia.setVisible(false);
+        this.showQuanLySach(this);
      }//GEN-LAST:event_lbQLSachMouseClicked
 
     private void lbTaiKhoanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbTaiKhoanMouseClicked
         BanHang.setVisible(false);
-        Quanlysach.setVisible(false);
         Quanlyhoadon.setVisible(false);
         TaiKhoan.setVisible(true);
         KhachHang.setVisible(false);
@@ -810,7 +491,6 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
 
     private void lbQuanLyKHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbQuanLyKHMouseClicked
         BanHang.setVisible(false);
-        Quanlysach.setVisible(false);
         Quanlyhoadon.setVisible(false);
         TaiKhoan.setVisible(false);
         KhachHang.setVisible(true);
@@ -819,7 +499,6 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
 
     private void lbQuanLyHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbQuanLyHDMouseClicked
         BanHang.setVisible(false);
-        Quanlysach.setVisible(false);
         Quanlyhoadon.setVisible(true);
         TaiKhoan.setVisible(false);
         KhachHang.setVisible(false);
@@ -828,7 +507,6 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
 
     private void lbThongKeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbThongKeMouseClicked
         BanHang.setVisible(false);
-        Quanlysach.setVisible(false);
         Quanlyhoadon.setVisible(false);
         TaiKhoan.setVisible(false);
         KhachHang.setVisible(false);
@@ -837,7 +515,6 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
 
     private void lbgiamgiaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbgiamgiaMouseClicked
         BanHang.setVisible(false);
-        Quanlysach.setVisible(false);
         Quanlyhoadon.setVisible(false);
         TaiKhoan.setVisible(false);
         KhachHang.setVisible(false);
@@ -847,22 +524,6 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
     private void lbDangXuatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbDangXuatMouseClicked
         System.exit(0);
     }//GEN-LAST:event_lbDangXuatMouseClicked
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
-
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
-
-    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField7ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -904,57 +565,20 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
     private javax.swing.JPanel GiamGia;
     private javax.swing.JPanel KhachHang;
     private javax.swing.JPanel Quanlyhoadon;
-    private javax.swing.JPanel Quanlysach;
     private javax.swing.JPanel TaiKhoan;
     private javax.swing.JPanel Thongke;
-    private javax.swing.JTextField btnTimKiem;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
-    private javax.swing.JComboBox<String> jComboBox5;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
     private javax.swing.JLabel lbBanHang;
     private javax.swing.JLabel lbDangXuat;
     private javax.swing.JLabel lbQLSach;
@@ -1001,6 +625,10 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
     @Override
     public void showLoginJDialog(JFrame frame) {
         PolybookController.super.showLoginJDialog(frame); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    }
+@Override
+    public void showQuanLySach(JFrame frame) {
+        PolybookController.super.showQuanLySach(frame); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
 
 }

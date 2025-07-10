@@ -8,6 +8,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import poly.books.ui.LoginJDialog;
 import poly.books.ui.WelcomeJDialog;
+import poly.books.ui.manager.QuanLySach;
 import poly.books.util.XDialog;
 
 /**
@@ -31,5 +32,8 @@ public interface PolybookController {
     } 
     default void showLoginJDialog(JFrame frame){ 
         this.showJDialog(new LoginJDialog(frame, true)); 
+    } 
+    default void showQuanLySach(JFrame frame){ 
+        this.showJDialog(new QuanLySach(frame, true)); 
     } 
 }

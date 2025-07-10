@@ -4,6 +4,7 @@
  */
 package poly.books.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import poly.books.entity.HoaDon;
 import poly.books.entity.Sach;
@@ -73,8 +74,9 @@ public class SachDAO {
                              WHERE MaSach = ?
                        """;
 
-    public List<HoaDon> getAll() {
-        return XQuery.getBeanList(HoaDon.class, getAllSQL);
+    public List<Sach> getAll() {
+        List<Sach> list=new ArrayList<>();
+        return XQuery.getBeanList(Sach.class, getAllSQL);
     }
 
     public int create(Sach sach) {

@@ -15,5 +15,9 @@ import lombok.*;
 public class NgonNgu {
      private int MaNgonNgu;
     private String TenNgonNgu;
+    @Override
+    public String toString() {
+        return TenNgonNgu;
+    }
 
 }

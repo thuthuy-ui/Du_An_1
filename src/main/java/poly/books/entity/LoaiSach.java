@@ -15,4 +15,8 @@ import lombok.*;
 public class LoaiSach {
       private int MaLoaiSach;
     private String TenLoaiSach;
+    @Override
+    public String toString() {
+        return TenLoaiSach;
+    }
 }

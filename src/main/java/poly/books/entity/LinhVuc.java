@@ -15,4 +15,8 @@ import lombok.*;
 public class LinhVuc {
      private int MaLinhVuc;
     private String TenLinhVuc;
+    @Override
+    public String toString() {
+        return TenLinhVuc;
+    }
 }

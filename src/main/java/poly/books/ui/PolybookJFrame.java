@@ -5,9 +5,35 @@
 package poly.books.ui;
 
 import java.awt.Color;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.text.html.parser.Entity;
+import lombok.Builder;
 import poly.books.controller.PolybookController;
+import poly.books.dao.LinhVucDAO;
+import poly.books.dao.LoaiSachDAO;
+import poly.books.dao.NgonNguDAO;
+import poly.books.dao.NhaXuatBanDAO;
+import poly.books.dao.SachDAO;
+import poly.books.dao.TacGiaDAO;
+import poly.books.entity.LinhVuc;
+import poly.books.entity.LoaiSach;
+import poly.books.entity.NgonNgu;
+import poly.books.entity.NhaXuatBan;
+import poly.books.entity.Sach;
+import poly.books.entity.TacGia;
 import poly.books.util.XAuth;
 import poly.books.util.XIcon;
 
@@ -17,6 +43,21 @@ import poly.books.util.XIcon;
  */
 public class PolybookJFrame extends javax.swing.JFrame implements poly.books.controller.PolybookController {
 
+    SachDAO sach = new SachDAO();
+    List<Sach> listsach = new ArrayList<>();
+    TacGiaDAO tacgia = new TacGiaDAO();
+    List<TacGia> listtacgia = new ArrayList<>();
+    LinhVucDAO linhvuc = new LinhVucDAO();
+    List<LinhVuc> listlinhvuc = new ArrayList<>();
+    LoaiSachDAO loaisach = new LoaiSachDAO();
+    List<LoaiSach> listloaisach = new ArrayList<>();
+    NhaXuatBanDAO nxb = new NhaXuatBanDAO();
+    List<NhaXuatBan> listnxb = new ArrayList<>();
+    NgonNguDAO ngonngu = new NgonNguDAO();
+    List<NgonNgu> listngonngu = new ArrayList<>();
+    TacGiaDAO tg = new TacGiaDAO();
+    List<TacGia> listtg = new ArrayList<>();
+
     /**
      * Creates new form PolybookJFrame 215 503
      */
@@ -25,8 +66,13 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
 
     public PolybookJFrame() {
         initComponents();
-        this.init();
 
+        fillToCombobox();
+        fillToCombobox2();
+        fillToCombobox3();
+        fillToCombobox4();
+        fillToCombobox5();
+        fillToTable();
         menu.setSize(199, 660);
     }
 
@@ -110,7 +156,6 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
         jLabel17 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox<>();
         jComboBox2 = new javax.swing.JComboBox<>();
         jComboBox3 = new javax.swing.JComboBox<>();
@@ -132,6 +177,7 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
         jLabel25 = new javax.swing.JLabel();
         jTextField9 = new javax.swing.JTextField();
         jComboBox5 = new javax.swing.JComboBox<>();
+        jComboBox6 = new javax.swing.JComboBox<>();
         TaiKhoan = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
         Quanlyhoadon = new javax.swing.JPanel();
@@ -374,12 +420,6 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
             }
         });
 
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
-            }
-        });
-
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -395,15 +435,35 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
         jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_supplier_25px.png"))); // NOI18N
         jLabel18.setText("ảnh");
         jLabel18.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
+        jLabel18.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel18MouseClicked(evt);
+            }
+        });
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_add_25px_5.png"))); // NOI18N
         jButton1.setText("Thêm");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_edit_25px.png"))); // NOI18N
         jButton2.setText("Sửa");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_delete_25px_1.png"))); // NOI18N
         jButton3.setText("Xóa");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_reset_25px_1.png"))); // NOI18N
         jButton4.setText("Làm mới");
@@ -455,11 +515,18 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
                 "MaSach", "TenSach", "MaTacGia", "MaLinhVuc", "MaLoaiSach", "MaNXB", "NamXuatBan", "GiaBan", "LanTaiBan", "ISBN", "Tap", "MaNgonNgu", "HinhAnh"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jLabel25.setText("Năm sản xuất");
 
         jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout QuanlysachLayout = new javax.swing.GroupLayout(Quanlysach);
         Quanlysach.setLayout(QuanlysachLayout);
@@ -486,7 +553,7 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
                                     .addGroup(QuanlysachLayout.createSequentialGroup()
                                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jTextField3))
+                                        .addComponent(jComboBox6, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addGroup(QuanlysachLayout.createSequentialGroup()
                                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
@@ -555,10 +622,10 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
                             .addComponent(jLabel2)
                             .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(QuanlysachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(QuanlysachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(9, 9, 9)
                         .addGroup(QuanlysachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -607,7 +674,7 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 28, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jPanel2.add(Quanlysach, "card3");
@@ -796,6 +863,7 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
         KhachHang.setVisible(false);
         Thongke.setVisible(false);
         GiamGia.setVisible(false);
+
      }//GEN-LAST:event_lbQLSachMouseClicked
 
     private void lbTaiKhoanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbTaiKhoanMouseClicked
@@ -856,13 +924,63 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
-
     private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField7ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        int index = jTable1.getSelectedRow();
+        this.setForm(index);
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jLabel18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel18MouseClicked
+        JFileChooser fileChooser = new JFileChooser();
+    fileChooser.setDialogTitle("Chọn ảnh");
+
+    int result = fileChooser.showOpenDialog(this);
+    if (result == JFileChooser.APPROVE_OPTION) {
+        File selectedFile = fileChooser.getSelectedFile();
+        ImageIcon icon = new ImageIcon(selectedFile.getAbsolutePath());
+        Image img = icon.getImage().getScaledInstance(
+                jLabel18.getWidth(),
+                jLabel18.getHeight(),
+                Image.SCALE_SMOOTH
+        );
+        jLabel18.setIcon(new ImageIcon(img));
+        jLabel18.setText("");
+        jLabel18.setToolTipText(selectedFile.getName()); // Lưu tên file
+
+        // Tùy chọn: Copy file vào thư mục images để đảm bảo tồn tại
+        File destFile = new File("images/" + selectedFile.getName());
+        try {
+            java.nio.file.Files.copy(selectedFile.toPath(), destFile.toPath(), java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    }//GEN-LAST:event_jLabel18MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        Sach sa = getForm();
+        int them = sach.create(sa);
+        fillToTable();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        Sach sa = getForm();
+        sach.update(sa);
+        fillToTable();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        String id = jTextField1.getText();
+        int result = sach.delete(id);
+        fillToTable();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -918,6 +1036,7 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JComboBox<String> jComboBox5;
+    private javax.swing.JComboBox<String> jComboBox6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -949,7 +1068,6 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
@@ -967,40 +1085,155 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
     private javax.swing.JPanel menu;
     // End of variables declaration//GEN-END:variables
 
-    @Override
-    public void init() {
-         this.setIconImage(XIcon.getIcon("/images/logo.png").getImage());
-        this.setLocationRelativeTo(null);
+    public Sach getForm() {
+        Sach sach = new Sach();
 
-        this.showWelcomeJDialog(this);
-        this.showLoginJDialog(this);
-//        XIcon.setIcon(lblPhoto, "photos/" + XAuth.user.getPhoto());
-//        lblFullname.setText(XAuth.user.getFullname());
+        sach.setTenSach(jTextField2.getText());
+        TacGia tg = (TacGia) jComboBox6.getSelectedItem();
+        if (tg != null) {
+            sach.setMaTacGia(tg.getMaTacGia());
+        }
+        LinhVuc lv = (LinhVuc) jComboBox3.getSelectedItem();
+        if (lv != null) {
+            sach.setMaLinhVuc(lv.getMaLinhVuc());
+        }
+        LoaiSach ls = (LoaiSach) jComboBox2.getSelectedItem();
+        if (ls != null) {
+            sach.setMaLoaiSach(ls.getMaLoaiSach());
+        }
+        NhaXuatBan nxb = (NhaXuatBan) jComboBox1.getSelectedItem();
+        if (nxb != null) {
+            sach.setMaNXB(nxb.getMaNXB());
+        }
+        NgonNgu nn = (NgonNgu) jComboBox5.getSelectedItem();
+        if (nn != null) {
+            sach.setMaNgonNgu(nn.getMaNgonNgu());
+        }
+        sach.setTap(Integer.valueOf(jTextField5.getText()));
+        sach.setLanTaiBan(Integer.valueOf(jTextField6.getText()));
+        sach.setGiaBan(Double.valueOf(jTextField7.getText()));
+        sach.setISBN(jTextField8.getText());
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = sdf.parse(jTextField9.getText());
+            sach.setNamXuatBan(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
-//        if (!XAuth.user.isManager()) {
-//            pnlManager.setVisible(false);
-//            getContentPane().revalidate(); 
-//            getContentPane().repaint();
-//        }
+        String imageName = jLabel18.getToolTipText();
+        if (imageName != null && !imageName.isEmpty()) {
+            sach.setHinhAnh(imageName); // Lưu tên file
+        } else {
+            sach.setHinhAnh("product.png"); // Giá trị mặc định
+        }
+
+        return sach;
     }
 
-    @Override
-    public void exit() {
+    public void setForm(int index) {
+        Sach sach = listsach.get(index);
+        jTextField1.setText(String.valueOf(sach.getMaSach()));
+        jTextField2.setText(sach.getTenSach());
+        TacGia tg = tacgia.findByID(String.valueOf(sach.getMaTacGia()));
+        jComboBox6.setSelectedItem(tg);
+        LinhVuc lv = linhvuc.findbyID(String.valueOf(sach.getMaLinhVuc()));
+        jComboBox3.setSelectedItem(lv);
+        LoaiSach ls = loaisach.findByID(String.valueOf(sach.getMaLoaiSach()));
+        jComboBox2.setSelectedItem(ls);
+        NhaXuatBan nxban = nxb.findByID(String.valueOf(sach.getMaNXB()));
+        jComboBox1.setSelectedItem(nxban);
+        NgonNgu gg = ngonngu.findByID(String.valueOf(sach.getMaNgonNgu()));
+        jComboBox5.setSelectedItem(gg);
+        jTextField5.setText(String.valueOf(sach.getTap()));
+        jTextField6.setText(String.valueOf(sach.getLanTaiBan()));
+        jTextField7.setText(String.valueOf(sach.getGiaBan()));
+        jTextField8.setText(sach.getISBN());
+        jTextField9.setText(String.valueOf(sach.getNamXuatBan()));
+        if (sach.getHinhAnh() != null && !sach.getHinhAnh().isEmpty()) {
+        jLabel18.setToolTipText(sach.getHinhAnh());
+        File imageFile = new File("images/" + sach.getHinhAnh());
+        if (imageFile.exists()) {
+            XIcon.setIcon(jLabel18, imageFile);
+        } else {
+            jLabel18.setIcon(new ImageIcon(getClass().getResource("/images/product.png")));
+            jLabel18.setText("Ảnh không tìm thấy");
+        }
+    } else {
+        jLabel18.setIcon(new ImageIcon(getClass().getResource("/images/product.png")));
+        jLabel18.setText("Không có ảnh");
     }
 
-    @Override
-    public void showJDialog(JDialog dialog) {
-        PolybookController.super.showJDialog(dialog); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
 
-    @Override
-    public void showWelcomeJDialog(JFrame frame) {
-        PolybookController.super.showWelcomeJDialog(frame); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    public void fillToTable() {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        listsach = sach.getAll();
+        listsach.forEach(sach -> {
+            Object[] rowdata = {
+                sach.getMaSach(),
+                sach.getTenSach(),
+                tg.findByID(String.valueOf(sach.getMaTacGia())).getTenTacGia(),
+                linhvuc.findbyID(String.valueOf(sach.getMaLinhVuc())).getTenLinhVuc(),
+                loaisach.findByID(String.valueOf(sach.getMaLoaiSach())).getTenLoaiSach(),
+                nxb.findByID(String.valueOf(sach.getMaNXB())).getTenNXB(),
+                sach.getNamXuatBan(),
+                sach.getGiaBan(),
+                sach.getLanTaiBan(),
+                sach.getISBN(),
+                sach.getTap(),
+                ngonngu.findByID(String.valueOf(sach.getMaNgonNgu())).getTenNgonNgu(),
+                sach.getHinhAnh(),
+                false
+            };
+            model.addRow(rowdata);
+        });
     }
 
-    @Override
-    public void showLoginJDialog(JFrame frame) {
-        PolybookController.super.showLoginJDialog(frame); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    private void fillToCombobox() {
+        DefaultComboBoxModel model = (DefaultComboBoxModel) jComboBox3.getModel();
+        model.removeAllElements();
+        listlinhvuc = linhvuc.getAll();
+        for (LinhVuc cate : listlinhvuc) {
+            model.addElement(cate);
+        }
+    }
+
+    private void fillToCombobox2() {
+        DefaultComboBoxModel model = (DefaultComboBoxModel) jComboBox2.getModel();
+        model.removeAllElements();
+        listloaisach = loaisach.getAll();
+        for (LoaiSach cate : listloaisach) {
+            model.addElement(cate);
+        }
+    }
+
+    private void fillToCombobox3() {
+        DefaultComboBoxModel model = (DefaultComboBoxModel) jComboBox1.getModel();
+        model.removeAllElements();
+        listnxb = nxb.getAll();
+        for (NhaXuatBan cate : listnxb) {
+            model.addElement(cate);
+        }
+    }
+
+    private void fillToCombobox4() {
+        DefaultComboBoxModel model = (DefaultComboBoxModel) jComboBox5.getModel();
+        model.removeAllElements();
+        listngonngu = ngonngu.getAll();
+        for (NgonNgu cate : listngonngu) {
+            model.addElement(cate);
+        }
+    }
+
+    private void fillToCombobox5() {
+        DefaultComboBoxModel model = (DefaultComboBoxModel) jComboBox6.getModel();
+        model.removeAllElements();
+        listtacgia = tacgia.getAll();
+        for (TacGia cate : listtacgia) {
+            model.addElement(cate);
+        }
     }
 
 }

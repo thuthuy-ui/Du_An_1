@@ -15,5 +15,8 @@ import lombok.*;
 public class NhaXuatBan {
     private int MaNXB;
     private String TenNXB;
-
+    @Override
+    public String toString() {
+        return getTenNXB();
+    }
 }

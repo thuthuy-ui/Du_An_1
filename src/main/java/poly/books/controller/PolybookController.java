@@ -14,8 +14,8 @@ import poly.books.util.XDialog;
  *
  * @author HuyNguyen
  */
-public interface PolybookController {
-     void init(); 
+public interface PolybookController  {
+     
      
     default void exit(){ 
         if(XDialog.confirm("Bạn muốn kết thúc?")){ 

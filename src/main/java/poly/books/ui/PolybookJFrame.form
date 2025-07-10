@@ -381,6 +381,7 @@
                 </Component>
               </SubComponents>
             </Container>
+<<<<<<< HEAD
             <Container class="javax.swing.JPanel" name="Quanlysach">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -919,6 +920,8 @@
                 </Component>
               </SubComponents>
             </Container>
+=======
+>>>>>>> 05275c6a74b506d08e0e7c08b99c4b603f9305c0
             <Container class="javax.swing.JPanel" name="TaiKhoan">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">

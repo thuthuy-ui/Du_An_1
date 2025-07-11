@@ -6,6 +6,7 @@ package poly.books.controller;
 
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import poly.books.entity.Sach;
 import poly.books.ui.manager.QuanLyLinhVuc;
 import poly.books.ui.manager.QuanLyNgonNgu;
 import poly.books.ui.manager.QuanLyNhaXuatBan;
@@ -16,7 +17,7 @@ import poly.books.ui.manager.QuanLyTheLoai;
  *
  * @author ADMIN
  */
-public interface SachController extends CrudController{
+public interface SachController extends CrudController<Sach>{
       default void showJDialog(JDialog dialog){ 
         dialog.setLocationRelativeTo(null); 
         dialog.setVisible(true); 

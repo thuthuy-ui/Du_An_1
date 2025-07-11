@@ -18,7 +18,7 @@ import poly.books.util.XQuery;
 public class SachDAO {
 
     String getAllSQL = """
-                       SELECT TOP (1000) [MaSach]
+                       SELECT  [MaSach]
                              ,[TenSach]
                              ,[MaTacGia]
                              ,[MaLinhVuc]

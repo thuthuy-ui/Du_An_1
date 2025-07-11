@@ -4,11 +4,25 @@
  */
 package poly.books.ui.manager;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+
+import poly.books.dao.NgonNguDAO;
+import poly.books.entity.NgonNgu;
+import poly.books.util.XDialog;
+
 /**
  *
  * @author HuyNguyen
  */
-public class QuanLyNgonNgu extends javax.swing.JDialog {
+public class QuanLyNgonNgu extends javax.swing.JDialog implements poly.books.controller.QLNgonNguCotroller {
+
+    List<NgonNgu> listNN = new ArrayList<>();
+    NgonNguDAO NNdao = new NgonNguDAO();
 
     /**
      * Creates new form QuanLyNgoNgu
@@ -16,6 +30,8 @@ public class QuanLyNgonNgu extends javax.swing.JDialog {
     public QuanLyNgonNgu(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        fillToTable();
+        txtMaNN.setEditable(false);
     }
 
     /**
@@ -41,6 +57,7 @@ public class QuanLyNgonNgu extends javax.swing.JDialog {
         btnSua = new javax.swing.JButton();
         btnXoa = new javax.swing.JButton();
         btnLamMoi = new javax.swing.JButton();
+        txtMaNN = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -57,6 +74,11 @@ public class QuanLyNgonNgu extends javax.swing.JDialog {
                 "Mã ngôn ngữ", "Tên ngôn ngữ"
             }
         ));
+        tbNgonNgu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbNgonNguMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbNgonNgu);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -79,6 +101,11 @@ public class QuanLyNgonNgu extends javax.swing.JDialog {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm Kiếm", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 18))); // NOI18N
 
         btnTimKiem.setText("Tìm Kiếm");
+        btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimKiemActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -108,6 +135,11 @@ public class QuanLyNgonNgu extends javax.swing.JDialog {
         jLabel2.setText("Tên ngôn ngữ: ");
 
         btnThem.setText("Thêm");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
 
         btnSua.setText("Sửa");
         btnSua.addActionListener(new java.awt.event.ActionListener() {
@@ -117,6 +149,11 @@ public class QuanLyNgonNgu extends javax.swing.JDialog {
         });
 
         btnXoa.setText("Xóa");
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaActionPerformed(evt);
+            }
+        });
 
         btnLamMoi.setText("Làm mới");
         btnLamMoi.addActionListener(new java.awt.event.ActionListener() {
@@ -130,34 +167,35 @@ public class QuanLyNgonNgu extends javax.swing.JDialog {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnXoa)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnLamMoi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnThem, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(120, 120, 120))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtNgonNgu, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnXoa)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnLamMoi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnThem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(99, 99, 99)))
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtNgonNgu, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
+                    .addComponent(txtMaNN))
                 .addGap(21, 21, 21))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(jLabel1)
+                .addGap(29, 29, 29)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtMaNN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -204,12 +242,41 @@ public class QuanLyNgonNgu extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        // TODO add your handling code here:
+        this.update();
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed
-        // TODO add your handling code here:
+        clear();
     }//GEN-LAST:event_btnLamMoiActionPerformed
+
+    private void tbNgonNguMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbNgonNguMouseClicked
+        int index = tbNgonNgu.getSelectedRow();
+        if (index >= 0 && index < listNN.size()) {
+            NgonNgu entity = listNN.get(index);
+            this.setForm(entity);
+        }
+    }//GEN-LAST:event_tbNgonNguMouseClicked
+
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        this.create();
+    }//GEN-LAST:event_btnThemActionPerformed
+
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        this.delete();
+    }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
+              String searchID = txtTimKiem.getText().trim().toLowerCase();
+        if (searchID.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập tên ngôn ngữ để tìm kiếm");
+            return;
+        }
+        fillToTable();
+        DefaultTableModel defaultTableModel = (DefaultTableModel) tbNgonNgu.getModel();
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(defaultTableModel);
+        tbNgonNgu.setRowSorter(sorter);
+        sorter.setRowFilter(javax.swing.RowFilter.regexFilter("(?i)" + searchID, 1));
+    }//GEN-LAST:event_btnTimKiemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -267,7 +334,167 @@ public class QuanLyNgonNgu extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbNgonNgu;
+    private javax.swing.JTextField txtMaNN;
     private javax.swing.JTextField txtNgonNgu;
     private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void open() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void setForm(NgonNgu entity) {
+        txtMaNN.setText(String.valueOf(entity.getMaNgonNgu()));
+        txtNgonNgu.setText(entity.getTenNgonNgu());
+
+    }
+
+    @Override
+    public NgonNgu getForm() {
+        NgonNgu n = new NgonNgu();
+        n.setTenNgonNgu(txtNgonNgu.getText().trim());
+        if (!txtMaNN.getText().isEmpty()) {
+            try {
+                n.setMaNgonNgu(Integer.parseInt(txtMaNN.getText()));
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "Mã ngôn ngữ không hợp lệ!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        return n;
+    }
+
+    @Override
+    public void fillToTable() {
+        DefaultTableModel model = (DefaultTableModel) tbNgonNgu.getModel();
+        model.setRowCount(0);
+        listNN = NNdao.getAll();
+        for (NgonNgu n : listNN) {
+            Object[] rowData = {
+                n.getMaNgonNgu(),
+                n.getTenNgonNgu()
+            };
+            model.addRow(rowData);
+        }
+
+    }
+
+    @Override
+    public void edit() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void create() {
+        if (txtNgonNgu.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Tên ngôn ngữ không được để trống!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        try {
+            NgonNgu n = getForm();
+            NNdao.create(n);
+            this.fillToTable();
+            this.clear();
+            JOptionPane.showMessageDialog(this, "Thêm ngôn ngữ thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+        } catch (RuntimeException ex) {
+            JOptionPane.showMessageDialog(this, "Lỗi khi thêm ngôn ngữ: " + ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    @Override
+    public void update() {
+        int selectedRow = tbNgonNgu.getSelectedRow();
+        if (selectedRow < 0 || selectedRow >= listNN.size()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một ngôn ngữ để sửa!", "Lỗi", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (txtNgonNgu.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Tên ngôn ngữ không được để trống!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        try {
+            NgonNgu n = getForm();
+            NNdao.update(n);
+            this.fillToTable();
+            this.clear();
+            JOptionPane.showMessageDialog(this, "Cập nhật ngôn ngữ thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+        } catch (RuntimeException ex) {
+            JOptionPane.showMessageDialog(this, "Lỗi khi cập nhật ngôn ngữ: " + ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+       
+    }
+
+    @Override
+    public void delete() {
+        if (XDialog.confirm("Bạn thực sự muốn xóa?")) {
+            int selectedRow = tbNgonNgu.getSelectedRow();
+            if (selectedRow >= 0 && selectedRow < listNN.size()) {
+                NgonNgu entity = listNN.get(selectedRow);
+                int maNgonNgu = entity.getMaNgonNgu();
+                try {
+                    NNdao.delete(maNgonNgu);
+                    this.fillToTable();
+                    this.clear();
+                    XDialog.alert("Xóa ngôn ngữ thành công!");
+                } catch (RuntimeException ex) {
+                    XDialog.alert("Không thể xóa vì ngôn ngữ này đang được sử dụng trong sách.");
+                }
+            } else {
+                XDialog.alert("Vui lòng chọn một ngôn ngữ để xóa!");
+            }
+        }
+    }
+
+    @Override
+    public void clear() {
+        txtMaNN.setText("");
+        txtNgonNgu.setText("");
+
+    }
+
+    @Override
+    public void setEditable(boolean editable) {
+
+    }
+
+    @Override
+    public void checkAll() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void uncheckAll() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void deleteCheckedItems() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void moveFirst() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void movePrevious() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void moveNext() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void moveLast() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void moveTo(int rowIndex) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

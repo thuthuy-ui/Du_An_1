@@ -15,7 +15,7 @@ import poly.books.util.XQuery;
 public class TacGiaDAO {
 
     String getAllSQL = """
-                       SELECT TOP (1000) [MaTacGia]
+                       SELECT [MaTacGia]
                              ,[TenTacGia]
                              ,[QueQuan]
                          FROM [QLNhaSachPro].[dbo].[TacGia]

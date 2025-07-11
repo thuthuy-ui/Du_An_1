@@ -4,10 +4,12 @@
  */
 package poly.books.controller;
 
+import poly.books.entity.LoaiSach;
+
 /**
  *
  * @author HuyNguyen
  */
-public interface QLTheLoaiCotroller {
+public interface QLTheLoaiCotroller  extends CrudController<LoaiSach>{
     
 }

@@ -8,12 +8,13 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.text.html.parser.Entity;
 import poly.books.controller.SachController;
+import poly.books.entity.Sach;
 
 /**
  *
  * @author HuyNguyen
  */
-public class QuanLySach extends javax.swing.JDialog implements poly.books.controller.SachController{
+public class QuanLySach extends javax.swing.JDialog implements poly.books.controller.SachController {
 
     /**
      * Creates new form QuanLySach
@@ -21,13 +22,13 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
     public QuanLySach(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-         if (parent instanceof JFrame) {
+        if (parent instanceof JFrame) {
             this.parentFrame = (JFrame) parent;
         } else {
             throw new IllegalArgumentException("Parent must be a JFrame");
         }
     }
- private JFrame parentFrame;
+    private JFrame parentFrame;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -468,7 +469,7 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
     }//GEN-LAST:event_btnTimKiemActionPerformed
 
     private void btnLinhVucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLinhVucActionPerformed
-         this.showQuanLyLinhVuc(parentFrame);
+        this.showQuanLyLinhVuc(parentFrame);
     }//GEN-LAST:event_btnLinhVucActionPerformed
 
     private void btnNXBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNXBActionPerformed
@@ -612,12 +613,12 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
     }
 
     @Override
-    public void setForm(Entity entity) {
+    public void setForm(Sach entity) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public Entity getForm() {
+    public Sach getForm() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -695,4 +696,5 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
     public void moveTo(int rowIndex) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
 }

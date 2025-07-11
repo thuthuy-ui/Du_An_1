@@ -4,13 +4,13 @@
  */
 package poly.books.controller;
 
-import javax.swing.text.html.parser.Entity;
+
 
 /**
  *
  * @author ADMIN
  */
-public interface CrudController {
+public interface CrudController<Entity> {
     void open(); // Xử lý mở cửa sổ
 
     void setForm(Entity entity); // Hiển thị thực thể lên form

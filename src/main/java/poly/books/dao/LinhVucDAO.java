@@ -7,7 +7,7 @@ import poly.books.util.XQuery;
 
 public class LinhVucDAO {
     String getAllSQL = """
-                       SELECT TOP (1000) [MaLinhVuc]
+                       SELECT [MaLinhVuc]
                              ,[TenLinhVuc]
                          FROM [QLNhaSachPro].[dbo].[LinhVuc]
                        """;

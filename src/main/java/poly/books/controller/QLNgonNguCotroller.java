@@ -4,10 +4,12 @@
  */
 package poly.books.controller;
 
+import poly.books.entity.NgonNgu;
+
 /**
  *
  * @author HuyNguyen
  */
-public interface QLNgonNguCotroller {
+public interface QLNgonNguCotroller  extends CrudController<NgonNgu>{
     
 }

@@ -15,7 +15,7 @@ import poly.books.util.XQuery;
 public class NhaXuatBanDAO {
 
     String getAllSQL = """
-                       SELECT TOP (1000) [MaNXB]
+                       SELECT  [MaNXB]
                              ,[TenNXB]
                          FROM [QLNhaSachPro].[dbo].[NhaXuatBan]
                        """;

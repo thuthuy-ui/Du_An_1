@@ -4,11 +4,23 @@
  */
 package poly.books.ui.manager;
 
+
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+import poly.books.dao.LoaiSachDAO;
+import poly.books.entity.LoaiSach;
+import poly.books.util.XDialog;
+
 /**
  *
  * @author HuyNguyen
  */
-public class QuanLyTheLoai extends javax.swing.JDialog {
+public class QuanLyTheLoai extends javax.swing.JDialog implements poly.books.controller.QLTheLoaiCotroller{
+LoaiSachDAO lSachDAO = new LoaiSachDAO();
+List<LoaiSach> listLSach = new ArrayList<>();
 
     /**
      * Creates new form QuanLyTheLoai
@@ -16,6 +28,8 @@ public class QuanLyTheLoai extends javax.swing.JDialog {
     public QuanLyTheLoai(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        fillToTable();
+         txtMaTL.setEditable(false);
     }
 
     /**
@@ -29,24 +43,25 @@ public class QuanLyTheLoai extends javax.swing.JDialog {
 
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbTacGia = new javax.swing.JTable();
+        tbTheLoai = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         btnTimKiem = new javax.swing.JButton();
         txtTimKiem = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtTacGia = new javax.swing.JTextField();
+        txtTheLoai = new javax.swing.JTextField();
         btnThem = new javax.swing.JButton();
         btnSua = new javax.swing.JButton();
         btnXoa = new javax.swing.JButton();
         btnLamMoi = new javax.swing.JButton();
+        txtMaTL = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thông tin", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 18))); // NOI18N
 
-        tbTacGia.setModel(new javax.swing.table.DefaultTableModel(
+        tbTheLoai.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -57,7 +72,12 @@ public class QuanLyTheLoai extends javax.swing.JDialog {
                 "Mã Thể loại", "Tên Thể loại"
             }
         ));
-        jScrollPane1.setViewportView(tbTacGia);
+        tbTheLoai.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbTheLoaiMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tbTheLoai);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -79,6 +99,11 @@ public class QuanLyTheLoai extends javax.swing.JDialog {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm Kiếm", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 18))); // NOI18N
 
         btnTimKiem.setText("Tìm Kiếm");
+        btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimKiemActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -108,6 +133,11 @@ public class QuanLyTheLoai extends javax.swing.JDialog {
         jLabel2.setText("Tên thể loại");
 
         btnThem.setText("Thêm");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
 
         btnSua.setText("Sửa");
         btnSua.addActionListener(new java.awt.event.ActionListener() {
@@ -117,6 +147,11 @@ public class QuanLyTheLoai extends javax.swing.JDialog {
         });
 
         btnXoa.setText("Xóa");
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaActionPerformed(evt);
+            }
+        });
 
         btnLamMoi.setText("Làm mới");
         btnLamMoi.addActionListener(new java.awt.event.ActionListener() {
@@ -132,12 +167,15 @@ public class QuanLyTheLoai extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel1)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel1)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(txtMaTL))
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addComponent(jLabel2)
                             .addGap(18, 18, 18)
-                            .addComponent(txtTacGia, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtTheLoai, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnThem, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
@@ -154,12 +192,14 @@ public class QuanLyTheLoai extends javax.swing.JDialog {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(jLabel1)
+                .addGap(29, 29, 29)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtMaTL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtTacGia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTheLoai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(81, 81, 81)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -202,12 +242,41 @@ public class QuanLyTheLoai extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        // TODO add your handling code here:
+       this.update();
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed
-        // TODO add your handling code here:
+        this.clear();
     }//GEN-LAST:event_btnLamMoiActionPerformed
+
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        this.create();
+    }//GEN-LAST:event_btnThemActionPerformed
+
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        this.delete();
+    }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
+         String searchID = txtTimKiem.getText().trim().toLowerCase();
+        if (searchID.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập tên Thể Loại để tìm kiếm");
+            return;
+        }
+        fillToTable();
+        DefaultTableModel defaultTableModel = (DefaultTableModel) tbTheLoai.getModel();
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(defaultTableModel);
+        tbTheLoai.setRowSorter(sorter);
+        sorter.setRowFilter(javax.swing.RowFilter.regexFilter("(?i)" + searchID, 1));
+    }//GEN-LAST:event_btnTimKiemActionPerformed
+
+    private void tbTheLoaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbTheLoaiMouseClicked
+        int index = tbTheLoai.getSelectedRow();
+        if (index >= 0 && index < listLSach.size()) {
+            LoaiSach entity = listLSach.get(index);
+            this.setForm(entity);
+        }
+    }//GEN-LAST:event_tbTheLoaiMouseClicked
 
     /**
      * @param args the command line arguments
@@ -263,8 +332,168 @@ public class QuanLyTheLoai extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tbTacGia;
-    private javax.swing.JTextField txtTacGia;
+    private javax.swing.JTable tbTheLoai;
+    private javax.swing.JTextField txtMaTL;
+    private javax.swing.JTextField txtTheLoai;
     private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void open() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+       @Override
+    public void setForm(LoaiSach entity) {
+ txtMaTL.setText(String.valueOf(entity.getMaLoaiSach()));
+        txtTheLoai.setText(entity.getTenLoaiSach());
+    }
+
+    @Override
+    public LoaiSach getForm() {
+        LoaiSach n = new LoaiSach();
+        n.setTenLoaiSach(txtTheLoai.getText().trim());
+        if (!txtMaTL.getText().isEmpty()) {
+            try {
+                n.setMaLoaiSach(Integer.parseInt(txtMaTL.getText()));
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "Mã Thể loại không hợp lệ!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        return n;
+    }
+ 
+    @Override
+    public void fillToTable() {
+        DefaultTableModel model = (DefaultTableModel) tbTheLoai.getModel();
+        model.setRowCount(0);
+        listLSach = lSachDAO.getAll();
+        for (LoaiSach n : listLSach) {
+            Object[] rowData = {
+                n.getMaLoaiSach(),
+                n.getTenLoaiSach()
+            };
+            model.addRow(rowData);
+        }
+
+    }
+
+    @Override
+    public void edit() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void create() {
+        if (txtTheLoai.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Tên Loại Sách không được để trống!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        try {
+            LoaiSach n = getForm();
+            lSachDAO.create(n);
+            this.fillToTable();
+            this.clear();
+            JOptionPane.showMessageDialog(this, "Thêm Loại Sách  thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+        } catch (RuntimeException ex) {
+            JOptionPane.showMessageDialog(this, "Lỗi khi thêm Loại Sách : " + ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    @Override
+    public void update() {
+         int selectedRow = tbTheLoai.getSelectedRow();
+        if (selectedRow < 0 || selectedRow >= listLSach.size()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một Loại Sách để sửa!", "Lỗi", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (txtTheLoai.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Tên Loại Sách không được để trống!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        try {
+            LoaiSach n = getForm();
+            lSachDAO.update(n);
+            this.fillToTable();
+            this.clear();
+            JOptionPane.showMessageDialog(this, "Cập nhật Loại Sách thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+        } catch (RuntimeException ex) {
+            JOptionPane.showMessageDialog(this, "Lỗi khi cập nhật Loại Sách " + ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    @Override
+    public void delete() {
+        if (XDialog.confirm("Bạn thực sự muốn xóa?")) {
+            int selectedRow = tbTheLoai.getSelectedRow();
+            if (selectedRow >= 0 && selectedRow < listLSach.size()) {
+                LoaiSach entity = listLSach.get(selectedRow);
+                int maNgonNgu = entity.getMaLoaiSach();
+                try {
+                    lSachDAO.delete(maNgonNgu);
+                    this.fillToTable();
+                    this.clear();
+                    XDialog.alert("Xóa Loại Sách thành công!");
+                } catch (RuntimeException ex) {
+                    XDialog.alert("Không thể xóa vì Loại Sách này đang được sử dụng trong sách.");
+                }
+            } else {
+                XDialog.alert("Vui lòng chọn một Loại Sách để xóa!");
+            }
+        }
+    }
+
+    @Override
+    public void clear() {
+         txtMaTL.setText("");
+        txtTheLoai.setText("");
+    }
+
+    @Override
+    public void setEditable(boolean editable) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void checkAll() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void uncheckAll() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void deleteCheckedItems() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void moveFirst() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void movePrevious() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void moveNext() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void moveLast() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void moveTo(int rowIndex) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+ 
+
+    
 }

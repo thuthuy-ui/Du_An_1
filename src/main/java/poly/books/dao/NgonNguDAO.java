@@ -6,6 +6,7 @@ package poly.books.dao;
 
 import java.util.List;
 import poly.books.entity.NgonNgu;
+import poly.books.util.XJdbc;
 import poly.books.util.XQuery;
 
 /**
@@ -15,13 +16,27 @@ import poly.books.util.XQuery;
 public class NgonNguDAO {
 
     String getAllSQL = """
-                       SELECT TOP (1000) [MaNgonNgu]
+                       SELECT [MaNgonNgu]
                              ,[TenNgonNgu]
                          FROM [QLNhaSachPro].[dbo].[NgonNgu]
                        """;
     String findBySQL = """
                        SELECT * FROM [QLNhaSachPro].[dbo].[NgonNgu] where MaNgonNgu = ?
                        """;
+    String create = """
+                   INSERT INTO [dbo].[NgonNgu]
+                              ([TenNgonNgu])
+                        VALUES (?)
+                   """;
+    String update = """
+                   UPDATE [dbo].[NgonNgu]
+                      SET [TenNgonNgu] = ?
+                    WHERE MaNgonNgu=?
+                   """;
+    String delete = """
+                   DELETE FROM [dbo].[NgonNgu]
+                         WHERE MaNgonNgu=?
+                   """;
 
     public List<NgonNgu> getAll() {
         return XQuery.getBeanList(NgonNgu.class, getAllSQL);
@@ -29,5 +44,25 @@ public class NgonNguDAO {
 
     public NgonNgu findByID(String MaNgonNgu) {
         return XQuery.getSingleBean(NgonNgu.class, findBySQL, MaNgonNgu);
+    }
+
+    public int create(NgonNgu n) {
+        Object[] rowData = {
+            n.getTenNgonNgu()
+        };
+        return XJdbc.executeUpdate(create, rowData);
+    }
+
+    public int update(NgonNgu n) {
+        Object[] rowData = {
+            n.getTenNgonNgu(),
+            n.getMaNgonNgu()
+
+        };
+        return XJdbc.executeUpdate(update, rowData);
+    }
+
+    public int delete(int id) {
+        return XJdbc.executeUpdate(delete, id);
     }
 }

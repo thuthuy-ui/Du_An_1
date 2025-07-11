@@ -4,10 +4,12 @@
  */
 package poly.books.controller;
 
+import poly.books.entity.TacGia;
+
 /**
  *
  * @author HuyNguyen
  */
-public interface QLTacGiaCotroller {
+public interface QLTacGiaCotroller extends CrudController<TacGia>{
     
 }

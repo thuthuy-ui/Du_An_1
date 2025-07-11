@@ -4,11 +4,25 @@
  */
 package poly.books.ui.manager;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+import poly.books.dao.TacGiaDAO;
+import poly.books.entity.NgonNgu;
+import poly.books.entity.TacGia;
+import poly.books.util.XDialog;
+
 /**
  *
  * @author HuyNguyen
  */
-public class QuanLyTacGia extends javax.swing.JDialog {
+public class QuanLyTacGia extends javax.swing.JDialog implements poly.books.controller.QLTacGiaCotroller {
+
+    List<TacGia> tacGiaList = new ArrayList<>();
+    TacGiaDAO tacGiaDAO = new TacGiaDAO();
 
     /**
      * Creates new form QuanLyTacGia
@@ -16,6 +30,7 @@ public class QuanLyTacGia extends javax.swing.JDialog {
     public QuanLyTacGia(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        fillToTable();
     }
 
     /**
@@ -59,6 +74,11 @@ public class QuanLyTacGia extends javax.swing.JDialog {
                 "Mã Tác giả", "Tên Tác giả", "Quê quán"
             }
         ));
+        tbTacGia.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbTacGiaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbTacGia);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -81,6 +101,11 @@ public class QuanLyTacGia extends javax.swing.JDialog {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm Kiếm", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 18))); // NOI18N
 
         btnTimKiem.setText("Tìm Kiếm");
+        btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimKiemActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -110,6 +135,11 @@ public class QuanLyTacGia extends javax.swing.JDialog {
         jLabel2.setText("Tên tác giả");
 
         btnThem.setText("Thêm");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
 
         btnSua.setText("Sửa");
         btnSua.addActionListener(new java.awt.event.ActionListener() {
@@ -119,6 +149,11 @@ public class QuanLyTacGia extends javax.swing.JDialog {
         });
 
         btnXoa.setText("Xóa");
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaActionPerformed(evt);
+            }
+        });
 
         btnLamMoi.setText("Làm mới");
         btnLamMoi.addActionListener(new java.awt.event.ActionListener() {
@@ -149,14 +184,12 @@ public class QuanLyTacGia extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnThem, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnXoa)
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(btnXoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnLamMoi, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
                             .addComponent(btnSua, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 61, Short.MAX_VALUE)))
+                        .addGap(61, 61, 61)))
                 .addGap(21, 21, 21))
         );
         jPanel1Layout.setVerticalGroup(
@@ -214,12 +247,40 @@ public class QuanLyTacGia extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        // TODO add your handling code here:
+        this.update();
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed
-        // TODO add your handling code here:
+        clear();
     }//GEN-LAST:event_btnLamMoiActionPerformed
+
+    private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
+        String timkiem = txtTimKiem.getText().trim();
+        if (timkiem.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập tên tác giả để tìm kiếm!");
+            return;
+        }
+        DefaultTableModel model = (DefaultTableModel) tbTacGia.getModel();
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+        tbTacGia.setRowSorter(sorter);
+        sorter.setRowFilter(RowFilter.regexFilter("(?i)" + timkiem, 1));
+    }//GEN-LAST:event_btnTimKiemActionPerformed
+
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        this.create();
+    }//GEN-LAST:event_btnThemActionPerformed
+
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        this.delete();
+    }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void tbTacGiaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbTacGiaMouseClicked
+        int index = tbTacGia.getSelectedRow();
+        if (index >= 0 && index < tacGiaList.size()) {
+            TacGia entity = tacGiaList.get(index);
+            this.setForm(entity);
+        }
+    }//GEN-LAST:event_tbTacGiaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -281,4 +342,166 @@ public class QuanLyTacGia extends javax.swing.JDialog {
     private javax.swing.JTextField txtTacGia;
     private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void open() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void setForm(TacGia entity) {
+        txtTacGia.setText(entity.getTenTacGia());
+        txtQueQuan.setText(entity.getQueQuan());
+    }
+
+    @Override
+    public TacGia getForm() {
+        TacGia tacGia = new TacGia();
+        int selectedRow = tbTacGia.getSelectedRow();
+        if (selectedRow >= 0) {
+            int maTacGia = (int) tbTacGia.getValueAt(selectedRow, 0);
+            tacGia.setMaTacGia(maTacGia);
+        }
+        tacGia.setTenTacGia(txtTacGia.getText().trim());
+        tacGia.setQueQuan(txtQueQuan.getText().trim());
+        if (!txtTacGia.getText().isEmpty()) {
+            try {
+                tacGia.setTenTacGia(txtTacGia.getText());
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "Mã tác giả không hợp lệ!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        return tacGia;
+    }
+
+    @Override
+    public void fillToTable() {
+        DefaultTableModel defaultTableModel = (DefaultTableModel) tbTacGia.getModel();
+        defaultTableModel.setRowCount(0);
+        tacGiaList = tacGiaDAO.getAll();
+        for (TacGia tacGia : tacGiaList) {
+            Object[] rowData = {
+                tacGia.getMaTacGia(),
+                tacGia.getTenTacGia(),
+                tacGia.getQueQuan()
+            };
+            defaultTableModel.addRow(rowData);
+        }
+    }
+
+    @Override
+    public void edit() {
+
+    }
+
+    @Override
+    public void create() {
+        if (txtTacGia.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Tên tác giả không được để trống!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        try {
+            TacGia tacGia = getForm();
+            tacGiaDAO.create(tacGia);
+            this.fillToTable();
+            this.clear();
+            JOptionPane.showMessageDialog(this, "Thêm tác giả thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+        } catch (RuntimeException ex) {
+            JOptionPane.showMessageDialog(this, "Lỗi khi thêm tác giả: " + ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    @Override
+    public void update() {
+        int selectedRow = tbTacGia.getSelectedRow();
+        if (selectedRow < 0 || selectedRow >= tacGiaList.size()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một tác giả để sửa!", "Lỗi", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (txtTacGia.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Tên tác giả không được để trống!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        try {
+            TacGia tacGia = getForm();
+            tacGiaDAO.update(tacGia);
+            this.fillToTable();
+            this.clear();
+            JOptionPane.showMessageDialog(this, "Cập nhật tác giả thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+        } catch (RuntimeException ex) {
+            JOptionPane.showMessageDialog(this, "Lỗi khi cập nhật tác giả: " + ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    @Override
+    public void delete() {
+        if (XDialog.confirm("Bạn thực sự muốn xóa?")) {
+            int selectedRow = tbTacGia.getSelectedRow();
+            if (selectedRow >= 0 && selectedRow < tacGiaList.size()) {
+                TacGia entity = tacGiaList.get(selectedRow);
+                int maTacGia = entity.getMaTacGia();
+                try {
+                    tacGiaDAO.delete(maTacGia);
+                    this.fillToTable();
+                    this.clear();
+                    XDialog.alert("Xóa tác giả thành công!");
+                } catch (RuntimeException ex) {
+                    XDialog.alert("Không thể xóa vì tác giả này đang được sử dụng trong sách.");
+                }
+            } else {
+                XDialog.alert("Vui lòng chọn một tác giả để xóa!");
+            }
+        }
+    }
+
+    @Override
+    public void clear() {
+        txtTacGia.setText("");
+        txtQueQuan.setText("");
+    }
+
+    @Override
+    public void setEditable(boolean editable) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void checkAll() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void uncheckAll() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void deleteCheckedItems() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void moveFirst() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void movePrevious() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void moveNext() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void moveLast() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void moveTo(int rowIndex) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

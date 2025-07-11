@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -266,16 +267,15 @@ public class QuanLyNgonNgu extends javax.swing.JDialog implements poly.books.con
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
-              String searchID = txtTimKiem.getText().trim().toLowerCase();
-        if (searchID.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Vui lòng nhập tên ngôn ngữ để tìm kiếm");
+       String timkiem = txtTimKiem.getText().trim();
+        if (timkiem.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập thể loại ngôn ngữ để tìm kiếm!");
             return;
         }
-        fillToTable();
-        DefaultTableModel defaultTableModel = (DefaultTableModel) tbNgonNgu.getModel();
-        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(defaultTableModel);
+        DefaultTableModel model = (DefaultTableModel) tbNgonNgu.getModel();
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
         tbNgonNgu.setRowSorter(sorter);
-        sorter.setRowFilter(javax.swing.RowFilter.regexFilter("(?i)" + searchID, 1));
+        sorter.setRowFilter(RowFilter.regexFilter("(?i)" + timkiem, 1));
     }//GEN-LAST:event_btnTimKiemActionPerformed
 
     /**

@@ -2,13 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
-package poly.books.ui;
+package poly.books.ui.manager;
+
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.text.html.parser.Entity;
+import poly.books.controller.SachController;
 
 /**
  *
  * @author HuyNguyen
  */
-public class QuanLySach extends javax.swing.JDialog {
+public class QuanLySach extends javax.swing.JDialog implements poly.books.controller.SachController{
 
     /**
      * Creates new form QuanLySach
@@ -16,7 +21,13 @@ public class QuanLySach extends javax.swing.JDialog {
     public QuanLySach(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+         if (parent instanceof JFrame) {
+            this.parentFrame = (JFrame) parent;
+        } else {
+            throw new IllegalArgumentException("Parent must be a JFrame");
+        }
     }
+ private JFrame parentFrame;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -350,12 +361,27 @@ public class QuanLySach extends javax.swing.JDialog {
 
         btnNXB.setText("Nhà xuất bản");
         buttonGroup1.add(btnNXB);
+        btnNXB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNXBActionPerformed(evt);
+            }
+        });
 
         btnTacgia.setText("Tác giả");
         buttonGroup1.add(btnTacgia);
+        btnTacgia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTacgiaActionPerformed(evt);
+            }
+        });
 
         btnTheLoai.setText("Thể loại");
         buttonGroup1.add(btnTheLoai);
+        btnTheLoai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTheLoaiActionPerformed(evt);
+            }
+        });
 
         btnLinhVuc.setText("Lĩnh vực");
         buttonGroup1.add(btnLinhVuc);
@@ -367,6 +393,11 @@ public class QuanLySach extends javax.swing.JDialog {
 
         btnNgonNgu.setText("Ngôn ngữ");
         buttonGroup1.add(btnNgonNgu);
+        btnNgonNgu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNgonNguActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -437,8 +468,24 @@ public class QuanLySach extends javax.swing.JDialog {
     }//GEN-LAST:event_btnTimKiemActionPerformed
 
     private void btnLinhVucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLinhVucActionPerformed
-        // TODO add your handling code here:
+         this.showQuanLyLinhVuc(parentFrame);
     }//GEN-LAST:event_btnLinhVucActionPerformed
+
+    private void btnNXBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNXBActionPerformed
+        this.showQuanLyNhaXuatBan(parentFrame);
+    }//GEN-LAST:event_btnNXBActionPerformed
+
+    private void btnTacgiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTacgiaActionPerformed
+        this.showQuanLyTacGia(parentFrame);
+    }//GEN-LAST:event_btnTacgiaActionPerformed
+
+    private void btnTheLoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTheLoaiActionPerformed
+        this.showQuanLyTheLoai(parentFrame);
+    }//GEN-LAST:event_btnTheLoaiActionPerformed
+
+    private void btnNgonNguActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNgonNguActionPerformed
+        this.showQuanLyNgonNgu(parentFrame);
+    }//GEN-LAST:event_btnNgonNguActionPerformed
 
     /**
      * @param args the command line arguments
@@ -528,4 +575,124 @@ public class QuanLySach extends javax.swing.JDialog {
     private javax.swing.JTextField txtTimKiem;
     private javax.swing.JTextField txtgia;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void showJDialog(JDialog dialog) {
+        SachController.super.showJDialog(dialog); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    }
+
+    @Override
+    public void showQuanLyLinhVuc(JFrame frame) {
+        SachController.super.showQuanLyLinhVuc(frame); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    }
+
+    @Override
+    public void showQuanLyTacGia(JFrame frame) {
+        SachController.super.showQuanLyTacGia(frame); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    }
+
+    @Override
+    public void showQuanLyTheLoai(JFrame frame) {
+        SachController.super.showQuanLyTheLoai(frame); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    }
+
+    @Override
+    public void showQuanLyNgonNgu(JFrame frame) {
+        SachController.super.showQuanLyNgonNgu(frame); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    }
+
+    @Override
+    public void showQuanLyNhaXuatBan(JFrame frame) {
+        SachController.super.showQuanLyNhaXuatBan(frame); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    }
+
+    @Override
+    public void open() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void setForm(Entity entity) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public Entity getForm() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void fillToTable() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void edit() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void create() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void update() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void delete() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void clear() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void setEditable(boolean editable) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void checkAll() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void uncheckAll() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void deleteCheckedItems() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void moveFirst() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void movePrevious() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void moveNext() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void moveLast() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void moveTo(int rowIndex) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

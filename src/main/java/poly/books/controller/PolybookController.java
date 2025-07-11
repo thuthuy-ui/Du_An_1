@@ -8,28 +8,37 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import poly.books.ui.LoginJDialog;
 import poly.books.ui.WelcomeJDialog;
+import poly.books.ui.manager.QuanLySach;
 import poly.books.util.XDialog;
 
 /**
  *
  * @author HuyNguyen
  */
-public interface PolybookController  {
-     
-     
-    default void exit(){ 
-        if(XDialog.confirm("Bạn muốn kết thúc?")){ 
-            System.exit(0); 
-        } 
-    } 
-        default void showJDialog(JDialog dialog){ 
-        dialog.setLocationRelativeTo(null); 
-        dialog.setVisible(true); 
-    } 
-    default void showWelcomeJDialog(JFrame frame){ 
-        this.showJDialog(new WelcomeJDialog(frame, true)); 
-    } 
-    default void showLoginJDialog(JFrame frame){ 
-        this.showJDialog(new LoginJDialog(frame, true)); 
-    } 
+public interface PolybookController {
+
+    void init();
+
+    default void exit() {
+        if (XDialog.confirm("Bạn muốn kết thúc?")) {
+            System.exit(0);
+        }
+    }
+
+    default void showJDialog(JDialog dialog) {
+        dialog.setLocationRelativeTo(null);
+        dialog.setVisible(true);
+    }
+
+    default void showWelcomeJDialog(JFrame frame) {
+        this.showJDialog(new WelcomeJDialog(frame, true));
+    }
+
+    default void showLoginJDialog(JFrame frame) {
+        this.showJDialog(new LoginJDialog(frame, true));
+    }
+
+    default void showQuanLySach(JFrame frame) {
+        this.showJDialog(new QuanLySach(frame, true));
+    }
 }

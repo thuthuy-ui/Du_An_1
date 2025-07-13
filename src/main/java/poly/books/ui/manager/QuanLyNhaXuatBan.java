@@ -4,11 +4,24 @@
  */
 package poly.books.ui.manager;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+import poly.books.dao.NhaXuatBanDAO;
+import poly.books.entity.NhaXuatBan;
+import poly.books.util.XDialog;
+
 /**
  *
  * @author HuyNguyen
  */
-public class QuanLyNhaXuatBan extends javax.swing.JDialog {
+public class QuanLyNhaXuatBan extends javax.swing.JDialog implements poly.books.controller.QLNhaXuatBanController {
+
+    List<NhaXuatBan> nxbList = new ArrayList<>();
+    NhaXuatBanDAO nhaXuatBanDAO = new NhaXuatBanDAO();
 
     /**
      * Creates new form QuanLyNhaXuatBan
@@ -16,6 +29,7 @@ public class QuanLyNhaXuatBan extends javax.swing.JDialog {
     public QuanLyNhaXuatBan(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        fillToTable();
     }
 
     /**
@@ -57,6 +71,11 @@ public class QuanLyNhaXuatBan extends javax.swing.JDialog {
                 "Mã nhà xuất bản", "Tên nhà xuất bản"
             }
         ));
+        tbNhaXuatBan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbNhaXuatBanMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbNhaXuatBan);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -79,6 +98,11 @@ public class QuanLyNhaXuatBan extends javax.swing.JDialog {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm Kiếm", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 18))); // NOI18N
 
         btnTimKiem.setText("Tìm Kiếm");
+        btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimKiemActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -108,6 +132,11 @@ public class QuanLyNhaXuatBan extends javax.swing.JDialog {
         jLabel2.setText("Tên nhà xuất bản");
 
         btnThem.setText("Thêm");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
 
         btnSua.setText("Sửa");
         btnSua.addActionListener(new java.awt.event.ActionListener() {
@@ -117,6 +146,11 @@ public class QuanLyNhaXuatBan extends javax.swing.JDialog {
         });
 
         btnXoa.setText("Xóa");
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaActionPerformed(evt);
+            }
+        });
 
         btnLamMoi.setText("Làm mới");
         btnLamMoi.addActionListener(new java.awt.event.ActionListener() {
@@ -199,12 +233,40 @@ public class QuanLyNhaXuatBan extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        // TODO add your handling code here:
+        this.update();
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed
-        // TODO add your handling code here:
+        this.clear();
     }//GEN-LAST:event_btnLamMoiActionPerformed
+
+    private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
+        String timkiem = txtTimKiem.getText().trim();
+        if (timkiem.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập tên tác giả để tìm kiếm!");
+            return;
+        }
+        DefaultTableModel model = (DefaultTableModel) tbNhaXuatBan.getModel();
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+        tbNhaXuatBan.setRowSorter(sorter);
+        sorter.setRowFilter(RowFilter.regexFilter("(?i)" + timkiem, 1));
+    }//GEN-LAST:event_btnTimKiemActionPerformed
+
+    private void tbNhaXuatBanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbNhaXuatBanMouseClicked
+        int index = tbNhaXuatBan.getSelectedRow();
+        if (index >= 0 && index < nxbList.size()) {
+            NhaXuatBan entity = nxbList.get(index);
+            this.setForm(entity);
+        }
+    }//GEN-LAST:event_tbNhaXuatBanMouseClicked
+
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        this.delete();
+    }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        this.create();
+    }//GEN-LAST:event_btnThemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -264,4 +326,160 @@ public class QuanLyNhaXuatBan extends javax.swing.JDialog {
     private javax.swing.JTextField txtTacGia;
     private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void open() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void setForm(NhaXuatBan entity) {
+        txtTacGia.setText(entity.getTenNXB());
+    }
+
+    @Override
+    public NhaXuatBan getForm() {
+        NhaXuatBan nhaXuatBan = new NhaXuatBan();
+        int selectedRow = tbNhaXuatBan.getSelectedRow();
+        if (selectedRow >= 0) {
+            try {
+                String value = tbNhaXuatBan.getValueAt(selectedRow, 0).toString();
+                int maNXB = Integer.parseInt(value);
+                nhaXuatBan.setMaNXB(maNXB);
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "Mã NXB không hợp lệ!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        nhaXuatBan.setTenNXB(txtTacGia.getText().trim());
+        return nhaXuatBan;
+    }
+
+    @Override
+    public void fillToTable() {
+        DefaultTableModel defaultTableModel = (DefaultTableModel) tbNhaXuatBan.getModel();
+        defaultTableModel.setRowCount(0);
+        nxbList = nhaXuatBanDAO.getAll();
+        for (NhaXuatBan nhaXuatBan : nxbList) {
+            Object[] rowData = {
+                nhaXuatBan.getMaNXB(),
+                nhaXuatBan.getTenNXB()
+            };
+            defaultTableModel.addRow(rowData);
+        }
+    }
+
+    @Override
+    public void edit() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void create() {
+        if (txtTacGia.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Tên tác giả không được để trống!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        try {
+            NhaXuatBan nhaXuatBan = getForm();
+            nhaXuatBanDAO.create(nhaXuatBan);
+            this.fillToTable();
+            this.clear();
+            JOptionPane.showMessageDialog(this, "Thêm nhà xuất bản thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+        } catch (RuntimeException ex) {
+            JOptionPane.showMessageDialog(this, "Lỗi khi thêm nhà xuất bản: " + ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    @Override
+    public void update() {
+        int selectedRow = tbNhaXuatBan.getSelectedRow();
+        if (selectedRow < 0 || selectedRow >= nxbList.size()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một tác giả để sửa!", "Lỗi", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (txtTacGia.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Tên tác giả không được để trống!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        try {
+            NhaXuatBan nhaXuatBan = getForm();
+            nhaXuatBanDAO.update(nhaXuatBan);
+            this.fillToTable();
+            this.clear();
+            JOptionPane.showMessageDialog(this, "Cập nhật nhà xuất bản thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+        } catch (RuntimeException ex) {
+            JOptionPane.showMessageDialog(this, "Lỗi khi cập nhật nhà xuất bản: " + ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    @Override
+    public void delete() {
+        if (XDialog.confirm("Bạn thực sự muốn xóa?")) {
+            int selectedRow = tbNhaXuatBan.getSelectedRow();
+            if (selectedRow >= 0 && selectedRow < nxbList.size()) {
+                NhaXuatBan entity = nxbList.get(selectedRow);
+                int maNXB = entity.getMaNXB();
+                try {
+                    nhaXuatBanDAO.delete(maNXB);
+                    this.fillToTable();
+                    this.clear();
+                    XDialog.alert("Xóa nhà xuất bản thành công!");
+                } catch (RuntimeException ex) {
+                    XDialog.alert("Không thể xóa vì nhà xuất bản này đang được sử dụng trong sách.");
+                }
+            } else {
+                XDialog.alert("Vui lòng chọn một nhà xuất bản để xóa!");
+            }
+        }
+    }
+
+    @Override
+    public void clear() {
+        txtTacGia.setText("");
+    }
+
+    @Override
+    public void setEditable(boolean editable) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void checkAll() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void uncheckAll() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void deleteCheckedItems() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void moveFirst() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void movePrevious() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void moveNext() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void moveLast() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void moveTo(int rowIndex) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

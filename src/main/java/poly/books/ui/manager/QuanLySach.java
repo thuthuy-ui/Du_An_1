@@ -4,12 +4,19 @@
  */
 package poly.books.ui.manager;
 
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
@@ -145,7 +152,7 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
         txtLanTaiBan = new javax.swing.JTextField();
         txtgia = new javax.swing.JTextField();
         txtISBN = new javax.swing.JTextField();
-        txtAnh = new javax.swing.JLabel();
+        lblanh = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -217,9 +224,14 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
             }
         });
 
-        txtAnh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_supplier_25px.png"))); // NOI18N
-        txtAnh.setText("ảnh");
-        txtAnh.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
+        lblanh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_supplier_25px.png"))); // NOI18N
+        lblanh.setText("ảnh");
+        lblanh.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
+        lblanh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblanhMouseClicked(evt);
+            }
+        });
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_add_25px_5.png"))); // NOI18N
         jButton1.setText("Thêm");
@@ -380,7 +392,7 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
                                 .addGroup(QuanlysachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(QuanlysachLayout.createSequentialGroup()
                                         .addGap(40, 40, 40)
-                                        .addComponent(txtAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lblanh, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addGroup(QuanlysachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -446,7 +458,7 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
                         .addGroup(QuanlysachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtNamSX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel25)))
-                    .addComponent(txtAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblanh, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(QuanlysachLayout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -621,6 +633,38 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
         this.clear();
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void lblanhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblanhMouseClicked
+        JFileChooser fileChooser = new JFileChooser();
+        if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            String fileName = selectedFile.getName();
+            File destDir = new File("src/main/resources/New folder (2)"); // Thư mục tài nguyên
+            if (!destDir.exists()) {
+                destDir.mkdirs();
+            }
+            File dest = new File(destDir, fileName);
+            try {
+                Files.copy(selectedFile.toPath(), dest.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(this, "Không thể sao chép ảnh: " + ex.getMessage());
+                return;
+            }
+            lblanh.setToolTipText(fileName); // Lưu tên file
+            lblanh.setText("");
+
+            // Tải và thu nhỏ ảnh theo kích thước của lblanh
+            java.net.URL imageUrl = getClass().getResource("/New folder (2)/" + fileName);
+            if (imageUrl != null) {
+                ImageIcon icon = new ImageIcon(imageUrl);
+                Image img = icon.getImage().getScaledInstance(lblanh.getWidth(), lblanh.getHeight(), Image.SCALE_SMOOTH);
+                lblanh.setIcon(new ImageIcon(img));
+            } else {
+                lblanh.setText("Không tải được ảnh");
+            }
+        }
+
+    }//GEN-LAST:event_lblanhMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -698,8 +742,8 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblanh;
     private javax.swing.JTable tbSach;
-    private javax.swing.JLabel txtAnh;
     private javax.swing.JTextField txtISBN;
     private javax.swing.JTextField txtLanTaiBan;
     private javax.swing.JTextField txtMaSach;
@@ -768,6 +812,17 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
         cboNXB.setSelectedItem(nhaXuatBan.getMaNXB());
         NgonNgu ngonNgu = ngonNguDAO.findByID(sach.getMaNgonNgu());
         cboNgonNgu.setSelectedItem(ngonNgu.getMaNgonNgu());
+        lblanh.setIcon(null);
+        lblanh.setText("");
+        if (entity.getHinhAnh() != null && !entity.getHinhAnh().isEmpty()) {
+            lblanh.setToolTipText(entity.getHinhAnh());
+            java.net.URL imageUrl = getClass().getResource("/New folder (2)/" + entity.getHinhAnh());
+            if (imageUrl != null) {
+                ImageIcon icon = new ImageIcon(imageUrl);
+                Image img = icon.getImage().getScaledInstance(lblanh.getWidth(), lblanh.getHeight(), Image.SCALE_SMOOTH);
+                lblanh.setIcon(new ImageIcon(img));
+            }
+        }
 //    
     }
     
@@ -803,6 +858,12 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
         sach.setMaNXB(nhaXuatBan.getMaNXB());
         LoaiSach loaiSach = (LoaiSach) cboTheLoai.getSelectedItem();
         sach.setMaLoaiSach(loaiSach.getMaLoaiSach());
+        String imageName = lblanh.getToolTipText();
+        if (imageName != null && !imageName.isEmpty()) {
+            sach.setHinhAnh(imageName);
+        } else {
+            sach.setHinhAnh("product.png"); // Default image
+        }
         return sach;
         
     }
@@ -884,7 +945,7 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
                 Sach entity = sachList.get(selectedRow);
                 int id = entity.getMaSach();
                 try {
-                    nhaXuatBanDAO.delete(id);
+                    sachDAO.delete(id);
                     this.fillToTable();
                     this.clear();
                     XDialog.alert("Xóa sách thành công!");
@@ -901,7 +962,7 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
     public void clear() {
         int confirm = JOptionPane.showConfirmDialog(this, "Bạn có muốn làm mới không ?", "Confirm question", JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
-            txtAnh.setText("");
+            lblanh.setText("");
             txtISBN.setText("");
             txtLanTaiBan.setText("");
             txtMaSach.setText("");

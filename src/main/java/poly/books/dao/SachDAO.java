@@ -112,7 +112,7 @@ public class SachDAO {
         return XJdbc.executeUpdate(updateSQL, values);
     }
    
-   public int delete(String MaSach) {
-       return XJdbc.executeUpdate(deleteSQL,MaSach);
+   public int delete(int id) {
+       return XJdbc.executeUpdate(deleteSQL,id);
    }
 }

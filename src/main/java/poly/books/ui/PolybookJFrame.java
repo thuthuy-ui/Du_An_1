@@ -5,9 +5,26 @@
 package poly.books.ui;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import poly.books.controller.PolybookController;
+import poly.books.dao.LinhVucDAO;
+import poly.books.dao.LoaiSachDAO;
+import poly.books.dao.NgonNguDAO;
+import poly.books.dao.NhaXuatBanDAO;
+import poly.books.dao.SachDAO;
+import poly.books.entity.LinhVuc;
+import poly.books.entity.LoaiSach;
+import poly.books.entity.NgonNgu;
+import poly.books.entity.NhaXuatBan;
+import poly.books.entity.Sach;
 import poly.books.util.XIcon;
 
 /**
@@ -15,7 +32,16 @@ import poly.books.util.XIcon;
  * @author HuyNguyen
  */
 public class PolybookJFrame extends javax.swing.JFrame implements poly.books.controller.PolybookController {
-
+    List<Sach> sachList = new ArrayList<>();
+    SachDAO sachDAO = new SachDAO();
+    List<NhaXuatBan> nhaXuatBanList = new ArrayList<>();
+    NhaXuatBanDAO nhaXuatBanDAO = new NhaXuatBanDAO();
+    List<NgonNgu> ngonNguList = new ArrayList<>();
+    NgonNguDAO ngonNguDAO = new NgonNguDAO();
+    List<LinhVuc> linhVucList = new ArrayList<>();
+    LinhVucDAO linhVucDAO = new LinhVucDAO();
+    List<LoaiSach> loaiSachList = new ArrayList<>();
+    LoaiSachDAO loaiSachDAO = new LoaiSachDAO();
     /**
      * Creates new form PolybookJFrame 215 503
      */
@@ -276,8 +302,6 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
             }
         });
 
-        jPanel2.setLayout(new java.awt.CardLayout());
-
         jLabel13.setBackground(new java.awt.Color(0, 204, 204));
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -296,8 +320,6 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
                 .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 559, Short.MAX_VALUE))
         );
-
-        jPanel2.add(BanHang, "card2");
 
         jLabel19.setBackground(new java.awt.Color(0, 204, 204));
         jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -318,8 +340,6 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
                 .addGap(0, 559, Short.MAX_VALUE))
         );
 
-        jPanel2.add(TaiKhoan, "card4");
-
         jLabel20.setBackground(new java.awt.Color(0, 204, 204));
         jLabel20.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -338,8 +358,6 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
                 .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 559, Short.MAX_VALUE))
         );
-
-        jPanel2.add(Quanlyhoadon, "card5");
 
         jLabel21.setBackground(new java.awt.Color(0, 204, 204));
         jLabel21.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -360,8 +378,6 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
                 .addGap(0, 559, Short.MAX_VALUE))
         );
 
-        jPanel2.add(GiamGia, "card6");
-
         jLabel22.setBackground(new java.awt.Color(0, 204, 204));
         jLabel22.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -378,10 +394,8 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
             ThongkeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ThongkeLayout.createSequentialGroup()
                 .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 474, Short.MAX_VALUE))
+                .addGap(0, 559, Short.MAX_VALUE))
         );
-
-        jPanel2.add(Thongke, "card7");
 
         jLabel23.setBackground(new java.awt.Color(0, 204, 204));
         jLabel23.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -399,10 +413,29 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
             KhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(KhachHangLayout.createSequentialGroup()
                 .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 474, Short.MAX_VALUE))
+                .addGap(0, 559, Short.MAX_VALUE))
         );
 
-        jPanel2.add(KhachHang, "card8");
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Quanlyhoadon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(GiamGia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(BanHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(Thongke, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(KhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(TaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Quanlyhoadon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(GiamGia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(BanHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(Thongke, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(KhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(TaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         javax.swing.GroupLayout mainLayout = new javax.swing.GroupLayout(main);
         main.setLayout(mainLayout);
@@ -596,6 +629,8 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
 //            getContentPane().repaint();
 //        }    }
     }
+    
+
 
     @Override
     public void exit() {

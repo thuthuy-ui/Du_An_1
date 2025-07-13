@@ -337,14 +337,30 @@
         </Component>
         <Container class="javax.swing.JPanel" name="jPanel2">
 
-          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignCardLayout"/>
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="Quanlyhoadon" min="-2" max="-2" attributes="0"/>
+                  <Component id="GiamGia" min="-2" max="-2" attributes="0"/>
+                  <Component id="BanHang" min="-2" max="-2" attributes="0"/>
+                  <Component id="Thongke" min="-2" max="-2" attributes="0"/>
+                  <Component id="KhachHang" min="-2" max="-2" attributes="0"/>
+                  <Component id="TaiKhoan" min="-2" max="-2" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="Quanlyhoadon" min="-2" max="-2" attributes="0"/>
+                  <Component id="GiamGia" min="-2" max="-2" attributes="0"/>
+                  <Component id="BanHang" min="-2" max="-2" attributes="0"/>
+                  <Component id="Thongke" min="-2" max="-2" attributes="0"/>
+                  <Component id="KhachHang" min="-2" max="-2" attributes="0"/>
+                  <Component id="TaiKhoan" min="-2" max="-2" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+          </Layout>
           <SubComponents>
             <Container class="javax.swing.JPanel" name="BanHang">
-              <Constraints>
-                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-                  <CardConstraints cardName="card2"/>
-                </Constraint>
-              </Constraints>
 
               <Layout>
                 <DimensionLayout dim="0">
@@ -378,11 +394,6 @@
               </SubComponents>
             </Container>
             <Container class="javax.swing.JPanel" name="TaiKhoan">
-              <Constraints>
-                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-                  <CardConstraints cardName="card4"/>
-                </Constraint>
-              </Constraints>
 
               <Layout>
                 <DimensionLayout dim="0">
@@ -416,11 +427,6 @@
               </SubComponents>
             </Container>
             <Container class="javax.swing.JPanel" name="Quanlyhoadon">
-              <Constraints>
-                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-                  <CardConstraints cardName="card5"/>
-                </Constraint>
-              </Constraints>
 
               <Layout>
                 <DimensionLayout dim="0">
@@ -454,11 +460,6 @@
               </SubComponents>
             </Container>
             <Container class="javax.swing.JPanel" name="GiamGia">
-              <Constraints>
-                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-                  <CardConstraints cardName="card6"/>
-                </Constraint>
-              </Constraints>
 
               <Layout>
                 <DimensionLayout dim="0">
@@ -492,11 +493,6 @@
               </SubComponents>
             </Container>
             <Container class="javax.swing.JPanel" name="Thongke">
-              <Constraints>
-                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-                  <CardConstraints cardName="card7"/>
-                </Constraint>
-              </Constraints>
 
               <Layout>
                 <DimensionLayout dim="0">
@@ -508,7 +504,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel22" min="-2" pref="51" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="474" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="559" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -530,11 +526,6 @@
               </SubComponents>
             </Container>
             <Container class="javax.swing.JPanel" name="KhachHang">
-              <Constraints>
-                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-                  <CardConstraints cardName="card8"/>
-                </Constraint>
-              </Constraints>
 
               <Layout>
                 <DimensionLayout dim="0">
@@ -546,7 +537,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel23" min="-2" pref="51" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="474" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="559" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>

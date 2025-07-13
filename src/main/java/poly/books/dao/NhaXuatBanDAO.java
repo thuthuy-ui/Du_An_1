@@ -6,6 +6,7 @@ package poly.books.dao;
 
 import java.util.List;
 import poly.books.entity.NhaXuatBan;
+import poly.books.util.XJdbc;
 import poly.books.util.XQuery;
 
 /**
@@ -22,6 +23,21 @@ public class NhaXuatBanDAO {
     String findBySQL = """
                        SELECT * FROM [QLNhaSachPro].[dbo].[NhaXuatBan] where MaNXB = ?
                        """;
+    String createSQL = """
+                        INSERT INTO [dbo].[NhaXuatBan]
+                                              ([TenNXB])
+                                        VALUES
+                                              (?)
+                       """;
+        String updateSQL = """
+                         UPDATE [dbo].[NhaXuatBan]
+                            SET [TenNXB] = ?
+                          WHERE MaNXB = ?
+                       """;
+        String deleteSQL = """
+                        DELETE FROM [dbo].[NhaXuatBan]
+                              WHERE MaNXB = ?
+                       """;
 
     public List<NhaXuatBan> getAll() {
         return XQuery.getBeanList(NhaXuatBan.class, getAllSQL);
@@ -30,4 +46,22 @@ public class NhaXuatBanDAO {
     public NhaXuatBan findByID(String MaNXB) {
         return XQuery.getSingleBean(NhaXuatBan.class, findBySQL, MaNXB);
     }
+    public int create(NhaXuatBan nhaXuatBan) {
+            Object[] rowData = {
+                nhaXuatBan.getTenNXB()
+            };
+            return XJdbc.executeUpdate(createSQL, rowData);
+        }
+
+        public int update(NhaXuatBan nhaXuatBan) {
+            Object[] rowData = {
+                nhaXuatBan.getTenNXB(),
+                nhaXuatBan.getMaNXB()
+            };
+            return XJdbc.executeUpdate(updateSQL, rowData);
+        }
+
+        public int delete(int id) {
+            return XJdbc.executeUpdate(deleteSQL, id);
+        }
 }

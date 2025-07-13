@@ -4,10 +4,28 @@
  */
 package poly.books.ui.manager;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import javax.swing.text.html.parser.Entity;
 import poly.books.controller.SachController;
+import poly.books.dao.LinhVucDAO;
+import poly.books.dao.LoaiSachDAO;
+import poly.books.dao.NgonNguDAO;
+import poly.books.dao.NhaXuatBanDAO;
+import poly.books.dao.SachDAO;
+import poly.books.entity.LinhVuc;
+import poly.books.entity.LoaiSach;
+import poly.books.entity.NgonNgu;
+import poly.books.entity.NhaXuatBan;
 import poly.books.entity.Sach;
 
 /**
@@ -16,16 +34,68 @@ import poly.books.entity.Sach;
  */
 public class QuanLySach extends javax.swing.JDialog implements poly.books.controller.SachController {
 
+    List<Sach> sachList = new ArrayList<>();
+    SachDAO sachDAO = new SachDAO();
+    List<NhaXuatBan> nhaXuatBanList = new ArrayList<>();
+    NhaXuatBanDAO nhaXuatBanDAO = new NhaXuatBanDAO();
+    List<NgonNgu> ngonNguList = new ArrayList<>();
+    NgonNguDAO ngonNguDAO = new NgonNguDAO();
+    List<LinhVuc> linhVucList = new ArrayList<>();
+    LinhVucDAO linhVucDAO = new LinhVucDAO();
+    List<LoaiSach> loaiSachList = new ArrayList<>();
+    LoaiSachDAO loaiSachDAO = new LoaiSachDAO();
+
     /**
      * Creates new form QuanLySach
      */
     public QuanLySach(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        fillCboLinhVuc();
+        fillCboLoaiSach();
+        fillCboNgonNgu();
+        fillCboNhaXuatBan();
+        fillToTable();
         if (parent instanceof JFrame) {
             this.parentFrame = (JFrame) parent;
         } else {
             throw new IllegalArgumentException("Parent must be a JFrame");
+        }
+    }
+
+    public void fillCboLinhVuc() {
+        DefaultComboBoxModel defaultComboBoxModel = (DefaultComboBoxModel) cboLinhVuc.getModel();
+        defaultComboBoxModel.removeAllElements();
+        linhVucList = linhVucDAO.getAll();
+        for (LinhVuc linhVuc : linhVucList) {
+            defaultComboBoxModel.addElement(linhVuc);
+        }
+    }
+
+    public void fillCboLoaiSach() {
+        DefaultComboBoxModel defaultComboBoxModel = (DefaultComboBoxModel) cboTheLoai.getModel();
+        defaultComboBoxModel.removeAllElements();
+        loaiSachList = loaiSachDAO.getAll();
+        for (LoaiSach loaiSach : loaiSachList) {
+            defaultComboBoxModel.addElement(loaiSach);
+        }
+    }
+
+    public void fillCboNhaXuatBan() {
+        DefaultComboBoxModel defaultComboBoxModel = (DefaultComboBoxModel) cboNXB.getModel();
+        defaultComboBoxModel.removeAllElements();
+        nhaXuatBanList = nhaXuatBanDAO.getAll();
+        for (NhaXuatBan nhaXuatBan : nhaXuatBanList) {
+            defaultComboBoxModel.addElement(nhaXuatBan);
+        }
+    }
+
+    public void fillCboNgonNgu() {
+        DefaultComboBoxModel defaultComboBoxModel = (DefaultComboBoxModel) cboNgonNgu.getModel();
+        defaultComboBoxModel.removeAllElements();
+        ngonNguList = ngonNguDAO.getAll();
+        for (NgonNgu ngonNgu : ngonNguList) {
+            defaultComboBoxModel.addElement(ngonNgu);
         }
     }
     private JFrame parentFrame;
@@ -146,15 +216,35 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_add_25px_5.png"))); // NOI18N
         jButton1.setText("Thêm");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_edit_25px.png"))); // NOI18N
         jButton2.setText("Sửa");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_delete_25px_1.png"))); // NOI18N
         jButton3.setText("Xóa");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_reset_25px_1.png"))); // NOI18N
         jButton4.setText("Làm mới");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm Kiếm", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(102, 102, 102))); // NOI18N
@@ -203,6 +293,11 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
                 "MaSach", "TenSach", "MaTacGia", "MaLinhVuc", "MaLoaiSach", "MaNXB", "NamXuatBan", "GiaBan", "LanTaiBan", "ISBN", "Tap", "MaNgonNgu", "HinhAnh"
             }
         ));
+        tbSach.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbSachMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbSach);
 
         jLabel25.setText("Năm sản xuất");
@@ -465,7 +560,15 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
     }//GEN-LAST:event_txtgiaActionPerformed
 
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
-        // TODO add your handling code here:
+        String timkiem = txtTimKiem.getText().trim().toLowerCase();
+        if (timkiem.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập tên sác trước khi tìm kiếm");
+            return;
+        }
+        DefaultTableModel defaultTableModel = (DefaultTableModel) tbSach.getModel();
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(defaultTableModel);
+        tbSach.setRowSorter(sorter);
+        sorter.setRowFilter(RowFilter.regexFilter("(?i)" + timkiem, 1));
     }//GEN-LAST:event_btnTimKiemActionPerformed
 
     private void btnLinhVucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLinhVucActionPerformed
@@ -487,6 +590,31 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
     private void btnNgonNguActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNgonNguActionPerformed
         this.showQuanLyNgonNgu(parentFrame);
     }//GEN-LAST:event_btnNgonNguActionPerformed
+
+    private void tbSachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSachMouseClicked
+
+        int index = tbSach.getSelectedRow();
+        if (index >= 0) {
+            Sach sach = sachList.get(index);
+            this.setForm(sach);
+        }
+    }//GEN-LAST:event_tbSachMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.create();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.update();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        this.delete();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        this.clear();
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -614,17 +742,85 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
 
     @Override
     public void setForm(Sach entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Sach sach = sachList.get(tbSach.getSelectedRow());
+        txtMaSach.setText(String.valueOf(sach.getMaSach()));
+        txtTenSach.setText(sach.getTenSach());
+        txtTacGia.setText(String.valueOf(sach.getMaTacGia()));
+        txtTap.setText(String.valueOf(sach.getTap()));
+        txtLanTaiBan.setText(String.valueOf(sach.getLanTaiBan()));
+        txtgia.setText(String.valueOf(sach.getGiaBan()));
+        txtISBN.setText(sach.getISBN());
+        txtNamSX.setText(String.valueOf(sach.getNamXuatBan()));
+
+        // xử lý combobox
+        LinhVuc linhVuc = linhVucDAO.findbyID(String.valueOf(sach.getMaLinhVuc()));
+        cboLinhVuc.setSelectedItem(linhVuc.getMaLinhVuc());
+        LoaiSach loaiSach = loaiSachDAO.findByID(String.valueOf(sach.getMaLoaiSach()));
+        cboTheLoai.setSelectedItem(loaiSach.getMaLoaiSach());
+        NhaXuatBan nhaXuatBan = nhaXuatBanDAO.findByID(String.valueOf(sach.getMaNXB()));
+        cboNXB.setSelectedItem(nhaXuatBan.getMaNXB());
+        NgonNgu ngonNgu = ngonNguDAO.findByID(String.valueOf(sach.getMaNgonNgu()));
+        cboNgonNgu.setSelectedItem(ngonNgu.getMaNgonNgu());
+//    
     }
 
     @Override
     public Sach getForm() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Sach sach = new Sach();
+        //set thông tin cho đối tượng
+        sach.setMaSach(Integer.valueOf(txtMaSach.getText()));
+        sach.setTenSach(txtTenSach.getText());
+        sach.setMaTacGia(Integer.valueOf(txtTacGia.getText()));
+        sach.setTap(Integer.valueOf(txtTap.getText()));
+        sach.setLanTaiBan(Integer.valueOf(txtLanTaiBan.getText()));
+        sach.setGiaBan(Double.valueOf(txtgia.getText()));
+        sach.setISBN(txtISBN.getText());
+        try {
+            SimpleDateFormat SimpleDateFormat = new SimpleDateFormat("yyyy"); // hoặc "dd/MM/yyyy" nếu bạn nhập đầy đủ
+            sach.setNamXuatBan(SimpleDateFormat.parse(txtNamSX.getText()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Sai định dạng ngày! Vui lòng nhập năm đúng định dạng.");
+            return null; // hoặc xử lý khác nếu cần
+        }
+        LinhVuc linhVuc = (LinhVuc) cboLinhVuc.getSelectedItem();
+        sach.setMaLinhVuc(linhVuc.getMaLinhVuc());
+
+        NgonNgu ngonNgu = (NgonNgu) cboNgonNgu.getSelectedItem();
+        sach.setMaNgonNgu(ngonNgu.getMaNgonNgu());
+
+        NhaXuatBan nhaXuatBan = (NhaXuatBan) cboNXB.getSelectedItem();
+        sach.setMaNXB(nhaXuatBan.getMaNXB());
+        LoaiSach loaiSach = (LoaiSach) cboTheLoai.getSelectedItem();
+        sach.setMaLoaiSach(loaiSach.getMaLoaiSach());
+        return sach; 
+
     }
 
     @Override
     public void fillToTable() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        DefaultTableModel defaultTableModel = (DefaultTableModel) tbSach.getModel();
+        defaultTableModel.setRowCount(0);
+        sachList = sachDAO.getAll();
+        for (Sach sach : sachList) {
+            Object[] rowData = {
+                sach.getMaSach(),
+                sach.getTenSach(),
+                sach.getMaTacGia(),
+                sach.getMaLinhVuc(),
+                sach.getMaLoaiSach(),
+                sach.getMaNXB(),
+                sach.getNamXuatBan(),
+                sach.getGiaBan(),
+                sach.getLanTaiBan(),
+                sach.getISBN(),
+                sach.getTap(),
+                sach.getMaNgonNgu(),
+                sach.getHinhAnh(),
+                sach.getTrangThai()
+            };
+            defaultTableModel.addRow(rowData);
+        }
     }
 
     @Override
@@ -649,7 +845,25 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
 
     @Override
     public void clear() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        int confirm = JOptionPane.showConfirmDialog(this, "Bạn có muốn làm mới không ?", "Confirm question", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            txtAnh.setText("");
+            txtISBN.setText("");
+            txtLanTaiBan.setText("");
+            txtMaSach.setText("");
+            txtNamSX.setText("");
+            txtTacGia.setText("");
+            txtTap.setText("");
+            txtTenSach.setText("");
+            txtgia.setText("");
+            cboLinhVuc.setSelectedIndex(0);
+            cboNXB.setSelectedIndex(0);
+            cboNgonNgu.setSelectedIndex(0);
+            cboTheLoai.setSelectedIndex(0);
+            JOptionPane.showMessageDialog(this, "Làm mới thành công");
+        } else {
+            return;
+        }
     }
 
     @Override

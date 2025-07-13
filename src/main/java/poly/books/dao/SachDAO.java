@@ -31,7 +31,6 @@ public class SachDAO {
                              ,[Tap]
                              ,[MaNgonNgu]
                              ,[HinhAnh]
-                             ,[TrangThai]
                          FROM [QLNhaSachPro].[dbo].[Sach]
                        """;
     String createSQL = """
@@ -47,10 +46,9 @@ public class SachDAO {
                                   ,[ISBN]
                                   ,[Tap]
                                   ,[MaNgonNgu]
-                                  ,[HinhAnh]
-                                  ,[TrangThai])
+                                  ,[HinhAnh])
                             VALUES
-                                  (?,?,?,?,?,?,?,?,?,?,?,?,?)
+                                  (?,?,?,?,?,?,?,?,?,?,?,?)
                        """;
     String updateSQL = """
                        UPDATE [dbo].[Sach]
@@ -66,7 +64,6 @@ public class SachDAO {
                              ,[Tap] = ?
                              ,[MaNgonNgu] = ?
                              ,[HinhAnh] = ?
-                             ,[TrangThai] = ?
                         WHERE MaSach = ?
                        """;
     String deleteSQL = """
@@ -93,7 +90,6 @@ public class SachDAO {
             sach.getTap(),
             sach.getMaNgonNgu(),
             sach.getHinhAnh(),
-            sach.getTrangThai()
         };
         return XJdbc.executeUpdate(createSQL, values);
     }
@@ -111,7 +107,6 @@ public class SachDAO {
             sach.getTap(),
             sach.getMaNgonNgu(),
             sach.getHinhAnh(),
-            sach.getTrangThai(),
             sach.getMaSach()
         };
         return XJdbc.executeUpdate(updateSQL, values);

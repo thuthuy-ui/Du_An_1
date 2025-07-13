@@ -15,18 +15,20 @@ import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
-import javax.swing.text.html.parser.Entity;
 import poly.books.controller.SachController;
 import poly.books.dao.LinhVucDAO;
 import poly.books.dao.LoaiSachDAO;
 import poly.books.dao.NgonNguDAO;
 import poly.books.dao.NhaXuatBanDAO;
 import poly.books.dao.SachDAO;
+import poly.books.dao.TacGiaDAO;
 import poly.books.entity.LinhVuc;
 import poly.books.entity.LoaiSach;
 import poly.books.entity.NgonNgu;
 import poly.books.entity.NhaXuatBan;
 import poly.books.entity.Sach;
+import poly.books.entity.TacGia;
+import poly.books.util.XDialog;
 
 /**
  *
@@ -44,6 +46,8 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
     LinhVucDAO linhVucDAO = new LinhVucDAO();
     List<LoaiSach> loaiSachList = new ArrayList<>();
     LoaiSachDAO loaiSachDAO = new LoaiSachDAO();
+    List<TacGia> listTacGia = new ArrayList<>();
+    TacGiaDAO TacGiaDAO = new TacGiaDAO();
 
     /**
      * Creates new form QuanLySach
@@ -753,13 +757,13 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
         txtNamSX.setText(String.valueOf(sach.getNamXuatBan()));
 
         // xử lý combobox
-        LinhVuc linhVuc = linhVucDAO.findbyID(String.valueOf(sach.getMaLinhVuc()));
+        LinhVuc linhVuc = linhVucDAO.findbyID(sach.getMaLinhVuc());
         cboLinhVuc.setSelectedItem(linhVuc.getMaLinhVuc());
-        LoaiSach loaiSach = loaiSachDAO.findByID(String.valueOf(sach.getMaLoaiSach()));
+        LoaiSach loaiSach = loaiSachDAO.findByID(sach.getMaLoaiSach());
         cboTheLoai.setSelectedItem(loaiSach.getMaLoaiSach());
-        NhaXuatBan nhaXuatBan = nhaXuatBanDAO.findByID(String.valueOf(sach.getMaNXB()));
+        NhaXuatBan nhaXuatBan = nhaXuatBanDAO.findByID(sach.getMaNXB());
         cboNXB.setSelectedItem(nhaXuatBan.getMaNXB());
-        NgonNgu ngonNgu = ngonNguDAO.findByID(String.valueOf(sach.getMaNgonNgu()));
+        NgonNgu ngonNgu = ngonNguDAO.findByID(sach.getMaNgonNgu());
         cboNgonNgu.setSelectedItem(ngonNgu.getMaNgonNgu());
 //    
     }
@@ -793,7 +797,7 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
         sach.setMaNXB(nhaXuatBan.getMaNXB());
         LoaiSach loaiSach = (LoaiSach) cboTheLoai.getSelectedItem();
         sach.setMaLoaiSach(loaiSach.getMaLoaiSach());
-        return sach; 
+        return sach;
 
     }
 
@@ -806,18 +810,17 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
             Object[] rowData = {
                 sach.getMaSach(),
                 sach.getTenSach(),
-                sach.getMaTacGia(),
-                sach.getMaLinhVuc(),
-                sach.getMaLoaiSach(),
-                sach.getMaNXB(),
+                TacGiaDAO.findByID(sach.getMaTacGia()),
+                linhVucDAO.findbyID(sach.getMaLinhVuc()),
+                loaiSachDAO.findByID(sach.getMaLoaiSach()),
+                nhaXuatBanDAO.findByID(sach.getMaNXB()),
                 sach.getNamXuatBan(),
                 sach.getGiaBan(),
                 sach.getLanTaiBan(),
                 sach.getISBN(),
                 sach.getTap(),
-                sach.getMaNgonNgu(),
-                sach.getHinhAnh(),
-                sach.getTrangThai()
+                ngonNguDAO.findByID(sach.getMaNgonNgu()),
+                sach.getHinhAnh()
             };
             defaultTableModel.addRow(rowData);
         }
@@ -830,17 +833,62 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
 
     @Override
     public void create() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (txtTacGia.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Tên sách không được để trống!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        try {
+            Sach sach = getForm();
+            sachDAO.create(sach);
+            this.fillToTable();
+            this.clear();
+            JOptionPane.showMessageDialog(this, "Thêm sách thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+        } catch (RuntimeException ex) {
+            JOptionPane.showMessageDialog(this, "Lỗi khi thêm sách: " + ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     @Override
     public void update() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+int selectedRow = tbSach.getSelectedRow();
+        if (selectedRow < 0 || selectedRow >= sachList.size()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một sách để sửa!", "Lỗi", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (txtTacGia.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Tên sách không được để trống!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        try {
+           Sach sach = getForm();
+            sachDAO.update(sach);
+            this.fillToTable();
+            this.clear();
+            JOptionPane.showMessageDialog(this, "Cập nhật sách thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+        } catch (RuntimeException ex) {
+            JOptionPane.showMessageDialog(this, "Lỗi khi cập nhật sách: " + ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     @Override
     public void delete() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+if (XDialog.confirm("Bạn thực sự muốn xóa?")) {
+            int selectedRow = tbSach.getSelectedRow();
+            if (selectedRow >= 0 && selectedRow < sachList.size()) {
+                Sach entity = sachList.get(selectedRow);
+                int id = entity.getMaSach();
+                try {
+                    nhaXuatBanDAO.delete(id);
+                    this.fillToTable();
+                    this.clear();
+                    XDialog.alert("Xóa sách thành công!");
+                } catch (RuntimeException ex) {
+                    XDialog.alert("Lỗi"+ex.getMessage());
+                }
+            } else {
+                XDialog.alert("Vui lòng chọn một nhà xuất bản để xóa!");
+            }
+        }
     }
 
     @Override

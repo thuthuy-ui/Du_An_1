@@ -43,7 +43,7 @@ public class NhaXuatBanDAO {
         return XQuery.getBeanList(NhaXuatBan.class, getAllSQL);
     }
 
-    public NhaXuatBan findByID(String MaNXB) {
+    public NhaXuatBan findByID(int MaNXB) {
         return XQuery.getSingleBean(NhaXuatBan.class, findBySQL, MaNXB);
     }
     public int create(NhaXuatBan nhaXuatBan) {

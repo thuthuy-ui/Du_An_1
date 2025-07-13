@@ -42,7 +42,7 @@ public class LoaiSachDAO {
         return XQuery.getBeanList(LoaiSach.class, getAllSQL);
     }
 
-    public LoaiSach findByID(String MaLoaiSach) {
+    public LoaiSach findByID(int MaLoaiSach) {
         return XQuery.getSingleBean(LoaiSach.class, findBySQL, MaLoaiSach);
     }
 

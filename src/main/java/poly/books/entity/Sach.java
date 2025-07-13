@@ -28,5 +28,4 @@ public class Sach {
     private Integer Tap;
     private int MaNgonNgu;
     private String HinhAnh;
-    private int TrangThai;
 }

@@ -46,7 +46,7 @@
             return XQuery.getBeanList(TacGia.class, getAllSQL);
         }
 
-        public TacGia findByID(String MaTacGia) {
+        public TacGia findByID(int MaTacGia) {
             return XQuery.getSingleBean(TacGia.class, findBySQL, MaTacGia);
         }
 

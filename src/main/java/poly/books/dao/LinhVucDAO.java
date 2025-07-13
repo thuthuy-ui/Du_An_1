@@ -34,7 +34,7 @@ public class LinhVucDAO {
         return XQuery.getBeanList(LinhVuc.class, getAllSQL);
         
     }
-    public LinhVuc findbyID(String maLinhVuc) {
+    public LinhVuc findbyID(int maLinhVuc) {
         
         return XQuery.getSingleBean(LinhVuc.class, findBySQL, maLinhVuc);
     }

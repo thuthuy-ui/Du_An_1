@@ -42,7 +42,7 @@ public class NgonNguDAO {
         return XQuery.getBeanList(NgonNgu.class, getAllSQL);
     }
 
-    public NgonNgu findByID(String MaNgonNgu) {
+    public NgonNgu findByID(int MaNgonNgu) {
         return XQuery.getSingleBean(NgonNgu.class, findBySQL, MaNgonNgu);
     }
 

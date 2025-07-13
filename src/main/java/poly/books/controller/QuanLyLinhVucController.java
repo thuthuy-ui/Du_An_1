@@ -4,10 +4,12 @@
  */
 package poly.books.controller;
 
+import poly.books.entity.LinhVuc;
+
 /**
  *
  * @author HuyNguyen
  */
-public interface QuanLyLinhVucController {
+public interface QuanLyLinhVucController extends CrudController<LinhVuc>{
     
 }

@@ -35,7 +35,7 @@ import poly.books.util.XDialog;
  * @author HuyNguyen
  */
 public class QuanLySach extends javax.swing.JDialog implements poly.books.controller.SachController {
-
+    
     List<Sach> sachList = new ArrayList<>();
     SachDAO sachDAO = new SachDAO();
     List<NhaXuatBan> nhaXuatBanList = new ArrayList<>();
@@ -60,13 +60,14 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
         fillCboNgonNgu();
         fillCboNhaXuatBan();
         fillToTable();
+        fillCboTacGia();
         if (parent instanceof JFrame) {
             this.parentFrame = (JFrame) parent;
         } else {
             throw new IllegalArgumentException("Parent must be a JFrame");
         }
     }
-
+    
     public void fillCboLinhVuc() {
         DefaultComboBoxModel defaultComboBoxModel = (DefaultComboBoxModel) cboLinhVuc.getModel();
         defaultComboBoxModel.removeAllElements();
@@ -75,7 +76,7 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
             defaultComboBoxModel.addElement(linhVuc);
         }
     }
-
+    
     public void fillCboLoaiSach() {
         DefaultComboBoxModel defaultComboBoxModel = (DefaultComboBoxModel) cboTheLoai.getModel();
         defaultComboBoxModel.removeAllElements();
@@ -84,7 +85,7 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
             defaultComboBoxModel.addElement(loaiSach);
         }
     }
-
+    
     public void fillCboNhaXuatBan() {
         DefaultComboBoxModel defaultComboBoxModel = (DefaultComboBoxModel) cboNXB.getModel();
         defaultComboBoxModel.removeAllElements();
@@ -93,13 +94,21 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
             defaultComboBoxModel.addElement(nhaXuatBan);
         }
     }
-
+    
     public void fillCboNgonNgu() {
         DefaultComboBoxModel defaultComboBoxModel = (DefaultComboBoxModel) cboNgonNgu.getModel();
         defaultComboBoxModel.removeAllElements();
         ngonNguList = ngonNguDAO.getAll();
         for (NgonNgu ngonNgu : ngonNguList) {
             defaultComboBoxModel.addElement(ngonNgu);
+        }
+    }
+      public void fillCboTacGia() {
+        DefaultComboBoxModel defaultComboBoxModel = (DefaultComboBoxModel) cboTacGia.getModel();
+        defaultComboBoxModel.removeAllElements();
+        listTacGia = TacGiaDAO.getAll();
+        for (TacGia tacgia : listTacGia) {
+            defaultComboBoxModel.addElement(tacgia);
         }
     }
     private JFrame parentFrame;
@@ -129,7 +138,6 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
         jLabel17 = new javax.swing.JLabel();
         txtMaSach = new javax.swing.JTextField();
         txtTenSach = new javax.swing.JTextField();
-        txtTacGia = new javax.swing.JTextField();
         cboNXB = new javax.swing.JComboBox<>();
         cboTheLoai = new javax.swing.JComboBox<>();
         cboLinhVuc = new javax.swing.JComboBox<>();
@@ -151,6 +159,7 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
         jLabel25 = new javax.swing.JLabel();
         txtNamSX = new javax.swing.JTextField();
         cboNgonNgu = new javax.swing.JComboBox<>();
+        cboTacGia = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         btnNXB = new javax.swing.JButton();
         btnTacgia = new javax.swing.JButton();
@@ -193,12 +202,6 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
         txtTenSach.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTenSachActionPerformed(evt);
-            }
-        });
-
-        txtTacGia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTacGiaActionPerformed(evt);
             }
         });
 
@@ -308,6 +311,8 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
 
         cboNgonNgu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        cboTacGia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout QuanlysachLayout = new javax.swing.GroupLayout(Quanlysach);
         Quanlysach.setLayout(QuanlysachLayout);
         QuanlysachLayout.setHorizontalGroup(
@@ -333,7 +338,7 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
                                     .addGroup(QuanlysachLayout.createSequentialGroup()
                                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(txtTacGia))
+                                        .addComponent(cboTacGia, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addGroup(QuanlysachLayout.createSequentialGroup()
                                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
@@ -402,10 +407,10 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
                             .addComponent(jLabel2)
                             .addComponent(txtTenSach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(QuanlysachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(QuanlysachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(txtTacGia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(cboTacGia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(9, 9, 9)
                         .addGroup(QuanlysachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addComponent(cboLinhVuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -555,10 +560,6 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTenSachActionPerformed
 
-    private void txtTacGiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTacGiaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTacGiaActionPerformed
-
     private void txtgiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtgiaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtgiaActionPerformed
@@ -596,7 +597,7 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
     }//GEN-LAST:event_btnNgonNguActionPerformed
 
     private void tbSachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSachMouseClicked
-
+        
         int index = tbSach.getSelectedRow();
         if (index >= 0) {
             Sach sach = sachList.get(index);
@@ -674,6 +675,7 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
     private javax.swing.JComboBox<String> cboLinhVuc;
     private javax.swing.JComboBox<String> cboNXB;
     private javax.swing.JComboBox<String> cboNgonNgu;
+    private javax.swing.JComboBox<String> cboTacGia;
     private javax.swing.JComboBox<String> cboTheLoai;
     private javax.swing.JComboBox<String> cboTimKiem;
     private javax.swing.JButton jButton1;
@@ -702,7 +704,6 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
     private javax.swing.JTextField txtLanTaiBan;
     private javax.swing.JTextField txtMaSach;
     private javax.swing.JTextField txtNamSX;
-    private javax.swing.JTextField txtTacGia;
     private javax.swing.JTextField txtTap;
     private javax.swing.JTextField txtTenSach;
     private javax.swing.JTextField txtTimKiem;
@@ -713,43 +714,43 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
     public void showJDialog(JDialog dialog) {
         SachController.super.showJDialog(dialog); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
-
+    
     @Override
     public void showQuanLyLinhVuc(JFrame frame) {
         SachController.super.showQuanLyLinhVuc(frame); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
-
+    
     @Override
     public void showQuanLyTacGia(JFrame frame) {
         SachController.super.showQuanLyTacGia(frame); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
-
+    
     @Override
     public void showQuanLyTheLoai(JFrame frame) {
         SachController.super.showQuanLyTheLoai(frame); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
-
+    
     @Override
     public void showQuanLyNgonNgu(JFrame frame) {
         SachController.super.showQuanLyNgonNgu(frame); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
-
+    
     @Override
     public void showQuanLyNhaXuatBan(JFrame frame) {
         SachController.super.showQuanLyNhaXuatBan(frame); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
-
+    
     @Override
     public void open() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+    
     @Override
     public void setForm(Sach entity) {
         Sach sach = sachList.get(tbSach.getSelectedRow());
         txtMaSach.setText(String.valueOf(sach.getMaSach()));
         txtTenSach.setText(sach.getTenSach());
-        txtTacGia.setText(String.valueOf(sach.getMaTacGia()));
+        
         txtTap.setText(String.valueOf(sach.getTap()));
         txtLanTaiBan.setText(String.valueOf(sach.getLanTaiBan()));
         txtgia.setText(String.valueOf(sach.getGiaBan()));
@@ -757,6 +758,8 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
         txtNamSX.setText(String.valueOf(sach.getNamXuatBan()));
 
         // xử lý combobox
+        TacGia tacGia = TacGiaDAO.findByID(sach.getMaTacGia());
+        cboTacGia.setSelectedItem(tacGia.getMaTacGia());
         LinhVuc linhVuc = linhVucDAO.findbyID(sach.getMaLinhVuc());
         cboLinhVuc.setSelectedItem(linhVuc.getMaLinhVuc());
         LoaiSach loaiSach = loaiSachDAO.findByID(sach.getMaLoaiSach());
@@ -767,14 +770,14 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
         cboNgonNgu.setSelectedItem(ngonNgu.getMaNgonNgu());
 //    
     }
-
+    
     @Override
     public Sach getForm() {
         Sach sach = new Sach();
         //set thông tin cho đối tượng
         sach.setMaSach(Integer.valueOf(txtMaSach.getText()));
         sach.setTenSach(txtTenSach.getText());
-        sach.setMaTacGia(Integer.valueOf(txtTacGia.getText()));
+        
         sach.setTap(Integer.valueOf(txtTap.getText()));
         sach.setLanTaiBan(Integer.valueOf(txtLanTaiBan.getText()));
         sach.setGiaBan(Double.valueOf(txtgia.getText()));
@@ -787,20 +790,23 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
             JOptionPane.showMessageDialog(this, "Sai định dạng ngày! Vui lòng nhập năm đúng định dạng.");
             return null; // hoặc xử lý khác nếu cần
         }
+        TacGia tacGia = (TacGia) cboTacGia.getSelectedItem();
+        sach.setMaTacGia(tacGia.getMaTacGia());
+        
         LinhVuc linhVuc = (LinhVuc) cboLinhVuc.getSelectedItem();
         sach.setMaLinhVuc(linhVuc.getMaLinhVuc());
-
+        
         NgonNgu ngonNgu = (NgonNgu) cboNgonNgu.getSelectedItem();
         sach.setMaNgonNgu(ngonNgu.getMaNgonNgu());
-
+        
         NhaXuatBan nhaXuatBan = (NhaXuatBan) cboNXB.getSelectedItem();
         sach.setMaNXB(nhaXuatBan.getMaNXB());
         LoaiSach loaiSach = (LoaiSach) cboTheLoai.getSelectedItem();
         sach.setMaLoaiSach(loaiSach.getMaLoaiSach());
         return sach;
-
+        
     }
-
+    
     @Override
     public void fillToTable() {
         DefaultTableModel defaultTableModel = (DefaultTableModel) tbSach.getModel();
@@ -825,15 +831,15 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
             defaultTableModel.addRow(rowData);
         }
     }
-
+    
     @Override
     public void edit() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+    
     @Override
     public void create() {
-        if (txtTacGia.getText().trim().isEmpty()) {
+        if (txtTenSach.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Tên sách không được để trống!", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -847,20 +853,20 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
             JOptionPane.showMessageDialog(this, "Lỗi khi thêm sách: " + ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
     }
-
+    
     @Override
     public void update() {
-int selectedRow = tbSach.getSelectedRow();
+        int selectedRow = tbSach.getSelectedRow();
         if (selectedRow < 0 || selectedRow >= sachList.size()) {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn một sách để sửa!", "Lỗi", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        if (txtTacGia.getText().trim().isEmpty()) {
+        if (txtTenSach.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Tên sách không được để trống!", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return;
         }
         try {
-           Sach sach = getForm();
+            Sach sach = getForm();
             sachDAO.update(sach);
             this.fillToTable();
             this.clear();
@@ -869,10 +875,10 @@ int selectedRow = tbSach.getSelectedRow();
             JOptionPane.showMessageDialog(this, "Lỗi khi cập nhật sách: " + ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
     }
-
+    
     @Override
     public void delete() {
-if (XDialog.confirm("Bạn thực sự muốn xóa?")) {
+        if (XDialog.confirm("Bạn thực sự muốn xóa?")) {
             int selectedRow = tbSach.getSelectedRow();
             if (selectedRow >= 0 && selectedRow < sachList.size()) {
                 Sach entity = sachList.get(selectedRow);
@@ -883,14 +889,14 @@ if (XDialog.confirm("Bạn thực sự muốn xóa?")) {
                     this.clear();
                     XDialog.alert("Xóa sách thành công!");
                 } catch (RuntimeException ex) {
-                    XDialog.alert("Lỗi"+ex.getMessage());
+                    XDialog.alert("Lỗi" + ex.getMessage());
                 }
             } else {
                 XDialog.alert("Vui lòng chọn một nhà xuất bản để xóa!");
             }
         }
     }
-
+    
     @Override
     public void clear() {
         int confirm = JOptionPane.showConfirmDialog(this, "Bạn có muốn làm mới không ?", "Confirm question", JOptionPane.YES_NO_OPTION);
@@ -900,7 +906,7 @@ if (XDialog.confirm("Bạn thực sự muốn xóa?")) {
             txtLanTaiBan.setText("");
             txtMaSach.setText("");
             txtNamSX.setText("");
-            txtTacGia.setText("");
+           cboTacGia.setSelectedIndex(0);
             txtTap.setText("");
             txtTenSach.setText("");
             txtgia.setText("");
@@ -913,50 +919,50 @@ if (XDialog.confirm("Bạn thực sự muốn xóa?")) {
             return;
         }
     }
-
+    
     @Override
     public void setEditable(boolean editable) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+    
     @Override
     public void checkAll() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+    
     @Override
     public void uncheckAll() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+    
     @Override
     public void deleteCheckedItems() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+    
     @Override
     public void moveFirst() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+    
     @Override
     public void movePrevious() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+    
     @Override
     public void moveNext() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+    
     @Override
     public void moveLast() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+    
     @Override
     public void moveTo(int rowIndex) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+    
 }

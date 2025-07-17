@@ -6,15 +6,16 @@ package poly.books.ui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import javax.swing.BorderFactory;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import poly.books.controller.PolybookController;
+import poly.books.dao.impl.UserDAOImpl;
+import poly.books.entity.NguoiDungSD;
 import poly.books.ui.manager.QuanLySach;
+import poly.books.util.XAuth;
 import poly.books.util.XIcon;
 
 /**
@@ -29,7 +30,7 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
     public PolybookJFrame() {
         initComponents();
         menu.setBackground(null); // Xóa màu nền mặc định để gradient hiển thị
-
+        init();
         // Thêm hiệu ứng click cho các JLabel trong menu
         addClickEffect(lbBanHang);
         addClickEffect(lbQLSach);
@@ -39,6 +40,8 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
         addClickEffect(lbThongKe);
         addClickEffect(lbgiamgia);
         addClickEffect(lbDangXuat);
+        addClickEffect(lbDoiMk);
+        addClickEffect(lbLichSu);
 
     }
 
@@ -61,6 +64,23 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
         showPanel(QuanLySach);
 
     }
+    private void showQuanLyDoiMatKhau(){
+        pnlDoiMatKhau.removeAll();
+        pnlDoiMatKhau.revalidate();
+        pnlDoiMatKhau.repaint();
+
+        // Tạo instance của QuanLySach và lấy nội dung
+        ChangePasswordJDialog quanLymk = new ChangePasswordJDialog(this, false); // Không cần modal
+        JPanel contentPanel = quanLymk.getContentPanel();
+        contentPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2)); // Thêm border nếu cần
+
+        // Thêm nội dung vào mainSach
+        pnlDoiMatKhau.setLayout(new BorderLayout());
+        pnlDoiMatKhau.add(contentPanel, BorderLayout.CENTER);
+        pnlDoiMatKhau.revalidate();
+        pnlDoiMatKhau.repaint();
+        showPanel(DoiMatKhau);
+    }
 
     private void showPanel(JPanel panelToShow) {
         // Ẩn tất cả các panel
@@ -71,6 +91,8 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
         KhachHang.setVisible(false);
         ThongKe.setVisible(false);
         GiamGia.setVisible(false);
+        LichSu.setVisible(false);
+        DoiMatKhau.setVisible(false);
 
         // Hiển thị panel được chọn
         panelToShow.setVisible(true);
@@ -94,11 +116,13 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
         lbQuanLyKH = new javax.swing.JLabel();
         lbQuanLyHD = new javax.swing.JLabel();
         lbThongKe = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        lblAnh = new javax.swing.JLabel();
+        lblHoTen = new javax.swing.JLabel();
+        lblChucVu = new javax.swing.JLabel();
         lbgiamgia = new javax.swing.JLabel();
         lbDangXuat = new javax.swing.JLabel();
+        lbDoiMk = new javax.swing.JLabel();
+        lbLichSu = new javax.swing.JLabel();
         QuanLy = new javax.swing.JPanel();
         BanHang = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -121,6 +145,12 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
         ThongKe = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
         pnlThongKe = new javax.swing.JPanel();
+        LichSu = new javax.swing.JPanel();
+        jLabel18 = new javax.swing.JLabel();
+        pnlLichSu = new javax.swing.JPanel();
+        DoiMatKhau = new javax.swing.JPanel();
+        jLabel19 = new javax.swing.JLabel();
+        pnlDoiMatKhau = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -190,16 +220,16 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
             }
         });
 
-        jLabel8.setBackground(new java.awt.Color(51, 51, 255));
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user.png"))); // NOI18N
+        lblAnh.setBackground(new java.awt.Color(51, 51, 255));
+        lblAnh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user.png"))); // NOI18N
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Tên ");
+        lblHoTen.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblHoTen.setForeground(new java.awt.Color(255, 255, 255));
+        lblHoTen.setText("Tên ");
 
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Chức vụ");
+        lblChucVu.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblChucVu.setForeground(new java.awt.Color(255, 255, 255));
+        lblChucVu.setText("Chức vụ");
 
         lbgiamgia.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lbgiamgia.setForeground(new java.awt.Color(255, 255, 255));
@@ -221,6 +251,26 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
             }
         });
 
+        lbDoiMk.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lbDoiMk.setForeground(new java.awt.Color(255, 255, 255));
+        lbDoiMk.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbDoiMk.setText("Đổi Mật Khẩu");
+        lbDoiMk.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbDoiMkMouseClicked(evt);
+            }
+        });
+
+        lbLichSu.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lbLichSu.setForeground(new java.awt.Color(255, 255, 255));
+        lbLichSu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbLichSu.setText("Lịch Sử");
+        lbLichSu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbLichSuMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout menuLayout = new javax.swing.GroupLayout(menu);
         menu.setLayout(menuLayout);
         menuLayout.setHorizontalGroup(
@@ -231,24 +281,26 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
             .addComponent(lbQuanLyKH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(lbThongKe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(lbgiamgia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(lbDangXuat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(lbQuanLyHD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblHoTen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(menuLayout.createSequentialGroup()
                 .addGap(43, 43, 43)
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 43, Short.MAX_VALUE))
-            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblChucVu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lbDoiMk, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lbLichSu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lbDangXuat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         menuLayout.setVerticalGroup(
             menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblChucVu, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lbBanHang, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -264,8 +316,12 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbgiamgia, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbLichSu, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbDoiMk, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbDangXuat, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout mainLayout = new javax.swing.GroupLayout(main);
@@ -278,7 +334,7 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
         );
         mainLayout.setVerticalGroup(
             mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(menu, javax.swing.GroupLayout.DEFAULT_SIZE, 610, Short.MAX_VALUE)
+            .addComponent(menu, javax.swing.GroupLayout.DEFAULT_SIZE, 705, Short.MAX_VALUE)
         );
 
         getContentPane().add(main, java.awt.BorderLayout.LINE_START);
@@ -306,7 +362,7 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
         );
         pnlBanHangLayout.setVerticalGroup(
             pnlBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 560, Short.MAX_VALUE)
+            .addGap(0, 655, Short.MAX_VALUE)
         );
 
         BanHang.add(pnlBanHang, java.awt.BorderLayout.CENTER);
@@ -334,7 +390,7 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
         );
         mainSachLayout.setVerticalGroup(
             mainSachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 560, Short.MAX_VALUE)
+            .addGap(0, 655, Short.MAX_VALUE)
         );
 
         QuanLySach.add(mainSach, java.awt.BorderLayout.CENTER);
@@ -362,7 +418,7 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
         );
         pnlQuanLyHDLayout.setVerticalGroup(
             pnlQuanLyHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 560, Short.MAX_VALUE)
+            .addGap(0, 655, Short.MAX_VALUE)
         );
 
         QuanLyHoaDon.add(pnlQuanLyHD, java.awt.BorderLayout.CENTER);
@@ -390,7 +446,7 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
         );
         pnlTaiKhoanLayout.setVerticalGroup(
             pnlTaiKhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 560, Short.MAX_VALUE)
+            .addGap(0, 655, Short.MAX_VALUE)
         );
 
         TaiKhoan.add(pnlTaiKhoan, java.awt.BorderLayout.CENTER);
@@ -418,7 +474,7 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
         );
         pnlQuanLyKHLayout.setVerticalGroup(
             pnlQuanLyKHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 560, Short.MAX_VALUE)
+            .addGap(0, 655, Short.MAX_VALUE)
         );
 
         KhachHang.add(pnlQuanLyKH, java.awt.BorderLayout.CENTER);
@@ -446,7 +502,7 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
         );
         pnlGiamGiaLayout.setVerticalGroup(
             pnlGiamGiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 560, Short.MAX_VALUE)
+            .addGap(0, 655, Short.MAX_VALUE)
         );
 
         GiamGia.add(pnlGiamGia, java.awt.BorderLayout.CENTER);
@@ -474,12 +530,68 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
         );
         pnlThongKeLayout.setVerticalGroup(
             pnlThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 560, Short.MAX_VALUE)
+            .addGap(0, 655, Short.MAX_VALUE)
         );
 
         ThongKe.add(pnlThongKe, java.awt.BorderLayout.CENTER);
 
         QuanLy.add(ThongKe, "card2");
+
+        LichSu.setBackground(new java.awt.Color(255, 255, 255));
+        LichSu.setLayout(new java.awt.BorderLayout());
+
+        jLabel18.setBackground(new java.awt.Color(0, 144, 193));
+        jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel18.setText("Lịch Sử");
+        jLabel18.setOpaque(true);
+        jLabel18.setPreferredSize(new java.awt.Dimension(84, 50));
+        LichSu.add(jLabel18, java.awt.BorderLayout.PAGE_START);
+
+        pnlLichSu.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout pnlLichSuLayout = new javax.swing.GroupLayout(pnlLichSu);
+        pnlLichSu.setLayout(pnlLichSuLayout);
+        pnlLichSuLayout.setHorizontalGroup(
+            pnlLichSuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1160, Short.MAX_VALUE)
+        );
+        pnlLichSuLayout.setVerticalGroup(
+            pnlLichSuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 655, Short.MAX_VALUE)
+        );
+
+        LichSu.add(pnlLichSu, java.awt.BorderLayout.CENTER);
+
+        QuanLy.add(LichSu, "card2");
+
+        DoiMatKhau.setBackground(new java.awt.Color(255, 255, 255));
+        DoiMatKhau.setLayout(new java.awt.BorderLayout());
+
+        jLabel19.setBackground(new java.awt.Color(0, 144, 193));
+        jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel19.setText("Đổi mật khẩu");
+        jLabel19.setOpaque(true);
+        jLabel19.setPreferredSize(new java.awt.Dimension(84, 50));
+        DoiMatKhau.add(jLabel19, java.awt.BorderLayout.PAGE_START);
+
+        pnlDoiMatKhau.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout pnlDoiMatKhauLayout = new javax.swing.GroupLayout(pnlDoiMatKhau);
+        pnlDoiMatKhau.setLayout(pnlDoiMatKhauLayout);
+        pnlDoiMatKhauLayout.setHorizontalGroup(
+            pnlDoiMatKhauLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1160, Short.MAX_VALUE)
+        );
+        pnlDoiMatKhauLayout.setVerticalGroup(
+            pnlDoiMatKhauLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 655, Short.MAX_VALUE)
+        );
+
+        DoiMatKhau.add(pnlDoiMatKhau, java.awt.BorderLayout.CENTER);
+
+        QuanLy.add(DoiMatKhau, "card2");
 
         getContentPane().add(QuanLy, java.awt.BorderLayout.CENTER);
 
@@ -495,7 +607,7 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
     }//GEN-LAST:event_lbgiamgiaMouseClicked
 
     private void lbThongKeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbThongKeMouseClicked
-         showPanel(ThongKe);
+        showPanel(ThongKe);
     }//GEN-LAST:event_lbThongKeMouseClicked
 
     private void lbQuanLyHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbQuanLyHDMouseClicked
@@ -503,11 +615,11 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
     }//GEN-LAST:event_lbQuanLyHDMouseClicked
 
     private void lbQuanLyKHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbQuanLyKHMouseClicked
-      showPanel(KhachHang);
+        showPanel(KhachHang);
     }//GEN-LAST:event_lbQuanLyKHMouseClicked
 
     private void lbTaiKhoanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbTaiKhoanMouseClicked
-         showPanel(TaiKhoan);
+        showPanel(TaiKhoan);
     }//GEN-LAST:event_lbTaiKhoanMouseClicked
 
     private void lbQLSachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbQLSachMouseClicked
@@ -515,8 +627,16 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
     }//GEN-LAST:event_lbQLSachMouseClicked
 
     private void lbBanHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbBanHangMouseClicked
-         showPanel(BanHang);
+        showPanel(BanHang);
     }//GEN-LAST:event_lbBanHangMouseClicked
+
+    private void lbDoiMkMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbDoiMkMouseClicked
+        showQuanLyDoiMatKhau();
+    }//GEN-LAST:event_lbDoiMkMouseClicked
+
+    private void lbLichSuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLichSuMouseClicked
+        showPanel(LichSu);
+    }//GEN-LAST:event_lbLichSuMouseClicked
 
     /**
      * @param args the command line arguments
@@ -556,36 +676,44 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BanHang;
+    private javax.swing.JPanel DoiMatKhau;
     private javax.swing.JPanel GiamGia;
     private javax.swing.JPanel KhachHang;
+    private javax.swing.JPanel LichSu;
     private javax.swing.JPanel QuanLy;
     private javax.swing.JPanel QuanLyHoaDon;
     private javax.swing.JPanel QuanLySach;
     private javax.swing.JPanel TaiKhoan;
     private javax.swing.JPanel ThongKe;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel lbBanHang;
     private javax.swing.JLabel lbDangXuat;
+    private javax.swing.JLabel lbDoiMk;
+    private javax.swing.JLabel lbLichSu;
     private javax.swing.JLabel lbQLSach;
     private javax.swing.JLabel lbQuanLyHD;
     private javax.swing.JLabel lbQuanLyKH;
     private javax.swing.JLabel lbTaiKhoan;
     private javax.swing.JLabel lbThongKe;
     private javax.swing.JLabel lbgiamgia;
+    private javax.swing.JLabel lblAnh;
+    private javax.swing.JLabel lblChucVu;
+    private javax.swing.JLabel lblHoTen;
     private javax.swing.JPanel main;
     private javax.swing.JPanel mainSach;
     private javax.swing.JPanel menu;
     private javax.swing.JPanel pnlBanHang;
+    private javax.swing.JPanel pnlDoiMatKhau;
     private javax.swing.JPanel pnlGiamGia;
+    private javax.swing.JPanel pnlLichSu;
     private javax.swing.JPanel pnlQuanLyHD;
     private javax.swing.JPanel pnlQuanLyKH;
     private javax.swing.JPanel pnlTaiKhoan;
@@ -617,9 +745,34 @@ private JLabel selectedLabel = null; // Theo dõi label được chọn
     public void init() {
         this.setIconImage(XIcon.getIcon("/images/logo.png").getImage());
         this.setLocationRelativeTo(null);
-
         this.showWelcomeJDialog(this);
         this.showLoginJDialog(this);
+        UserDAOImpl userDAO = new UserDAOImpl();
+
+        String tenDangNhap = XAuth.user.getTenDangNhap();
+        NguoiDungSD user1 = userDAO.findById(tenDangNhap);
+        if (user1 != null) {
+            // Cập nhật thông tin giao diện
+            XIcon.setIcon(lblAnh, "images/" + (user1.getHinhAnh() != null ? user1.getHinhAnh() : "user.png"));
+            lblHoTen.setText(user1.getHoTen());
+            lblChucVu.setText(user1.isQuanLy() ? "Quản Lý" : "Nhân Viên");
+
+            // Ẩn các menu nếu người dùng không phải quản lý
+            if (!user1.isQuanLy()) {
+                lbQLSach.setVisible(false);
+                lbQuanLyHD.setVisible(false);
+                lbQuanLyKH.setVisible(false);
+                lbTaiKhoan.setVisible(false);
+                lbgiamgia.setVisible(false);
+                lbThongKe.setVisible(false);
+            }
+
+        } else {
+            // Xử lý trường hợp không tìm thấy người dùng
+            lblHoTen.setText("Không tìm thấy người dùng");
+            lblChucVu.setText("Không xác định");
+        }
+
     }
 
     @Override

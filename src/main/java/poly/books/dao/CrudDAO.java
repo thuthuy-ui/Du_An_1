@@ -4,12 +4,16 @@
  */
 package poly.books.dao;
 
-import poly.books.entity.NguoiDungSD;
+import java.util.List;
 
 /**
  *
  * @author HuyNguyen
  */
-public interface UserDAO extends CrudDAO<NguoiDungSD, String>{
-    
+public interface CrudDAO<T,ID> {
+    T create(T entity); 
+    void update(T entity); 
+    void deleteById(ID id); 
+    List<T> findAll(); 
+    T findById(ID id);
 }

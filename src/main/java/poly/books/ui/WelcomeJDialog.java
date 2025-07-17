@@ -50,10 +50,10 @@ public class WelcomeJDialog extends javax.swing.JDialog implements poly.books.co
         jLabel3.setOpaque(true);
 
         jLabel2.setFont(new java.awt.Font("MS UI Gothic", 1, 48)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(102, 255, 102));
+        jLabel2.setForeground(new java.awt.Color(255, 204, 153));
         jLabel2.setText("Poly Book");
 
-        progressBar.setBackground(new java.awt.Color(51, 255, 51));
+        progressBar.setBackground(new java.awt.Color(255, 102, 102));
         progressBar.setForeground(new java.awt.Color(204, 0, 51));
         progressBar.setStringPainted(true);
 

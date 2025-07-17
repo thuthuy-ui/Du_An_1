@@ -17,6 +17,6 @@ public class XAuth {
             .TrangThai(true) 
             .QuanLy(true) 
             .HoTen("Nguyễn Văn Tèo") 
-            .HinhAnh("trump.png") 
+            .HinhAnh("user.png") 
             .build(); 
 }

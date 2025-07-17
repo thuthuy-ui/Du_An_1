@@ -21,7 +21,7 @@ import poly.books.util.XIcon;
  *
  * @author HuyNguyen
  */
-public class PolybookJFrame extends javax.swing.JFrame implements poly.books.controller.PolybookController  {
+public class PolybookJFrame extends javax.swing.JFrame implements poly.books.controller.PolybookController {
 
     /**
      * Creates new form d
@@ -39,12 +39,7 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
         addClickEffect(lbThongKe);
         addClickEffect(lbgiamgia);
         addClickEffect(lbDangXuat);
-        lbQLSach.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                showQuanLySachContent();
-            }
-        });
+
     }
 
     private void showQuanLySachContent() {
@@ -63,15 +58,22 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
         mainSach.add(contentPanel, BorderLayout.CENTER);
         mainSach.revalidate();
         mainSach.repaint();
+        showPanel(QuanLySach);
 
-        // Ẩn các panel khác và hiển thị QuanLySach
+    }
+
+    private void showPanel(JPanel panelToShow) {
+        // Ẩn tất cả các panel
         BanHang.setVisible(false);
+        QuanLySach.setVisible(false);
         QuanLyHoaDon.setVisible(false);
         TaiKhoan.setVisible(false);
         KhachHang.setVisible(false);
         ThongKe.setVisible(false);
         GiamGia.setVisible(false);
-        QuanLySach.setVisible(true); // Đảm bảo QuanLySach được hiển thị
+
+        // Hiển thị panel được chọn
+        panelToShow.setVisible(true);
     }
 
     /**
@@ -97,28 +99,28 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
         jLabel10 = new javax.swing.JLabel();
         lbgiamgia = new javax.swing.JLabel();
         lbDangXuat = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        QuanLy = new javax.swing.JPanel();
         BanHang = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
+        pnlBanHang = new javax.swing.JPanel();
         QuanLySach = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         mainSach = new javax.swing.JPanel();
         QuanLyHoaDon = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
-        jPanel8 = new javax.swing.JPanel();
+        pnlQuanLyHD = new javax.swing.JPanel();
         TaiKhoan = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
-        jPanel10 = new javax.swing.JPanel();
+        pnlTaiKhoan = new javax.swing.JPanel();
         KhachHang = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
-        jPanel12 = new javax.swing.JPanel();
+        pnlQuanLyKH = new javax.swing.JPanel();
         GiamGia = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
-        jPanel14 = new javax.swing.JPanel();
+        pnlGiamGia = new javax.swing.JPanel();
         ThongKe = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
-        jPanel15 = new javax.swing.JPanel();
+        pnlThongKe = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -281,7 +283,7 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
 
         getContentPane().add(main, java.awt.BorderLayout.LINE_START);
 
-        jPanel1.setLayout(new java.awt.CardLayout());
+        QuanLy.setLayout(new java.awt.CardLayout());
 
         BanHang.setBackground(new java.awt.Color(255, 255, 255));
         BanHang.setLayout(new java.awt.BorderLayout());
@@ -294,22 +296,22 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
         jLabel2.setPreferredSize(new java.awt.Dimension(84, 50));
         BanHang.add(jLabel2, java.awt.BorderLayout.PAGE_START);
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        pnlBanHang.setBackground(new java.awt.Color(255, 255, 255));
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pnlBanHangLayout = new javax.swing.GroupLayout(pnlBanHang);
+        pnlBanHang.setLayout(pnlBanHangLayout);
+        pnlBanHangLayout.setHorizontalGroup(
+            pnlBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1160, Short.MAX_VALUE)
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pnlBanHangLayout.setVerticalGroup(
+            pnlBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 560, Short.MAX_VALUE)
         );
 
-        BanHang.add(jPanel3, java.awt.BorderLayout.CENTER);
+        BanHang.add(pnlBanHang, java.awt.BorderLayout.CENTER);
 
-        jPanel1.add(BanHang, "card2");
+        QuanLy.add(BanHang, "card2");
 
         QuanLySach.setBackground(new java.awt.Color(255, 255, 255));
         QuanLySach.setLayout(new java.awt.BorderLayout());
@@ -337,7 +339,7 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
 
         QuanLySach.add(mainSach, java.awt.BorderLayout.CENTER);
 
-        jPanel1.add(QuanLySach, "card2");
+        QuanLy.add(QuanLySach, "card2");
 
         QuanLyHoaDon.setBackground(new java.awt.Color(255, 255, 255));
         QuanLyHoaDon.setLayout(new java.awt.BorderLayout());
@@ -350,22 +352,22 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
         jLabel13.setPreferredSize(new java.awt.Dimension(84, 50));
         QuanLyHoaDon.add(jLabel13, java.awt.BorderLayout.PAGE_START);
 
-        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
+        pnlQuanLyHD.setBackground(new java.awt.Color(255, 255, 255));
 
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pnlQuanLyHDLayout = new javax.swing.GroupLayout(pnlQuanLyHD);
+        pnlQuanLyHD.setLayout(pnlQuanLyHDLayout);
+        pnlQuanLyHDLayout.setHorizontalGroup(
+            pnlQuanLyHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1160, Short.MAX_VALUE)
         );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pnlQuanLyHDLayout.setVerticalGroup(
+            pnlQuanLyHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 560, Short.MAX_VALUE)
         );
 
-        QuanLyHoaDon.add(jPanel8, java.awt.BorderLayout.CENTER);
+        QuanLyHoaDon.add(pnlQuanLyHD, java.awt.BorderLayout.CENTER);
 
-        jPanel1.add(QuanLyHoaDon, "card2");
+        QuanLy.add(QuanLyHoaDon, "card2");
 
         TaiKhoan.setBackground(new java.awt.Color(255, 255, 255));
         TaiKhoan.setLayout(new java.awt.BorderLayout());
@@ -378,22 +380,22 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
         jLabel14.setPreferredSize(new java.awt.Dimension(84, 50));
         TaiKhoan.add(jLabel14, java.awt.BorderLayout.PAGE_START);
 
-        jPanel10.setBackground(new java.awt.Color(255, 255, 255));
+        pnlTaiKhoan.setBackground(new java.awt.Color(255, 255, 255));
 
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pnlTaiKhoanLayout = new javax.swing.GroupLayout(pnlTaiKhoan);
+        pnlTaiKhoan.setLayout(pnlTaiKhoanLayout);
+        pnlTaiKhoanLayout.setHorizontalGroup(
+            pnlTaiKhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1160, Short.MAX_VALUE)
         );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pnlTaiKhoanLayout.setVerticalGroup(
+            pnlTaiKhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 560, Short.MAX_VALUE)
         );
 
-        TaiKhoan.add(jPanel10, java.awt.BorderLayout.CENTER);
+        TaiKhoan.add(pnlTaiKhoan, java.awt.BorderLayout.CENTER);
 
-        jPanel1.add(TaiKhoan, "card2");
+        QuanLy.add(TaiKhoan, "card2");
 
         KhachHang.setBackground(new java.awt.Color(255, 255, 255));
         KhachHang.setLayout(new java.awt.BorderLayout());
@@ -406,22 +408,22 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
         jLabel15.setPreferredSize(new java.awt.Dimension(84, 50));
         KhachHang.add(jLabel15, java.awt.BorderLayout.PAGE_START);
 
-        jPanel12.setBackground(new java.awt.Color(255, 255, 255));
+        pnlQuanLyKH.setBackground(new java.awt.Color(255, 255, 255));
 
-        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
-        jPanel12.setLayout(jPanel12Layout);
-        jPanel12Layout.setHorizontalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pnlQuanLyKHLayout = new javax.swing.GroupLayout(pnlQuanLyKH);
+        pnlQuanLyKH.setLayout(pnlQuanLyKHLayout);
+        pnlQuanLyKHLayout.setHorizontalGroup(
+            pnlQuanLyKHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1160, Short.MAX_VALUE)
         );
-        jPanel12Layout.setVerticalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pnlQuanLyKHLayout.setVerticalGroup(
+            pnlQuanLyKHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 560, Short.MAX_VALUE)
         );
 
-        KhachHang.add(jPanel12, java.awt.BorderLayout.CENTER);
+        KhachHang.add(pnlQuanLyKH, java.awt.BorderLayout.CENTER);
 
-        jPanel1.add(KhachHang, "card2");
+        QuanLy.add(KhachHang, "card2");
 
         GiamGia.setBackground(new java.awt.Color(255, 255, 255));
         GiamGia.setLayout(new java.awt.BorderLayout());
@@ -434,22 +436,22 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
         jLabel16.setPreferredSize(new java.awt.Dimension(84, 50));
         GiamGia.add(jLabel16, java.awt.BorderLayout.PAGE_START);
 
-        jPanel14.setBackground(new java.awt.Color(255, 255, 255));
+        pnlGiamGia.setBackground(new java.awt.Color(255, 255, 255));
 
-        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
-        jPanel14.setLayout(jPanel14Layout);
-        jPanel14Layout.setHorizontalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pnlGiamGiaLayout = new javax.swing.GroupLayout(pnlGiamGia);
+        pnlGiamGia.setLayout(pnlGiamGiaLayout);
+        pnlGiamGiaLayout.setHorizontalGroup(
+            pnlGiamGiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1160, Short.MAX_VALUE)
         );
-        jPanel14Layout.setVerticalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pnlGiamGiaLayout.setVerticalGroup(
+            pnlGiamGiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 560, Short.MAX_VALUE)
         );
 
-        GiamGia.add(jPanel14, java.awt.BorderLayout.CENTER);
+        GiamGia.add(pnlGiamGia, java.awt.BorderLayout.CENTER);
 
-        jPanel1.add(GiamGia, "card2");
+        QuanLy.add(GiamGia, "card2");
 
         ThongKe.setBackground(new java.awt.Color(255, 255, 255));
         ThongKe.setLayout(new java.awt.BorderLayout());
@@ -462,24 +464,24 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
         jLabel17.setPreferredSize(new java.awt.Dimension(84, 50));
         ThongKe.add(jLabel17, java.awt.BorderLayout.PAGE_START);
 
-        jPanel15.setBackground(new java.awt.Color(255, 255, 255));
+        pnlThongKe.setBackground(new java.awt.Color(255, 255, 255));
 
-        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
-        jPanel15.setLayout(jPanel15Layout);
-        jPanel15Layout.setHorizontalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pnlThongKeLayout = new javax.swing.GroupLayout(pnlThongKe);
+        pnlThongKe.setLayout(pnlThongKeLayout);
+        pnlThongKeLayout.setHorizontalGroup(
+            pnlThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1160, Short.MAX_VALUE)
         );
-        jPanel15Layout.setVerticalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pnlThongKeLayout.setVerticalGroup(
+            pnlThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 560, Short.MAX_VALUE)
         );
 
-        ThongKe.add(jPanel15, java.awt.BorderLayout.CENTER);
+        ThongKe.add(pnlThongKe, java.awt.BorderLayout.CENTER);
 
-        jPanel1.add(ThongKe, "card2");
+        QuanLy.add(ThongKe, "card2");
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
+        getContentPane().add(QuanLy, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -489,62 +491,31 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
     }//GEN-LAST:event_lbDangXuatMouseClicked
 
     private void lbgiamgiaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbgiamgiaMouseClicked
-        BanHang.setVisible(false);
-        GiamGia.setVisible(true);
-        QuanLyHoaDon.setVisible(false);
-        TaiKhoan.setVisible(false);
-        KhachHang.setVisible(false);
-        ThongKe.setVisible(false);
+        showPanel(GiamGia);
     }//GEN-LAST:event_lbgiamgiaMouseClicked
 
     private void lbThongKeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbThongKeMouseClicked
-        BanHang.setVisible(false);
-        GiamGia.setVisible(false);
-        QuanLyHoaDon.setVisible(false);
-        TaiKhoan.setVisible(false);
-        KhachHang.setVisible(false);
-        ThongKe.setVisible(true);
+         showPanel(ThongKe);
     }//GEN-LAST:event_lbThongKeMouseClicked
 
     private void lbQuanLyHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbQuanLyHDMouseClicked
-        BanHang.setVisible(false);
-        GiamGia.setVisible(false);
-        QuanLyHoaDon.setVisible(true);
-        TaiKhoan.setVisible(false);
-        KhachHang.setVisible(false);
-        ThongKe.setVisible(false);
+        showPanel(QuanLyHoaDon);
     }//GEN-LAST:event_lbQuanLyHDMouseClicked
 
     private void lbQuanLyKHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbQuanLyKHMouseClicked
-        BanHang.setVisible(false);
-        GiamGia.setVisible(false);
-        QuanLyHoaDon.setVisible(false);
-        TaiKhoan.setVisible(false);
-        KhachHang.setVisible(true);
-        ThongKe.setVisible(false);
+      showPanel(KhachHang);
     }//GEN-LAST:event_lbQuanLyKHMouseClicked
 
     private void lbTaiKhoanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbTaiKhoanMouseClicked
-        BanHang.setVisible(false);
-        GiamGia.setVisible(false);
-        QuanLyHoaDon.setVisible(false);
-        TaiKhoan.setVisible(true);
-        KhachHang.setVisible(false);
-        ThongKe.setVisible(false);
-        GiamGia.setVisible(false);
+         showPanel(TaiKhoan);
     }//GEN-LAST:event_lbTaiKhoanMouseClicked
 
     private void lbQLSachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbQLSachMouseClicked
-
+        showQuanLySachContent();
     }//GEN-LAST:event_lbQLSachMouseClicked
 
     private void lbBanHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbBanHangMouseClicked
-        BanHang.setVisible(true);
-        QuanLyHoaDon.setVisible(false);
-        TaiKhoan.setVisible(false);
-        KhachHang.setVisible(false);
-        ThongKe.setVisible(false);
-        GiamGia.setVisible(false);
+         showPanel(BanHang);
     }//GEN-LAST:event_lbBanHangMouseClicked
 
     /**
@@ -587,6 +558,7 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
     private javax.swing.JPanel BanHang;
     private javax.swing.JPanel GiamGia;
     private javax.swing.JPanel KhachHang;
+    private javax.swing.JPanel QuanLy;
     private javax.swing.JPanel QuanLyHoaDon;
     private javax.swing.JPanel QuanLySach;
     private javax.swing.JPanel TaiKhoan;
@@ -601,13 +573,6 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel8;
     private javax.swing.JLabel lbBanHang;
     private javax.swing.JLabel lbDangXuat;
     private javax.swing.JLabel lbQLSach;
@@ -619,6 +584,12 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
     private javax.swing.JPanel main;
     private javax.swing.JPanel mainSach;
     private javax.swing.JPanel menu;
+    private javax.swing.JPanel pnlBanHang;
+    private javax.swing.JPanel pnlGiamGia;
+    private javax.swing.JPanel pnlQuanLyHD;
+    private javax.swing.JPanel pnlQuanLyKH;
+    private javax.swing.JPanel pnlTaiKhoan;
+    private javax.swing.JPanel pnlThongKe;
     // End of variables declaration//GEN-END:variables
 private JLabel selectedLabel = null; // Theo dõi label được chọn
 

@@ -59,6 +59,7 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
 public JPanel getContentPanel() {
         return Quanlysach; // Trả về JPanel Quanlysach chứa toàn bộ giao diện
     }
+
     /**
      * Creates new form QuanLySach
      */

@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import poly.books.controller.PolybookController;
 import poly.books.dao.impl.UserDAOImpl;
 import poly.books.entity.NguoiDungSD;
+import poly.books.ui.manager.QuanLyHoaDon;
 import poly.books.ui.manager.QuanLySach;
 import poly.books.util.XAuth;
 import poly.books.util.XIcon;
@@ -64,7 +65,8 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
         showPanel(QuanLySach);
 
     }
-    private void showQuanLyDoiMatKhau(){
+
+    private void showQuanLyDoiMatKhau() {
         pnlDoiMatKhau.removeAll();
         pnlDoiMatKhau.revalidate();
         pnlDoiMatKhau.repaint();
@@ -80,6 +82,24 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
         pnlDoiMatKhau.revalidate();
         pnlDoiMatKhau.repaint();
         showPanel(DoiMatKhau);
+    }
+
+    private void showQuanLyHoaDonContent() {
+        QuanLyHoaDon.removeAll();
+        QuanLyHoaDon.revalidate();
+        QuanLyHoaDon.repaint();
+
+        // Tạo instance của QuanLySach và lấy nội dung
+        QuanLyHoaDon pnlQuanLyHD = new QuanLyHoaDon(this, false); // Không cần modal
+        JPanel contentPanel = pnlQuanLyHD.getContentPanel();
+        contentPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2)); // Thêm border nếu cần
+
+        // Thêm nội dung vào mainSach
+        QuanLyHoaDon.setLayout(new BorderLayout());
+        QuanLyHoaDon.add(contentPanel, BorderLayout.CENTER);
+        QuanLyHoaDon.revalidate();
+        QuanLyHoaDon.repaint();
+        showPanel(QuanLyHoaDon);
     }
 
     private void showPanel(JPanel panelToShow) {
@@ -800,4 +820,8 @@ private JLabel selectedLabel = null; // Theo dõi label được chọn
         PolybookController.super.showQuanLySach(frame); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
 
+    @Override
+    public void showQuanLyHoaDon(JFrame frame) {
+        PolybookController.super.showQuanLyHoaDon(frame); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    }
 }

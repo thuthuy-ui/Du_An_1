@@ -6,6 +6,9 @@ package poly.books.ui;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import poly.books.dao.UserDAO;
+import poly.books.dao.impl.UserDAOImpl;
+import poly.books.entity.NguoiDungSD;
 import poly.books.util.XAuth;
 import poly.books.util.XDialog;
 
@@ -226,6 +229,7 @@ public class LoginJDialog extends javax.swing.JDialog implements poly.books.cont
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
+UserDAO dao = new UserDAOImpl();
 
     @Override
     public void open() {
@@ -234,19 +238,19 @@ public class LoginJDialog extends javax.swing.JDialog implements poly.books.cont
 
     @Override
     public void login() {
-//        String username = txtUsername.getText();
-//        String password = new String(txtPassword.getPassword());
-//        User user = dao.findById(username);
-//        if (user == null) {
-//            XDialog.alert("Sai tên đăng nhập!");
-//        } else if (!password.equals(user.getPassword())) {
-//            XDialog.alert("Sai mật khẩu đăng nhập!");
-//        } else if (!user.isEnabled()) {
-//            XDialog.alert("Tài khoản của bạn đang tạm dừng!");
-//        } else {
-//            XAuth.user = user; 
-//            this.dispose();
-//        }
+        String username = txtUsername.getText();
+        String password = new String(txtPassword.getPassword());
+        NguoiDungSD user = dao.findById(username);
+        if (user == null) {
+            XDialog.alert("Sai tên đăng nhập!");
+        } else if (!password.equals(user.getMatKhau())) {
+            XDialog.alert("Sai mật khẩu đăng nhập!");
+        } else if (!user.isTrangThai()) {
+            XDialog.alert("Tài khoản của bạn đang tạm dừng!");
+        } else {
+            XAuth.user = user;
+            this.dispose();
+        }
     }
 
     @Override

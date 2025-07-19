@@ -5,8 +5,6 @@
 package poly.books.ui.manager;
 
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -1435,10 +1433,11 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
             txtTap.setText("");
             txtTenSach.setText("");
             txtgia.setText("");
-            cboLinhVuc.setSelectedIndex(0);
-            cboNXB.setSelectedIndex(0);
+            cboLinhVuc.setSelectedIndex(-1);
+            cboNXB.setSelectedIndex(-1);
             cboNgonNgu.setSelectedIndex(0);
-            cboTheLoai.setSelectedIndex(0);
+            cboTheLoai.setSelectedIndex(-1);
+            
             JOptionPane.showMessageDialog(this, "Làm mới thành công");
         } else {
             return;

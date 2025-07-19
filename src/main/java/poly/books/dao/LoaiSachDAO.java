@@ -16,9 +16,9 @@ import poly.books.util.XQuery;
 public class LoaiSachDAO {
 
     String getAllSQL = """
-                       SELECT TOP (1000) [MaLoaiSach]
+                       SELECT  [MaLoaiSach]
                              ,[TenLoaiSach]
-                         FROM [QLNhaSach].[dbo].[LoaiSach]
+                         FROM [QLNhaSachPro].[dbo].[LoaiSach]
                        """;
     String findBySQL = """
                        SELECT * FROM [QLNhaSachPro].[dbo].[LoaiSach] where MaLoaiSach = ?

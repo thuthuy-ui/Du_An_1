@@ -51,6 +51,7 @@ public class ChangePasswordJDialog extends javax.swing.JDialog implements poly.b
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        QuanLyMatKhau.setBackground(new java.awt.Color(255, 255, 255));
         QuanLyMatKhau.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N

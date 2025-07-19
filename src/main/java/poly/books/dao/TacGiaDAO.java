@@ -16,10 +16,10 @@
     public class TacGiaDAO {
 
         String getAllSQL = """
-                           SELECT TOP (1000) [MaTacGia]
+                           SELECT  [MaTacGia]
                                    ,[TenTacGia]
                                    ,[QueQuan]
-                               FROM [QLNhaSach].[dbo].[TacGia]
+                               FROM [QLNhaSachPro].[dbo].[TacGia]
                            """;
         String findBySQL = """
                            SELECT * FROM [QLNhaSachPro].[dbo].[TacGia] where MaTacGia = ?

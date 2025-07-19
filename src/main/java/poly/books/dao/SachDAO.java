@@ -29,7 +29,7 @@ public class SachDAO {
                                ,[Tap]
                                ,[MaNgonNgu]
                                ,[HinhAnh]
-                           FROM [QLNhaSach].[dbo].[Sach]
+                           FROM [QLNhaSachPro].[dbo].[Sach]
                        """;
 
     // SQL tạo sách mới (đã bỏ MaLinhVuc và MaLoaiSach)

@@ -5,7 +5,9 @@
 package poly.books.entity;
 
 import java.util.Date;
+import java.util.List;
 import lombok.*;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -15,6 +17,7 @@ import lombok.*;
  * @author HuyNguyen
  */
 public class Sach {
+
     private int MaSach;
     private String TenSach;
     private int MaTacGia;
@@ -28,4 +31,25 @@ public class Sach {
     private Integer Tap;
     private int MaNgonNgu;
     private String HinhAnh;
+    private transient List<Integer> maLinhVucs;
+    private transient List<Integer> maLoaiSachs;
+    private List<LinhVuc> linhVucList;
+    private List<LoaiSach> loaiSachList;
+
+// Và các phương thức getter/setter tương ứng
+    public List<LinhVuc> getLinhVucList() {
+        return linhVucList;
+    }
+
+    public void setLinhVucList(List<LinhVuc> linhVucList) {
+        this.linhVucList = linhVucList;
+    }
+
+    public List<LoaiSach> getLoaiSachList() {
+        return loaiSachList;
+    }
+
+    public void setLoaiSachList(List<LoaiSach> loaiSachList) {
+        this.loaiSachList = loaiSachList;
+    }
 }

@@ -16,9 +16,9 @@ import poly.books.util.XQuery;
 public class LoaiSachDAO {
 
     String getAllSQL = """
-                       SELECT  [MaLoaiSach]
+                       SELECT TOP (1000) [MaLoaiSach]
                              ,[TenLoaiSach]
-                         FROM [QLNhaSachPro].[dbo].[LoaiSach]
+                         FROM [QLNhaSach].[dbo].[LoaiSach]
                        """;
     String findBySQL = """
                        SELECT * FROM [QLNhaSachPro].[dbo].[LoaiSach] where MaLoaiSach = ?
@@ -65,4 +65,10 @@ public class LoaiSachDAO {
     public int delete(int id) {
         return XJdbc.executeUpdate(delete, id);
     }
+    public List<LoaiSach> findBySachID(int maSach) {
+    String sql = "SELECT ls.* FROM LoaiSach ls " +
+                 "JOIN Sach_LoaiSach sls ON ls.MaLoaiSach = sls.MaLoaiSach " +
+                 "WHERE sls.MaSach = ?";
+    return XQuery.getBeanList(LoaiSach.class, sql, maSach);
+}
 }

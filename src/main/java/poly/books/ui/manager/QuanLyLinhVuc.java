@@ -19,14 +19,18 @@ import poly.books.entity.LinhVuc;
  *
  * @author HuyNguyen
  */
-public class QuanLyLinhVuc extends javax.swing.JDialog implements poly.books.controller.QuanLyLinhVucController{
+public class QuanLyLinhVuc extends javax.swing.JDialog implements poly.books.controller.QuanLyLinhVucController {
+
     List<LinhVuc> listLV = new ArrayList<>();
     LinhVucDAO Lvdao = new LinhVucDAO();
+    private QuanLySach quanLySach;
+
     /**
      * Creates new form QuanLyLinhVuc
      */
-    public QuanLyLinhVuc(java.awt.Frame parent, boolean modal) {
+    public QuanLyLinhVuc(java.awt.Frame parent, boolean modal, QuanLySach sql) {
         super(parent, modal);
+        this.quanLySach = sql;
         initComponents();
         fillToTable();
         txtMaLinhVuc.setEditable(false);
@@ -261,6 +265,9 @@ public class QuanLyLinhVuc extends javax.swing.JDialog implements poly.books.con
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
         this.create();
+        if (quanLySach != null) {
+            quanLySach.fillToTablelv();
+        }
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
@@ -270,7 +277,7 @@ public class QuanLyLinhVuc extends javax.swing.JDialog implements poly.books.con
 
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
         // TODO add your handling code here:
-       String timkiem = txtTimKiem.getText().trim();
+        String timkiem = txtTimKiem.getText().trim();
         if (timkiem.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập loại lĩnh vực để tìm kiếm!");
             return;
@@ -311,7 +318,7 @@ public class QuanLyLinhVuc extends javax.swing.JDialog implements poly.books.con
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                QuanLyLinhVuc dialog = new QuanLyLinhVuc(new javax.swing.JFrame(), true);
+                QuanLyLinhVuc dialog = new QuanLyLinhVuc(new javax.swing.JFrame(), true, null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -354,7 +361,7 @@ public class QuanLyLinhVuc extends javax.swing.JDialog implements poly.books.con
 
     @Override
     public LinhVuc getForm() {
-                LinhVuc lv = new LinhVuc();
+        LinhVuc lv = new LinhVuc();
         lv.setTenLinhVuc(txtTenLinhVuc.getText().trim());
         if (!txtMaLinhVuc.getText().isEmpty()) {
             try {
@@ -377,8 +384,8 @@ public class QuanLyLinhVuc extends javax.swing.JDialog implements poly.books.con
                 lv.getTenLinhVuc()
             };
             model.addRow(rowData);
-        }    }
-
+        }
+    }
 
     @Override
     public void create() {
@@ -391,10 +398,14 @@ public class QuanLyLinhVuc extends javax.swing.JDialog implements poly.books.con
             Lvdao.create(lv);
             this.fillToTable();
             this.clear();
+            if (quanLySach != null) {
+                quanLySach.refreshLinhVucTable();
+            }
             JOptionPane.showMessageDialog(this, "Thêm lĩnh vực thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
         } catch (RuntimeException ex) {
             JOptionPane.showMessageDialog(this, "Thêm lĩnh vực đã xảy ra lỗi: " + ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
-        }    }
+        }
+    }
 
     @Override
     public void update() {
@@ -412,10 +423,14 @@ public class QuanLyLinhVuc extends javax.swing.JDialog implements poly.books.con
             Lvdao.update(lv);
             this.fillToTable();
             this.clear();
+            if (quanLySach != null) {
+                quanLySach.refreshLinhVucTable();
+            }
             JOptionPane.showMessageDialog(this, "Cập nhật lĩnh vực thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
         } catch (RuntimeException ex) {
             JOptionPane.showMessageDialog(this, "Cập nhật ngôn ngữ đã xảy ra lỗi: " + ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
-        }    }
+        }
+    }
 
     @Override
     public void delete() {
@@ -428,6 +443,9 @@ public class QuanLyLinhVuc extends javax.swing.JDialog implements poly.books.con
                     Lvdao.delete(maNgonNgu);
                     this.fillToTable();
                     this.clear();
+                    if (quanLySach != null) {
+                        quanLySach.refreshLinhVucTable();
+                    }
                     XDialog.alert("Xóa lĩnh vực thành công!");
                 } catch (RuntimeException ex) {
                     XDialog.alert("Không thể xóa vì lĩnh vực này đang được sử dụng trong sách.");
@@ -435,7 +453,8 @@ public class QuanLyLinhVuc extends javax.swing.JDialog implements poly.books.con
             } else {
                 XDialog.alert("Vui lòng chọn một lĩnh vực để xóa!");
             }
-        }    }
+        }
+    }
 
     @Override
     public void clear() {
@@ -445,6 +464,6 @@ public class QuanLyLinhVuc extends javax.swing.JDialog implements poly.books.con
 
     @Override
     public void setEditable(boolean editable) {
-        
+
     }
 }

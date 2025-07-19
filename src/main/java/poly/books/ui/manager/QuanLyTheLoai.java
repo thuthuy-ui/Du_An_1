@@ -22,12 +22,14 @@ import poly.books.util.XDialog;
 public class QuanLyTheLoai extends javax.swing.JDialog implements poly.books.controller.QLTheLoaiCotroller{
 LoaiSachDAO lSachDAO = new LoaiSachDAO();
 List<LoaiSach> listLSach = new ArrayList<>();
+private QuanLySach quanLySach;
 
     /**
      * Creates new form QuanLyTheLoai
      */
-    public QuanLyTheLoai(java.awt.Frame parent, boolean modal) {
+    public QuanLyTheLoai(java.awt.Frame parent, boolean modal,QuanLySach sql) {
         super(parent, modal);
+        this.quanLySach=sql;
         initComponents();
         fillToTable();
          txtMaTL.setEditable(false);
@@ -308,7 +310,7 @@ List<LoaiSach> listLSach = new ArrayList<>();
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                QuanLyTheLoai dialog = new QuanLyTheLoai(new javax.swing.JFrame(), true);
+                QuanLyTheLoai dialog = new QuanLyTheLoai(new javax.swing.JFrame(), true,null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -390,6 +392,9 @@ List<LoaiSach> listLSach = new ArrayList<>();
             lSachDAO.create(n);
             this.fillToTable();
             this.clear();
+            if (quanLySach != null) {
+                quanLySach.refresLoaiSachTable();
+            }
             JOptionPane.showMessageDialog(this, "Thêm Loại Sách  thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
         } catch (RuntimeException ex) {
             JOptionPane.showMessageDialog(this, "Lỗi khi thêm Loại Sách : " + ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
@@ -412,6 +417,9 @@ List<LoaiSach> listLSach = new ArrayList<>();
             lSachDAO.update(n);
             this.fillToTable();
             this.clear();
+            if (quanLySach != null) {
+                quanLySach.refresLoaiSachTable();
+            }
             JOptionPane.showMessageDialog(this, "Cập nhật Loại Sách thành công!", "Thành công", JOptionPane.INFORMATION_MESSAGE);
         } catch (RuntimeException ex) {
             JOptionPane.showMessageDialog(this, "Lỗi khi cập nhật Loại Sách " + ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
@@ -429,6 +437,9 @@ List<LoaiSach> listLSach = new ArrayList<>();
                     lSachDAO.delete(maNgonNgu);
                     this.fillToTable();
                     this.clear();
+                    if (quanLySach != null) {
+                quanLySach.refresLoaiSachTable();
+            }
                     XDialog.alert("Xóa Loại Sách thành công!");
                 } catch (RuntimeException ex) {
                     XDialog.alert("Không thể xóa vì Loại Sách này đang được sử dụng trong sách.");

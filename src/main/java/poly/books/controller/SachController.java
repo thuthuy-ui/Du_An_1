@@ -23,13 +23,13 @@ public interface SachController extends CrudController<Sach>{
         dialog.setVisible(true); 
     } 
     default void showQuanLyLinhVuc(JFrame frame){ 
-        this.showJDialog(new QuanLyLinhVuc(frame, true)); 
+        this.showJDialog(new QuanLyLinhVuc(frame, true,null)); 
     } 
    default void showQuanLyTacGia(JFrame frame){ 
         this.showJDialog(new QuanLyTacGia(frame, true)); 
     }  
    default void showQuanLyTheLoai(JFrame frame){ 
-        this.showJDialog(new QuanLyTheLoai(frame, true)); 
+        this.showJDialog(new QuanLyTheLoai(frame, true,null)); 
     } 
    default void showQuanLyNgonNgu(JFrame frame){ 
         this.showJDialog(new QuanLyNgonNgu(frame, true)); 

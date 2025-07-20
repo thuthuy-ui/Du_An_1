@@ -111,8 +111,6 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
         fillToTabletl();
     }
 
-    
-
     private void removeSelectedLinhVuc() {
         int index = cboLinhVuc.getSelectedIndex();
         if (index >= 0) {
@@ -339,7 +337,7 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
 
         jLabel16.setText("Giá bán");
 
-        jLabel17.setText("INBS");
+        jLabel17.setText("ISBN");
 
         txtTenSach.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -381,6 +379,7 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
             }
         });
 
+        jButton1.setBackground(new java.awt.Color(255, 153, 153));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_add_25px_5.png"))); // NOI18N
         jButton1.setText("Thêm");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -389,6 +388,7 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
             }
         });
 
+        jButton2.setBackground(new java.awt.Color(255, 255, 204));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_edit_25px.png"))); // NOI18N
         jButton2.setText("Sửa");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -397,6 +397,7 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
             }
         });
 
+        jButton3.setBackground(new java.awt.Color(51, 255, 255));
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_delete_25px_1.png"))); // NOI18N
         jButton3.setText("Xóa");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -405,6 +406,7 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
             }
         });
 
+        jButton4.setBackground(new java.awt.Color(0, 204, 204));
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_reset_25px_1.png"))); // NOI18N
         jButton4.setText("Làm mới");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -416,6 +418,7 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm Kiếm", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(102, 102, 102))); // NOI18N
 
+        btnTimKiem.setBackground(new java.awt.Color(102, 102, 255));
         btnTimKiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_search_25px.png"))); // NOI18N
         btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -748,13 +751,13 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
 
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
         String timkiem = txtTimKiem.getText().trim().toLowerCase();
-        if (timkiem.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Vui lòng nhập tên sác trước khi tìm kiếm");
-            return;
-        }
         DefaultTableModel defaultTableModel = (DefaultTableModel) tbSach.getModel();
         TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(defaultTableModel);
         tbSach.setRowSorter(sorter);
+        if (timkiem.isEmpty()) {
+            sorter.setRowFilter(null);
+            return;
+        }
         sorter.setRowFilter(RowFilter.regexFilter("(?i)" + timkiem, 1));
     }//GEN-LAST:event_btnTimKiemActionPerformed
 
@@ -1437,7 +1440,7 @@ public class QuanLySach extends javax.swing.JDialog implements poly.books.contro
             cboNXB.setSelectedIndex(-1);
             cboNgonNgu.setSelectedIndex(0);
             cboTheLoai.setSelectedIndex(-1);
-            
+
             JOptionPane.showMessageDialog(this, "Làm mới thành công");
         } else {
             return;

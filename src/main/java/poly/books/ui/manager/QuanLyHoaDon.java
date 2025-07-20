@@ -4,7 +4,10 @@
  */
 package poly.books.ui.manager;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -15,16 +18,19 @@ import poly.books.dao.ChiTietHoaDonDAO;
 import poly.books.dao.HoaDonDAO;
 import poly.books.entity.ChiTietHoaDon;
 import poly.books.entity.HoaDon;
+import poly.books.entity.NgonNgu;
 
 /**
  *
  * @author LAPTOP
  */
-public class QuanLyHoaDon extends javax.swing.JDialog {
+public class QuanLyHoaDon extends javax.swing.JDialog implements poly.books.controller.QLHoaDonController {
+
     List<HoaDon> hoaDonList = new ArrayList<>();
     HoaDonDAO hoaDonDAO = new HoaDonDAO();
     List<ChiTietHoaDon> chiTietHoaDonList = new ArrayList<>();
     ChiTietHoaDonDAO chiTietHoaDonDAO = new ChiTietHoaDonDAO();
+
     /**
      * Creates new form QuanLyHoaDon
      */
@@ -33,44 +39,49 @@ public class QuanLyHoaDon extends javax.swing.JDialog {
         initComponents();
         fillTableHoaDon();
     }
-     public void formHDCT() {
+
+    public void formHDCT() {
         initComponents();
     }
-       public JPanel getContentPanel() {
+
+    public JPanel getContentPanel() {
         return QuanLyHD; // Trả về JPanel Quanlysach chứa toàn bộ giao diện
     }
+
     private void loadHDCT() {
         DefaultTableModel defaultTableModel = (DefaultTableModel) tblHDCT.getModel();
         defaultTableModel.setRowCount(0);
         chiTietHoaDonList = chiTietHoaDonDAO.getAll();
-        for (ChiTietHoaDon chiTietHoaDon: chiTietHoaDonList) {
+        for (ChiTietHoaDon chiTietHoaDon : chiTietHoaDonList) {
             Object[] rowData = {
                 chiTietHoaDon.getMaHD(),
                 chiTietHoaDon.getMaSach(),
                 chiTietHoaDon.getSoLuong(),
-                chiTietHoaDon.getDonGia()  
+                chiTietHoaDon.getDonGia()
             };
             defaultTableModel.addRow(rowData);
         }
-    } 
-        public void fillTableHoaDon() {
+    }
+
+    public void fillTableHoaDon() {
         DefaultTableModel defaultTableModel = (DefaultTableModel) tblHoaDon.getModel();
         defaultTableModel.setRowCount(0);
         hoaDonList = hoaDonDAO.getAll();
         for (HoaDon hoaDon : hoaDonList) {
             Object[] rowData = {
-              hoaDon.getMaHD(),
-            hoaDon.getNgayLap(),
-            hoaDon.getMaKH(),
-            hoaDon.getTenDangNhap(),
-            hoaDon.getMaPhieu(),
-            hoaDon.getTongTien(),
-            hoaDon.getPhuongThuc() == 2 ? "Tiền mặt" : "Chuyển khoản"
-          };
+                hoaDon.getMaHD(),
+                hoaDon.getNgayLap(),
+                hoaDon.getMaKH(),
+                hoaDon.getTenDangNhap(),
+                hoaDon.getMaPhieu(),
+                hoaDon.getTongTien(),
+                hoaDon.getPhuongThuc() == 2 ? "Tiền mặt" : "Chuyển khoản",
+                hoaDon.getNgayThanhToan()
+            };
             defaultTableModel.addRow(rowData);
         }
     }
-   
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -153,6 +164,11 @@ public class QuanLyHoaDon extends javax.swing.JDialog {
         btnLamMoiHoaDon.setBackground(new java.awt.Color(0, 204, 204));
         btnLamMoiHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/poly/book/icons8_reset_25px_1.png"))); // NOI18N
         btnLamMoiHoaDon.setText("Làm mới");
+        btnLamMoiHoaDon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLamMoiHoaDonActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(rdoTienMat);
         rdoTienMat.setText("Tiền mặt");
@@ -311,6 +327,11 @@ public class QuanLyHoaDon extends javax.swing.JDialog {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tblHoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblHoaDonMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tblHoaDon);
@@ -515,19 +536,31 @@ public class QuanLyHoaDon extends javax.swing.JDialog {
 
     private void btnTimKiemHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemHoaDonActionPerformed
         String timkiem = txtTimKiemHoaDon.getText().trim().toLowerCase();
-        if (timkiem.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Vui lòng nhập mã sách trước khi tìm kiếm");
-            return;
-        }
         DefaultTableModel defaultTableModel = (DefaultTableModel) tblHoaDon.getModel();
         TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(defaultTableModel);
         tblHoaDon.setRowSorter(sorter);
+        if (timkiem.isEmpty()) {
+            sorter.setRowFilter(null);
+            return;
+        }
         sorter.setRowFilter(RowFilter.regexFilter("(?i)" + timkiem, 0));
     }//GEN-LAST:event_btnTimKiemHoaDonActionPerformed
 
     private void btnTatCaChiTietHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTatCaChiTietHoaDonActionPerformed
         loadHDCT();
     }//GEN-LAST:event_btnTatCaChiTietHoaDonActionPerformed
+
+    private void tblHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonMouseClicked
+        int index = tblHoaDon.getSelectedRow();
+        if (index >= 0 && index < hoaDonList.size()) {
+            HoaDon entity = hoaDonList.get(index);
+            this.setForm(entity);
+        }
+    }//GEN-LAST:event_tblHoaDonMouseClicked
+
+    private void btnLamMoiHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiHoaDonActionPerformed
+        this.clear();
+    }//GEN-LAST:event_btnLamMoiHoaDonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -619,4 +652,96 @@ public class QuanLyHoaDon extends javax.swing.JDialog {
     private javax.swing.JTextField txtTongTienHDCT;
     private javax.swing.JTextField txtTongTienHoaDon;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void open() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public HoaDon getForm() {
+        HoaDon hoaDon = new HoaDon();
+        hoaDon.setMaHD(Integer.valueOf(txtMaHoaDon.getText()));
+        try {
+            String date = txtNgayLap.getText();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Date ngayLap = sdf.parse(date);
+            hoaDon.setNgayLap(ngayLap);
+        } catch (ParseException e) {
+            JOptionPane.showMessageDialog(null, "Ngày lập không hợp lệ! Định dạng đúng là yyyy-MM-dd");
+            return null;
+        }
+        hoaDon.setMaKH(Integer.valueOf(txtMaKhachHang.getText()));
+        hoaDon.setTenDangNhap(txtTenDangNhap.getText());
+        hoaDon.setMaPhieu(Integer.valueOf(txtMaPhieu.getText()));
+        hoaDon.setTongTien(Double.valueOf(txtTongTien.getText()));
+        hoaDon.setPhuongThuc(rdoChuyenKhoan.isSelected() ? 1 : 2);
+        try {
+            String date = txtNgayThanhToan.getText();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Date ngayThanhToan = sdf.parse(date);
+            hoaDon.setNgayLap(ngayThanhToan);
+        } catch (ParseException e) {
+            JOptionPane.showMessageDialog(null, "Ngày lập không hợp lệ! Định dạng đúng là yyyy-MM-dd");
+            return null;
+        }
+        return hoaDon;
+    }
+
+    @Override
+    public void fillToTable() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void create() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void update() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void delete() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void clear() {
+        int confirm = JOptionPane.showConfirmDialog(this, "Bạn có muốn làm mới không ?", "Confirm question", JOptionPane.YES_NO_OPTION);
+        if(confirm == JOptionPane.YES_OPTION) {
+            txtMaHoaDon.setText("");
+            txtNgayLap.setText("");
+            txtMaKhachHang.setText("");
+            txtTenDangNhap.setText("");
+            txtMaPhieu.setText("");
+            txtTongTien.setText("");
+            rdoChuyenKhoan.setSelected(false);
+            rdoTienMat.setSelected(false);
+            txtNgayThanhToan.setText("");
+            JOptionPane.showMessageDialog(this,"Làm mới thành công");
+        } else {
+            return;
+        }
+    }
+
+    @Override
+    public void setEditable(boolean editable) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void setForm(HoaDon entity) {
+        txtMaHoaDon.setText(String.valueOf(entity.getMaHD()));
+        txtNgayLap.setText(String.valueOf(entity.getNgayLap()));
+        txtMaKhachHang.setText(String.valueOf(entity.getMaKH()));
+        txtTenDangNhap.setText(entity.getTenDangNhap());
+        txtMaPhieu.setText(String.valueOf(entity.getMaPhieu()));
+        txtTongTien.setText(String.valueOf(entity.getTongTien()));
+        rdoChuyenKhoan.setSelected(entity.getPhuongThuc() == 1);
+        rdoTienMat.setSelected(entity.getPhuongThuc() == 2);
+        txtNgayThanhToan.setText(String.valueOf(entity.getNgayThanhToan()));
+    }
 }

@@ -12,6 +12,8 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.RowFilter;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import poly.books.dao.ChiTietHoaDonDAO;
@@ -19,6 +21,7 @@ import poly.books.dao.HoaDonDAO;
 import poly.books.entity.ChiTietHoaDon;
 import poly.books.entity.HoaDon;
 import poly.books.entity.NgonNgu;
+import poly.books.util.XDialog;
 
 /**
  *
@@ -37,7 +40,50 @@ public class QuanLyHoaDon extends javax.swing.JDialog implements poly.books.cont
     public QuanLyHoaDon(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        fillTableHoaDon();
+        fillToTable();
+        init();
+        suaHDCT();
+    }
+
+    public void suaHDCT() {
+        DefaultTableModel defaultTableModel = new DefaultTableModel(
+                new Object[]{"Mã HD", "Mã Sách", "Số lượng", "Đơn giá"}, 0
+        ) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                // Chỉ cho phép chỉnh sửa cột Số lượng (2) và Đơn giá (3)
+                return column == 2 || column == 3;
+            }
+        };
+        tblHDCT.setModel(defaultTableModel);
+        // Load lại dữ liệu từ DAO
+        int selectedRow = tblHoaDon.getSelectedRow();
+        if (selectedRow != -1) {
+            int MaHD = Integer.parseInt(tblHoaDon.getValueAt(selectedRow, 0).toString());
+            chiTietHoaDonList = chiTietHoaDonDAO.findByID(MaHD);
+            for (ChiTietHoaDon chiTietHoaDon : chiTietHoaDonList) {
+                defaultTableModel.addRow(new Object[]{
+                    chiTietHoaDon.getMaHD(),
+                    chiTietHoaDon.getMaSach(),
+                    chiTietHoaDon.getSoLuong(),
+                    chiTietHoaDon.getDonGia()
+                });
+            }
+        }
+    }
+
+    public void init() {
+        tblHoaDon.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()) {
+                    int selectedRow = tblHoaDon.getSelectedRow();
+                    if (selectedRow != -1) {
+                        int MaHD = (int) tblHoaDon.getValueAt(selectedRow, 0); // Lấy mã hóa đơn
+                        loadHDCT(MaHD); // Gọi phương thức có tham số
+                    }
+                }
+            }
+        });
     }
 
     public void formHDCT() {
@@ -48,10 +94,14 @@ public class QuanLyHoaDon extends javax.swing.JDialog implements poly.books.cont
         return QuanLyHD; // Trả về JPanel Quanlysach chứa toàn bộ giao diện
     }
 
-    private void loadHDCT() {
+    private void loadHDCT(int MaHD) {
         DefaultTableModel defaultTableModel = (DefaultTableModel) tblHDCT.getModel();
         defaultTableModel.setRowCount(0);
-        chiTietHoaDonList = chiTietHoaDonDAO.getAll();
+
+        // Lấy danh sách chi tiết theo mã hóa đơn
+        chiTietHoaDonList = chiTietHoaDonDAO.findByID(MaHD);
+        int quantity = 0;
+        int total = 0;
         for (ChiTietHoaDon chiTietHoaDon : chiTietHoaDonList) {
             Object[] rowData = {
                 chiTietHoaDon.getMaHD(),
@@ -60,25 +110,11 @@ public class QuanLyHoaDon extends javax.swing.JDialog implements poly.books.cont
                 chiTietHoaDon.getDonGia()
             };
             defaultTableModel.addRow(rowData);
-        }
-    }
-
-    public void fillTableHoaDon() {
-        DefaultTableModel defaultTableModel = (DefaultTableModel) tblHoaDon.getModel();
-        defaultTableModel.setRowCount(0);
-        hoaDonList = hoaDonDAO.getAll();
-        for (HoaDon hoaDon : hoaDonList) {
-            Object[] rowData = {
-                hoaDon.getMaHD(),
-                hoaDon.getNgayLap(),
-                hoaDon.getMaKH(),
-                hoaDon.getTenDangNhap(),
-                hoaDon.getMaPhieu(),
-                hoaDon.getTongTien(),
-                hoaDon.getPhuongThuc() == 2 ? "Tiền mặt" : "Chuyển khoản",
-                hoaDon.getNgayThanhToan()
-            };
-            defaultTableModel.addRow(rowData);
+            quantity += chiTietHoaDon.getSoLuong();
+            total += (chiTietHoaDon.getDonGia() * chiTietHoaDon.getSoLuong());
+            txtMaHDCT.setText(String.valueOf(chiTietHoaDon.getMaHD()));
+            txtTongSoSanPham.setText(String.valueOf(quantity));
+            txtTongTienHDCT.setText(String.valueOf(total));
         }
     }
 
@@ -160,6 +196,11 @@ public class QuanLyHoaDon extends javax.swing.JDialog implements poly.books.cont
         btnThemHoaDon.setBackground(new java.awt.Color(255, 153, 153));
         btnThemHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/poly/book/icons8_add_25px_5.png"))); // NOI18N
         btnThemHoaDon.setText("Thêm");
+        btnThemHoaDon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemHoaDonActionPerformed(evt);
+            }
+        });
 
         btnLamMoiHoaDon.setBackground(new java.awt.Color(0, 204, 204));
         btnLamMoiHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/poly/book/icons8_reset_25px_1.png"))); // NOI18N
@@ -184,10 +225,20 @@ public class QuanLyHoaDon extends javax.swing.JDialog implements poly.books.cont
         btnSuaHoaDon1.setBackground(new java.awt.Color(255, 255, 204));
         btnSuaHoaDon1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/poly/book/icons8_edit_25px.png"))); // NOI18N
         btnSuaHoaDon1.setText("Sửa");
+        btnSuaHoaDon1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaHoaDon1ActionPerformed(evt);
+            }
+        });
 
         btnXoaHoaDon2.setBackground(new java.awt.Color(51, 255, 255));
         btnXoaHoaDon2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/poly/book/icons8_delete_25px_1.png"))); // NOI18N
         btnXoaHoaDon2.setText("Xoá");
+        btnXoaHoaDon2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaHoaDon2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -395,10 +446,20 @@ public class QuanLyHoaDon extends javax.swing.JDialog implements poly.books.cont
         btnSuaHDCT.setBackground(new java.awt.Color(255, 255, 204));
         btnSuaHDCT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/poly/book/icons8_edit_25px.png"))); // NOI18N
         btnSuaHDCT.setText("Sửa");
+        btnSuaHDCT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaHDCTActionPerformed(evt);
+            }
+        });
 
         btnXoaHDCT.setBackground(new java.awt.Color(51, 255, 255));
         btnXoaHDCT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/poly/book/icons8_delete_25px_1.png"))); // NOI18N
         btnXoaHDCT.setText("Xoá");
+        btnXoaHDCT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaHDCTActionPerformed(evt);
+            }
+        });
 
         btnTatCaChiTietHoaDon.setText("Tất cả chi tiết hoá đơn");
         btnTatCaChiTietHoaDon.addActionListener(new java.awt.event.ActionListener() {
@@ -547,7 +608,7 @@ public class QuanLyHoaDon extends javax.swing.JDialog implements poly.books.cont
     }//GEN-LAST:event_btnTimKiemHoaDonActionPerformed
 
     private void btnTatCaChiTietHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTatCaChiTietHoaDonActionPerformed
-        loadHDCT();
+        loadHDCT(WIDTH);
     }//GEN-LAST:event_btnTatCaChiTietHoaDonActionPerformed
 
     private void tblHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonMouseClicked
@@ -561,6 +622,62 @@ public class QuanLyHoaDon extends javax.swing.JDialog implements poly.books.cont
     private void btnLamMoiHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiHoaDonActionPerformed
         this.clear();
     }//GEN-LAST:event_btnLamMoiHoaDonActionPerformed
+
+    private void btnThemHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemHoaDonActionPerformed
+        this.create();
+    }//GEN-LAST:event_btnThemHoaDonActionPerformed
+
+    private void btnSuaHoaDon1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaHoaDon1ActionPerformed
+        this.update();
+    }//GEN-LAST:event_btnSuaHoaDon1ActionPerformed
+
+    private void btnXoaHoaDon2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaHoaDon2ActionPerformed
+        this.delete();
+    }//GEN-LAST:event_btnXoaHoaDon2ActionPerformed
+
+    private void btnSuaHDCTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaHDCTActionPerformed
+        int selectedRow = tblHDCT.getSelectedRow();
+        if (selectedRow != -1) {
+            try {
+                // Lấy dữ liệu từ dòng đã được chỉnh sửa trên bảng
+                int maHD = Integer.parseInt(tblHDCT.getValueAt(selectedRow, 0).toString());
+                int masach = Integer.parseInt(tblHDCT.getValueAt(selectedRow, 1).toString());
+                int soLuong = Integer.parseInt(tblHDCT.getValueAt(selectedRow, 2).toString());
+                double donGia = Double.parseDouble(tblHDCT.getValueAt(selectedRow, 3).toString());
+                ChiTietHoaDon chiTietHoaDon = new ChiTietHoaDon(maHD, masach, soLuong, donGia);
+                chiTietHoaDonDAO.update(chiTietHoaDon);
+                loadHDCT(maHD); // hoặc loadChiTietHoaDonTheoMa(maHD);
+                JOptionPane.showMessageDialog(this, "Sửa chi tiết hóa đơn thành công!");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Lỗi dữ liệu hoặc định dạng không hợp lệ!");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng cần sửa.");
+        }
+    }//GEN-LAST:event_btnSuaHDCTActionPerformed
+
+    private void btnXoaHDCTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaHDCTActionPerformed
+        int selectedRow = tblHDCT.getSelectedRow();
+        if (selectedRow != -1) {
+            int confirm = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa không?", "Xác nhận xóa", JOptionPane.YES_NO_OPTION);
+            if (confirm == JOptionPane.YES_OPTION) {
+                try {
+                    int MaHD = Integer.parseInt(tblHDCT.getValueAt(selectedRow, 0).toString());
+                    String MaSach = tblHDCT.getValueAt(selectedRow, 1).toString();
+
+                    // Gọi DAO để xóa bản ghi
+                    chiTietHoaDonDAO.delete(MaHD);
+
+                    loadHDCT(MaHD); // Load lại bảng sau khi xóa
+                    JOptionPane.showMessageDialog(this, "Xóa thành công!");
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, "Lỗi khi xóa: " + e.getMessage());
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Bạn chưa chọn dòng cần xóa!");
+        }
+    }//GEN-LAST:event_btnXoaHDCTActionPerformed
 
     /**
      * @param args the command line arguments
@@ -680,7 +797,7 @@ public class QuanLyHoaDon extends javax.swing.JDialog implements poly.books.cont
             String date = txtNgayThanhToan.getText();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             Date ngayThanhToan = sdf.parse(date);
-            hoaDon.setNgayLap(ngayThanhToan);
+            hoaDon.setNgayThanhToan(ngayThanhToan);
         } catch (ParseException e) {
             JOptionPane.showMessageDialog(null, "Ngày lập không hợp lệ! Định dạng đúng là yyyy-MM-dd");
             return null;
@@ -690,28 +807,103 @@ public class QuanLyHoaDon extends javax.swing.JDialog implements poly.books.cont
 
     @Override
     public void fillToTable() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        DefaultTableModel defaultTableModel = (DefaultTableModel) tblHoaDon.getModel();
+        defaultTableModel.setRowCount(0);
+        hoaDonList = hoaDonDAO.getAll();
+        int totalOfQuantity = 0;
+        int totalOfPrice = 0;
+        for (HoaDon hoaDon : hoaDonList) {
+            Object[] rowData = {
+                hoaDon.getMaHD(),
+                hoaDon.getNgayLap(),
+                hoaDon.getMaKH(),
+                hoaDon.getTenDangNhap(),
+                hoaDon.getMaPhieu(),
+                hoaDon.getTongTien(),
+                hoaDon.getPhuongThuc() == 2 ? "Tiền mặt" : "Chuyển khoản",
+                hoaDon.getNgayThanhToan()
+            };
+            totalOfQuantity++;
+            totalOfPrice += (hoaDon.getTongTien());
+            defaultTableModel.addRow(rowData);
+            txtSoLuongHoaDon.setText(String.valueOf(totalOfQuantity));
+            txtTongTienHoaDon.setText(String.valueOf(totalOfPrice));
+        }
     }
 
     @Override
     public void create() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        HoaDon hoaDon = getForm(); // Lấy dữ liệu từ form
+        if (hoaDon == null) {
+            return;
+        }
+
+        int confirm = JOptionPane.showConfirmDialog(this, "Bạn có muốn thêm hóa đơn này không?", "Xác nhận", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            try {
+                int result = hoaDonDAO.create(hoaDon);
+                if (result > 0) {
+                    fillToTable();
+                    XDialog.alert("Thêm hóa đơn mới thành công!");
+                } else {
+                    XDialog.alert("Thêm mới thất bại. Vui lòng kiểm tra lại dữ liệu!");
+                }
+            } catch (Exception ex) {
+                XDialog.alert("Lỗi khi thêm mới: " + ex.getMessage());
+                ex.printStackTrace();
+            }
+        }
     }
 
     @Override
     public void update() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        HoaDon hoaDon = getForm(); // Lấy dữ liệu từ form
+        if (hoaDon == null) {
+            return;
+        }
+
+        int confirm = JOptionPane.showConfirmDialog(this, "Bạn có muốn cập nhật hóa đơn này không?", "Xác nhận", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            try {
+                int result = hoaDonDAO.update(hoaDon);
+                if (result > 0) {
+                    fillToTable();
+                    XDialog.alert("Cập nhật hóa đơn thành công!");
+                } else {
+                    XDialog.alert("Cập nhật thất bại. Vui lòng kiểm tra lại dữ liệu!");
+                }
+            } catch (Exception ex) {
+                XDialog.alert("Lỗi khi cập nhật: " + ex.getMessage());
+                ex.printStackTrace();
+            }
+        }
     }
 
     @Override
     public void delete() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (XDialog.confirm("Bạn thực sự muốn xóa hoá đơn?")) {
+            int selectedRow = tblHoaDon.getSelectedRow();
+            if (selectedRow >= 0 && selectedRow < hoaDonList.size()) {
+                HoaDon entity = hoaDonList.get(selectedRow);
+                int id = entity.getMaHD();
+                try {
+                    hoaDonDAO.delete(id);
+                    this.fillToTable();
+                    this.clear();
+                    XDialog.alert("Xóa hoá đơn thành công!");
+                } catch (RuntimeException ex) {
+                    XDialog.alert("Lỗi" + ex.getMessage());
+                }
+            } else {
+                XDialog.alert("Vui lòng chọn một hoá đơn để xóa!");
+            }
+        }
     }
 
     @Override
     public void clear() {
         int confirm = JOptionPane.showConfirmDialog(this, "Bạn có muốn làm mới không ?", "Confirm question", JOptionPane.YES_NO_OPTION);
-        if(confirm == JOptionPane.YES_OPTION) {
+        if (confirm == JOptionPane.YES_OPTION) {
             txtMaHoaDon.setText("");
             txtNgayLap.setText("");
             txtMaKhachHang.setText("");
@@ -721,7 +913,7 @@ public class QuanLyHoaDon extends javax.swing.JDialog implements poly.books.cont
             rdoChuyenKhoan.setSelected(false);
             rdoTienMat.setSelected(false);
             txtNgayThanhToan.setText("");
-            JOptionPane.showMessageDialog(this,"Làm mới thành công");
+            JOptionPane.showMessageDialog(this, "Làm mới thành công");
         } else {
             return;
         }

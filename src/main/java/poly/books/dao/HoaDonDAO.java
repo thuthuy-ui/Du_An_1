@@ -26,7 +26,6 @@ public class HoaDonDAO {
                              ,[NgayThanhToan]
                          FROM [QLNhaSachPro].[dbo].[HoaDon]
                        """;
-     
     String createSQL = """
                        INSERT INTO [dbo].[HoaDon]
                                   ([NgayLap]
@@ -57,8 +56,6 @@ public class HoaDonDAO {
    public List<HoaDon> getAll() {
        return XQuery.getBeanList(HoaDon.class, getAllSQL);
    }
-   
-   
    
    public int create(HoaDon hoaDon) {
        Object[] values = {

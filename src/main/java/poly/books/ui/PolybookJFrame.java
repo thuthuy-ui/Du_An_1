@@ -29,9 +29,10 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
      * Creates new form d
      */
     public PolybookJFrame() {
+        
         initComponents();
         menu.setBackground(null); // Xóa màu nền mặc định để gradient hiển thị
-        init();
+        this.init();
         // Thêm hiệu ứng click cho các JLabel trong menu
         addClickEffect(lbBanHang);
         addClickEffect(lbQLSach);
@@ -43,6 +44,8 @@ public class PolybookJFrame extends javax.swing.JFrame implements poly.books.con
         addClickEffect(lbDangXuat);
         addClickEffect(lbDoiMk);
         addClickEffect(lbLichSu);
+
+       
 
     }
 
